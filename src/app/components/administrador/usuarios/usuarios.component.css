@@ -1,0 +1,119 @@
+.container{
+    padding-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+}
+
+.titulo h3{
+    font-weight: bold;
+    font-size: 2.2rem;
+    font-family: 'Righteous', cursive;
+    color: #3bbfa0;
+}
+.datosUser {
+    width: 100%;
+}
+.datosUser small {
+    width: 100%;
+}
+.navPU{
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  ng-container{
+      margin-left: 5px !important;
+      margin-right: 5px !important;
+  }
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    padding-left: 24px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+.btnsAcc button:nth-child(1){
+    color:#3bbfa0;
+}
+.btnsAcc button:nth-child(2){
+    color:#dc0c0c;
+}
+
+.msjError{
+    width: 100%;
+    color: red;
+}
+.imgRG{
+    position: relative;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.containerACTUALIZAR{
+    height: 29rem;
+    overflow: auto;
+}
+.btnElimLog{
+    position: absolute;
+    top: 7%;
+    border-radius: 50%;
+    right: 37%;
+    background: #484444;
+    
+}
+.btnElimLog i{
+    color: #3bbfa0;
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    
+}
+.input-label2{
+    background: #52c234;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #061700, #52c234);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+#file23{
+    display: none;
+}
+
+.btnf{
+    text-align: center;
+}
+#nav-form{
+    background: #fff;
+    padding: 2rem 3rem;
+}

@@ -1,0 +1,68 @@
+
+<footer>
+    <div class="contenedor">
+            
+           
+            <div class="optionsFooter">
+                  <div class="titulo-footer">
+                          <img  src="../../../../assets/img/Captura2.png">
+          </div>
+                    <div class="flinks">
+                            <ul>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'nosotros','all']"><img src="../../../../assets/img/iconohuouse2.png"> Nosotros</a>
+                                    </li>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'mascotas','all']"><img src="../../../../assets/img/depositphotos_143182805-stock-photo-set-of-rounded-colorful-icons.png"> Mascotas</a>
+                                    </li>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'donaciones','all']" href="#"><img src="../../../../assets/img/errorvolun.png"> Donaciones</a>
+
+                                    </li>
+                                    <li>
+                                         <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'contactanos','all']" href="#"><img src="../../../../assets/img/istockphoto-668721150-1024x10242.png"> Contactanos</a>
+
+                                    </li>
+                            </ul>
+                            <ul>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'emergencias','all']" *ngIf="valid == true" href="#"><img src="../../../../assets/img/corEm2.png"> Emergencias</a>
+                                    </li>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'voluntarios','all']" *ngIf="valid == true" href="#"><img  src="../../../../assets/img/iconEdit.png"> Voluntarios</a>
+
+                                    </li>
+                                    <li>
+                                        <a [routerLinkActive]="['active']" [routerLink]="['/fundacion',idFun,'adopciones','all']" *ngIf="valid == true" href="#"><img src="../../../../assets/img/corEm2.png"> Adopciones</a>
+                                    </li>
+                            </ul>
+                            
+                    </div>
+                <!--    <div class="btnDesc">
+                                    <div class="social-icons">
+  
+                                                    <button type="button" class="h" (click)="nuevaAdopcion()">Descarga nuestra APP
+                                                      <i class="fa fa-android" aria-hidden="true"></i>
+                                                    </button>
+                                            
+                                                  </div>
+                    </div>-->
+                    <div class="desarrolladores">
+                            <h5>Desarrolladores</h5>
+                            <p>María Fernanda Tibanta</p>
+                            <p>David Hernández</p>
+                    </div>
+            </div>
+            <!--<h3 class="subtitulo-footer">Lo apreciariamos mucho</h3>
+            <div class="footer">
+                    <form action="">
+                            <input type="text" name="" id="" placeholder="Nombre">
+                            <input type="email" name="" id="" placeholder="Email">
+                            <textarea name="" id="" cols="30" rows="10"
+                                    placeholder="Ingrese su mensaje..."></textarea>
+                            <input type="submit" value="Enviar">
+                    </form>
+            </div>-->
+            
+    </div>
+  </footer>

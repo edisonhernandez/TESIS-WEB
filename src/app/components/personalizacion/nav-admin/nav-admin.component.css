@@ -1,0 +1,237 @@
+h5,h4,h3,h2,h1,a,button{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+    padding: 0;
+ }
+ p{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo', sans-serif;
+ }
+ .navbar-brand img{
+   width: 2.5rem;
+   height: 2.5rem;
+   border-radius: 50%;
+}
+ .nvSticky{
+     padding: 0 10px;
+     background: rgba(0,0,0,.85) !important;
+     position: fixed;
+     right: 0;
+     top: 0;
+     width: 100%;
+     transform: translate3d(0,0px,0);
+     -webkit-backface-visibility: hidden;
+     backface-visibility: hidden;
+     will-change: transform;
+     transition-property: opacity,visibility,transform;
+     transition-duration: .3s;
+     transition-timing-function: ease-out;
+ }
+ 
+ .nvSticky a{
+     font-family: 'Righteous', cursive;
+  }
+  .btna2{
+     position: relative;
+     margin: 0px;
+  }
+  .btna2 a{
+     font-family: 'Righteous', cursive;
+     color: white ;
+     padding: 11px 9px;
+     text-decoration: none;
+     letter-spacing: 2px;
+     font-size: 12px;
+  }
+  .btna2 a:hover{
+     color: white;
+  }
+  .active{
+      color: #3bbfad  !important;
+      border-bottom: 1px solid #3bbfad;
+  }
+  
+  
+ .dropNAV button{
+    background: transparent;
+    border: none;
+ }
+ .dropNAV button span
+ {
+    position: absolute !important;
+    top: 29% !important;
+    right: 27% !important;
+    display: inline-block !important;
+    height: 9px !important;
+    background: red;
+ }
+ 
+ /*----ESTILO PARA NOTIFICACIOM---*/
+ .Drop{
+    width: 30rem !important;
+    height: 30rem !important;
+    
+    padding: 0;
+    
+ }
+ 
+ .Drop .containerNotifi{
+    width: 100%;
+    height: 100%;
+    position: relative;
+ }
+ .notificacion{
+    width: 100%;
+    height: 89%;
+    overflow: auto;
+ }
+ .notificacion .notiS{
+    width: 100%;
+    height: 5rem;
+    background-color: #edf2fa;
+    cursor: pointer;
+    
+ }
+ .activeNT{
+    background-color: white !important;
+ }
+ .notificacion .notiS .contNot{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid #dadada;
+ }
+ 
+ .notificacion .notiS .contNot .imgnotiS{
+    width: 12%;
+    height: 3.4rem;
+    margin-right: 5px;
+ 
+ }
+ .notificacion .notiS .contNot .imgnotiS img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+ }
+ .notificacion .notiS .contNot .imgnotiS2{
+    width: 12%;
+    height: 3.4rem;
+    margin-left: 5px;
+ 
+ }
+ .notificacion .notiS .contNot .imgnotiS2 img{
+    width: 100%;
+    height: 100%;
+   
+ }
+ .notificacion .notiS .contNot .textnotiS{
+    width: 65%;
+    height: 4rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: 600 !important;
+     font-size: 14px !important;
+ 
+ }
+ 
+ .btnAllNoti{
+    position: absolute;
+    padding: .3rem;
+    width: 100%;
+    border-top: 1px solid #dadada;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+ }
+ 
+ .btnAllNoti button{
+    color: #3bbfad;
+ 
+ }
+ .no{
+    margin-left: 10px;
+    margin-right: 10px;
+ }
+ .opciones button{
+   background: transparent;
+   padding: 0px;
+   border: 0;
+ }
+ .contentD{
+    padding: 1rem 1rem;
+ }
+ .titulo{
+    width: 100%;
+    padding: 1rem 1rem;
+ }
+ .titulo h4{
+    font-size: 16px;
+ }
+ .btnDROPOP{
+  
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.btnDROPOP img{
+   width: 2rem;
+   height: 2rem;
+   border-radius: 50%;
+   margin-right: 5px;
+}
+
+ .dropdown-divider{
+    margin: 0 !important;
+ }  
+ @media only screen and (max-width:780px){
+   .dropNAV {
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      vertical-align: bottom !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+   }
+   .DROP{
+      width: 21rem !important;
+      height: 13rem !important;
+   }
+ }
+ #divNotificacion::-webkit-scrollbar {
+   width: 8px;     /* Tamaño del scroll en vertical */
+   height: 8px;    /* Tamaño del scroll en horizontal */
+   
+}
+#divNotificacion::-webkit-scrollbar-thumb {
+   background: #ccc;
+   border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+#divNotificacion::-webkit-scrollbar-thumb:hover {
+   background: #b3b3b3;
+   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+#divNotificacion::-webkit-scrollbar-thumb:active {
+   background-color: #999999;
+}
+.carga{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   position: absolute;
+   bottom: 0;
+}

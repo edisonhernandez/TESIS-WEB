@@ -1,0 +1,279 @@
+<app-nav-fundacion ></app-nav-fundacion >
+    <header id="header">
+
+            <div class="titulo">
+              <h3>Solicitud de emergencia</h3>
+              <span class="lineTi"></span>
+            </div>
+          
+          
+          </header>
+        
+    <!-- Modal -->
+    <div class="modal fade" id="modalAyudarEmergencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ayuda acogida</h5>
+                <button type="button" (click)="loadPage()" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+ 
+            <div class="modal-body" >
+                    <img src="../../../../assets/img/affirmative-156538_640.png">
+                    <p>{{mensajeAyuda}}</p>
+            </div>
+           
+          
+        </div>
+    </div>
+ </div>
+   <div class="container" *ngIf="emergencia">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Emergencia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mascota</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Direccion</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" id="AC-tab" data-toggle="tab" href="#AC" role="tab" aria-controls="AC" aria-selected="false">Acciones</a>
+                      </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row emergencia">
+                        <div class="col-12 col-md-6 emergencia-datos">
+                                <div class="ti">
+                                        <h5>Información</h5>
+                                        <span></span>
+                                    </div>
+                                <div class="info">
+                                        Publicado:&nbsp;<p>{{(emergencia.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</p>
+                                    </div>
+                                    <div class="info">
+                                            Nivel:&nbsp;<p>{{emergencia.nivelEmergencia}}</p>
+                                        </div>
+                                        <div class="info">
+                                                Tipo:&nbsp;<p>{{emergencia.tipoEmergencia}}</p>
+                                            </div>
+                                           
+                        </div>
+                        <div class="col-12 col-md-6 emergencia-publicado">
+                                <div class="ti">
+                                        <h5>Publicado por</h5>
+                                        <span></span>
+                                    </div>
+                                <div class="info">
+                                        <i class="fa fa-user" aria-hidden="true"></i> <p> {{emergencia.responsable.nombres}} {{emergencia.responsable.apellidos}}</p>
+                                    </div>
+                                    <div class="info">
+                                            <i class="fa fa-phone-square" aria-hidden="true"></i><p>{{emergencia.responsable.telefono}}</p>
+                                        </div>
+                                        <div class="info">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i><p>{{emergencia.responsable.celular}}</p>
+                                            </div>
+                                            <div class="info">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i> <p>{{emergencia.responsable.correo}}</p>
+                                                </div>
+                                                <div class="info2">
+                                                        Contacto extra: <p>{{emergencia.contactoExtra}}</p>
+                                                    </div>
+                               
+                        </div>
+                        <div class="col-12 col-md-6 emergencia-descripcion">
+                            <div class="ti">
+                                <h5>Descripción</h5>
+                                <span></span>
+                            </div>
+                                <div class="info">
+                                      <p>{{emergencia.descripcion}}</p>
+                                    </div>
+                               
+                        </div>
+                        
+                                
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="row mascota">
+                        <div class="col-12 col-md-4 mascota-foto">
+                                <div class="foto">
+                                        <img class="card-img-top" *ngIf="emergencia.fotoMascota" src="{{url + 'obtener-imagen-emergencia/' + emergencia.fotoMascota}}" alt="Card image cap"> 
+                                        <img class="card-img-top" *ngIf="!emergencia.fotoMascota" src="../../../../assets/img/Captura2.png" alt="Card image cap"> 
+                                        
+                                    </div>
+                        </div>
+                        <div class="col-12 col-md-4 mascota-datos">
+                                <div class="ti">
+                                    <h5>Mascota</h5>
+                                    <span></span>
+                                </div>
+                                <div class="info">
+                                    <p><span>Tipo:</span>&nbsp;{{emergencia.tipoMascota}}</p>
+                                   <p><span>Raza:</span>&nbsp;{{emergencia.raza}}</p>
+                                   <p><span>Sexo::</span>&nbsp;{{emergencia.sexoMascota}}</p>
+                                  
+                                </div>
+                                     
+                               </div>
+                               <div class="col-12 col-md-4 mascota-datos">
+                                    <div class="ti">
+                                            <h5>Estado de la mascota</h5>
+                                            <span></span>
+                                        </div>
+                                    <div class="info">
+                                        <p>{{emergencia.estadoMascota}}</p>
+                                      
+                                    </div>
+                                         
+                                   </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="row direccion">
+                        <div class="col-12 col-md-4 direccion-foto">
+                                <div class="foto">
+                                        <img class="card-img-top"  *ngIf="direccionFoto" src="{{url + 'obtener-imagen-emergencia/' + emergencia.direccionFoto}}" alt="Card image cap">
+                                        <img class="card-img-top" *ngIf="!direccionFoto" src="../../../../assets/img/Captura2.png" alt="Card image cap"> 
+                      
+                      
+                                    </div>
+                                    
+                        </div>
+                        <div class="col-12 col-md-4 direccion-datos">
+                            <div class="info">
+                                    <p><span>Sector: </span>{{emergencia.direccionSector}}</p>
+                                    <p><span>Calle principal: </span>{{emergencia.direccionCprincipal}}</p>
+                                    <p><span>Calle secundaria: </span>{{emergencia.direccionCsecundaria}}</p>
+                                    <p><span>Referencia: </span>{{emergencia.direccionReferencia}}</p>
+                            </div>
+                              
+
+                            </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="AC" role="tabpanel" aria-labelledby="AC-tab">
+                    <div class="ACOGIDAOTRA" *ngIf="emergencia.estado == 'acogida' && identity._id != emergencia.ayuda.fundacion._id">
+                        <img src="../../../../assets/img/errorvolun.png">
+                        <p>La emergencia ya fue acogida por otra fundación.</p>
+                    </div>
+                    <div class="ACOGIDAOTRA" *ngIf="emergencia.estado == 'atentida' && identity._id != emergencia.ayuda.fundacion._id">
+                            <img src="../../../../assets/img/errorvolun.png">
+                            <p>La emergencia ya fue acogida por otra fundación.</p>
+                        </div>
+                      
+                    <div class="ACOGIDA"  *ngIf="emergencia.estado == 'acogida' && identity._id == emergencia.ayuda.fundacion._id">
+                            <div class="acciones-info" *ngIf="emergencia.estado == 'acogida' && identity._id == emergencia.ayuda.fundacion._id">
+                                    <h5>Tú fundación acogió está emergencia.</h5>
+                                </div>
+                                
+                        <div class="row voluntarios" *ngIf="emergencia.estado == 'acogida' && identity._id == emergencia.ayuda.fundacion._id">
+                            <div class="col-12 tituloV">
+                                <p>Voluntarios seleccionados para la emergencia:</p>
+                            </div>
+                            <div class="col-12">
+                                    <div class="info" *ngIf="voluntariosAS.length > 0">
+                                        <p *ngFor="let vl of voluntariosAS">{{vl.voluntarioC.nombres}} {{vl.voluntarioC.apellidos}} 
+                                            
+                                            <span *ngIf="vl.estadoD == 'p'">( Aún no acepta la solicitud)</span>
+                                            <span *ngIf="vl.estadoD == 'no'">( No aceptó la solicitud)</span>
+                                            <span *ngIf="vl.estadoD == 'si'">( Aceptó la solicitud)</span>
+                                        
+                                        </p>
+                                       
+                                    </div>
+                                    <div class="info" *ngIf="voluntariosAS.length == 0">
+                                            <p >No existe voluntarios
+                                            </p>
+                                           
+                                        </div>
+                                </div>
+                        </div>
+                       
+                        <div class="btnsACCIONES">
+                              
+                                    <button  *ngIf="emergencia.estado == 'acogida' && identity._id == emergencia.ayuda.fundacion._id" (click)="marcarAtentida()"class="btn btn-primary bnMA">Marcar como ATENTIDA</button>
+        
+                        </div>
+                    </div>
+                    <div class="ACOGIDA"  *ngIf="emergencia.estado == 'atentida' && identity._id == emergencia.ayuda.fundacion._id">
+                            <div class="acciones-info" >
+                                    <h5>Marcaste esta emergencia como atendida</h5>
+                                </div>
+                                
+                        <div class="row voluntarios" >
+                            <div class="col-12 tituloV">
+                                <p>Voluntarios seleccionados para la emergencia:</p>
+                            </div>
+                            <div class="col-12">
+                                <div class="info" *ngIf="voluntariosAS.length > 0">
+                                    <p *ngFor="let vl of voluntariosAS">{{vl.voluntarioC.nombres}} {{vl.voluntarioC.apellidos}} 
+                                        
+                                        <span *ngIf="vl.estadoD == 'p'">( Aún no acepta la solicitud)</span>
+                                        <span *ngIf="vl.estadoD == 'no'">( No aceptó la solicitud)</span>
+                                        <span *ngIf="vl.estadoD == 'si'">( Aceptó la solicitud)</span>
+                                    
+                                    </p>
+                                   
+                                </div>
+                                <div class="info" *ngIf="voluntariosAS.length == 0">
+                                        <p >No existe voluntarios
+                                        </p>
+                                       
+                                    </div>
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                    <div class="AYUDA" *ngIf="emergencia.estado == 'pendiente'">
+                            <p [class.error]="statusAyuda == 'errorVoluntario'">Selecciona por lo menos un voluntario, el cual ayude en la emergencia </p>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6">
+                                        <form class="formulario needs-validation" #registerAyuda="ngForm" (ngSubmit)="registrarAyuda(registerAyuda)" novalidate>
+                                                <div class="SCROLVOLSE">
+                                                    
+                                                       <div class="form-check" *ngFor="let volun of voluntarios">
+                                                               <input required type="checkbox" name="checkbox" id="{{volun._id}}" value="{{volun._id}}">
+                                                               <label *ngIf="volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                                                                   <div class="imgVol">
+                                                                       <img src="{{url + 'obtener-foto/' + volun.foto}}">
+                                                                   </div>
+                                                               </label>
+                                                               <label *ngIf="!volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                                                                   <div class="imgVol">
+                                                                       <img src="../../../assets/img/user.png">
+                                                                   </div>
+                                                               </label>
+                                                           </div>
+                                                </div>
+                                                  
+                                                   <div class="btnm" style="border: 0 !important;">
+                                                        <button type="submit" class="btn btn-primary btnRGA" [disabled]="!registerAyuda.form.valid || statusAyuda == 'procesando'">Guardar  <div *ngIf=" statusAyuda == 'procesando'" style="margin-left: 5px;
+                                                            font-size: 1rem;
+                                                            width: 1rem;
+                                                            height: 1rem;" class="spinner-border text-primary" role="status">
+                                                              <span class="sr-only">Loading...</span>
+                                                            </div></button>
+                                                    
+                                                   </div>
+                                                   
+                                               </form>
+                                </div>
+                            </div>
+                           
+                          
+                    </div>
+                    
+                      
+                </div>
+
+              </div>
+   </div>
+   

@@ -1,0 +1,461 @@
+
+<div class="ubicacion">
+    <h5>Emergencias</h5>
+  </div>
+<div class="container">
+
+
+    <div class="row tituloEmer" *ngIf="identity">
+        <div class="col-12" *ngIf="identity">
+            <div class="header">
+               
+                <button class="btn btn-primary" (click)="nuevoRegiistro()">Agregar emergencia</button>
+            </div>
+
+        </div>
+        
+    </div>
+    <div class="container contAdvertecia" *ngIf="advertencia == true">
+
+        <div class="containerCargando" *ngIf="status == 'procesando'">
+            <div class="circleC">
+                <div class="dots">
+
+                </div>
+            </div>
+
+            <p>Por favor, espera estamos obteniendo las emergencias disponibles.</p>
+        </div>
+
+        <div class="alert alert-warning errores" role="alert" *ngIf="status == 'error' &&  n == '2'">
+            <div class="imgErr">
+                <img src="../../../assets/img/sign-305734_960_720.png">
+            </div>
+
+
+            <hr>
+            <p class="mb-0">{{mensaje}}</p>
+        </div>
+
+        <div class="alert alert-danger errores" role="alert" *ngIf="(status == 'error' &&  n == '3') || (status == 'error' &&  n == 'n') ">
+            <div class="imgErr">
+                <img src="../../../assets/img/Icon_Error.png">
+            </div>
+
+
+            <hr>
+            <p class="mb-0">{{mensaje}}</p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div *ngIf="nuevoReg == true" class="col-12 emr">
+            <form class="formNuevaMascota " #registerForm2="ngForm" (ngSubmit)="abrirModal()" novalidate>
+
+                <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+                <div class="modal fade modalEmergencia" id="modalEmergencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Confirmación de la emergencia</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" *ngIf="sure == 'no'">
+                                    <div class="col-12 modalInfo">
+                                        <p>¿Estás seguro de que la información es correcta?</p>
+                                        <p>Una vez guardada esta emergencia, los datos no podran ser modificados. </p>
+                                    </div>
+
+                                </div>
+                                <div class="row" *ngIf="sure == 'si'">
+                                    <div class="col-12 modalInfo">
+                                        <p>Guardando la información...</p>
+                                        <div class="spinner-border text-danger" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" *ngIf="sure == 'success'">
+                                    <div class="col-12 modalInfo">
+                                        <p>Emergencia enviada correctamente.</p>
+                                    </div>
+
+                                </div>
+                                <div class="row" *ngIf="sure == 'error'">
+                                    <div class="col-12 modalInfo">
+                                        <p>Se produjo un error en la petición intentalo nuevamente.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer bntRGF">
+                                <button *ngIf="sure == 'no'" type="button" (click)="registrarEmergencia(registerForm2)" class="btn btn-success">Sí, estoy seguro</button>
+                                <button *ngIf="sure == 'no'" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                <button *ngIf="sure == 'success'" type="button" class="btn btn-success" data-dismiss="modal">Listo</button>
+                                <button *ngIf="sure == 'error'" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin modal-->
+                <div class="titulo">
+                    <h3>Nueva emergencia</h3>
+                </div>
+
+                <div class="dividers">
+                    <p>Datos de la emergencia</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="tipoEmergencia">Tipo de emergencia</label>
+                        <select id="tipoEmergencia" class="form-control" name="tipoEmergencia" #tipoEmergencia="ngModel" [(ngModel)]="emergencia.tipoEmergencia"
+                            required [class.is-invalid]="!tipoEmergencia.valid && tipoEmergencia.touched" [class.is-valid]="tipoEmergencia.valid">
+                            <option>Mal estado de salud</option>
+                            <option>Accidente</option>
+                            <option>Preñada</option>
+                            <option>Con cachorros</option>
+                            <option>Maltrato</option>
+                            <option>Abandono</option>
+
+
+                        </select>
+                        <div class="msjError" *ngIf="!tipoEmergencia.valid && tipoEmergencia.touched">
+
+                            <div *ngIf="tipoEmergencia.errors.required">
+                                Selecciona un tipo de emergencia
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nivelEmergencia">Nivel de emergencia</label>
+                        <select id="nivelEmergencia" class="form-control" name="nivelEmergencia" #nivelEmergencia="ngModel" [(ngModel)]="emergencia.nivelEmergencia"
+                            required [class.is-invalid]="!nivelEmergencia.valid && nivelEmergencia.touched" [class.is-valid]="nivelEmergencia.valid">
+                            <option selected>Atención inmediata</option>
+                            <option selected>Muy Urgente</option>
+                            <option selected>Urgente</option>
+                            <option>Normal</option>
+                            <option>No urgente</option>
+                        </select>
+                        <div class="msjError" *ngIf="!nivelEmergencia.valid && nivelEmergencia.touched">
+
+                            <div *ngIf="nivelEmergencia.errors.required">
+                                Selecciona el nivel de la emergencia
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="direccionSector">Sector</label>
+                        <input type="text" class="form-control" placeholder="¿En qué sector se suscitó la emergencia?" id="direccionSector" name="direccionSector"
+                            #direccionSector="ngModel" [(ngModel)]="emergencia.direccionSector" required [class.is-invalid]="!direccionSector.valid && direccionSector.touched"
+                            [class.is-valid]="direccionSector.valid">
+                        <div class="msjError" *ngIf="!direccionSector.valid && direccionSector.touched">
+
+                            <div *ngIf="direccionSector.errors.required">
+                                Ingresa el sector del lugar de la emergencia
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="direccionCprincipal">Calle principal</label>
+                        <input type="text" class="form-control" id="direccionCprincipal" placeholder="¿Cuál es la calle principal?" name="direccionCprincipal"
+                            #direccionCprincipal="ngModel" [(ngModel)]="emergencia.direccionCprincipal" required [class.is-invalid]="!direccionCprincipal.valid && direccionCprincipal.touched"
+                            [class.is-valid]="direccionCprincipal.valid">
+                        <div class="msjError" *ngIf="!direccionCprincipal.valid && direccionCprincipal.touched">
+
+                            <div *ngIf="direccionCprincipal.errors.required">
+                                Ingresa la calle principal del lugar de la emergencia
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="direccionCsecundaria">Calle secundaria</label>
+                        <input type="text" class="form-control" placeholder="¿Cuál es la calle secundaria?" id="direccionCsecundaria" name="direccionCsecundaria"
+                            #direccionCsecundaria="ngModel" [(ngModel)]="emergencia.direccionCsecundaria" required [class.is-invalid]="!direccionCsecundaria.valid && direccionCsecundaria.touched"
+                            [class.is-valid]="direccionCsecundaria.valid">
+                        <div class="msjError" *ngIf="!direccionCsecundaria.valid && direccionCsecundaria.touched">
+
+                            <div *ngIf="direccionCsecundaria.errors.required">
+                                Ingresa la calle secundaria del lugar de la emergencia
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="direccionReferencia">Referencia</label>
+                        <input required type="text" class="form-control" id="direccionReferencia" placeholder="Referencia" name="direccionReferencia"
+                            #direccionReferencia="ngModel" [(ngModel)]="emergencia.direccionReferencia" required [class.is-invalid]="!direccionReferencia.valid && direccionReferencia.touched"
+                            [class.is-valid]="direccionReferencia.valid">
+                        <div class="msjError" *ngIf="!direccionReferencia.valid && direccionReferencia.touched">
+
+                            <div *ngIf="direccionReferencia.errors.required">
+                                Ingresa una referencia del lugar de la emergencia
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 imgRG">
+                        <img *ngIf="imL2 == true" src="{{imgUN2}}">
+
+                    </div>
+                    <div class="form-group col-md-12 bntRG">
+
+                        <div class="btn">
+
+                            <label for="file2" class="input-label2">Foto de referencia</label>
+                            <input required id="file2" (change)="fileChangeEvent2($event)" name="direccionFoto"
+                                #direccionFoto="ngModel" [(ngModel)]="emergencia.direccionFoto" type="file">
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="descripcion">Descripción extra de la emergencia</label>
+                        <textarea type="texta" class="form-control" id="descripcion" placeholder="¿Qué fue lo que sucedió?" name="descripcion" #descripcion="ngModel"
+                            [(ngModel)]="emergencia.descripcion" required [class.is-invalid]="!descripcion.valid && descripcion.touched"
+                            [class.is-valid]="descripcion.valid"></textarea>
+                        <div class="msjError" *ngIf="!descripcion.valid && descripcion.touched">
+
+                            <div *ngIf="descripcion.errors.required">
+                                Ingresa una breve descripción de lo suscitado
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+
+                </div>
+
+                <div class="dividers">
+                    <p>Datos del animal</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="sexoMascota">Sexo</label>
+                        <select id="sexoMascota" class="form-control" name="sexoMascota" #sexoMascota="ngModel" [(ngModel)]="emergencia.sexoMascota"
+                            required [class.is-invalid]="!sexoMascota.valid && sexoMascota.touched" [class.is-valid]="sexoMascota.valid">
+                            <option selected>Macho</option>
+                            <option>Hembra</option>
+                        </select>
+                        <div class="msjError" *ngIf="!sexoMascota.valid && sexoMascota.touched">
+
+                            <div *ngIf="sexoMascota.errors.required">
+                                Selecciona sexo del animal
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tipoMascota">Tipo de mascota</label>
+                        <select id="tipoMascota" class="form-control" name="tipoMascota" #tipoMascota="ngModel" [(ngModel)]="emergencia.tipoMascota"
+                            required [class.is-invalid]="!tipoMascota.valid && tipoMascota.touched" [class.is-valid]="tipoMascota.valid">
+                            <option selected>Felino</option>
+                            <option>Canino</option>
+                        </select>
+                        <div class="msjError" *ngIf="!tipoMascota.valid && tipoMascota.touched">
+
+                            <div *ngIf="tipoMascota.errors.required">
+                                Selecciona el tipo de animal
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="raza">Raza del animal</label>
+                        <input type="text" class="form-control" id="raza" placeholder="¿De qué raza es el animal?" name="raza" #raza="ngModel" [(ngModel)]="emergencia.raza"
+                            required [class.is-invalid]="!raza.valid && raza.touched" [class.is-valid]="raza.valid">
+                        <div class="msjError" *ngIf="!raza.valid && raza.touched">
+
+                            <div *ngIf="raza.errors.required">
+                                Ingresa la raza del animal
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="estadoMascota">Estado del animal</label>
+                        <input type="text" class="form-control" id="estadoMascota" placeholder="¿Cúal es el estado del animal?" name="estadoMascota"
+                            #estadoMascota="ngModel" [(ngModel)]="emergencia.estadoMascota" required [class.is-invalid]="!estadoMascota.valid && estadoMascota.touched"
+                            [class.is-valid]="estadoMascota.valid">
+                        <div class="msjError" *ngIf="!estadoMascota.valid && estadoMascota.touched">
+
+                            <div *ngIf="estadoMascota.errors.required">
+                                Ingresa una breve descripción del estado del animal
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 imgRG2">
+                        <img *ngIf="imL == true" src="{{imgUN}}">
+                    </div>
+                    <div class="form-group col-md-12  bntRG2">
+                        <div class="btn">
+                            <label for="file3" class="input-label2">Foto del animal</label>
+                            <input required id="file3" (change)="fileChangeEvent($event)" name="fotoMascota"
+                                #fotoMascota="ngModel" [(ngModel)]="emergencia.fotoMascota" type="file">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="dividers">
+                    <p>Datos extras</p>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-3"></div>
+                    <div class="form-group col-md-6">
+                        <label for="contactoExtra">Número de contacto extra</label>
+                        <input type="number" class="form-control" placeholder="¿Con qué otro número te podemos contactar?" id="contactoExtra" name="contactoExtra"
+                            #contactoExtra="ngModel" [(ngModel)]="emergencia.contactoExtra">
+                    </div>
+                    <div class="form-group col-md-3"></div>
+
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-12 btnsRegMas">
+                        <button type="submit" class="btn btn-primary" [disabled]=!registerForm2.form.valid>Registrar</button>
+                        &nbsp;
+                        <button type="submit" class="btn btn-danger" (click)="cancelarReg()">Cancelar</button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="card-deck">
+
+        <div class="card" *ngFor="let emerg of emergencias">
+            <!-- Modal -->
+            <div class="modal fade" data-backdrop="false" id="modalAyudarEmergencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Hacerce cargo de la emergencia</h5>
+                            <button type="button" (click)="actualPage()" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body" *ngIf="(advertenciaAyuda == true) || (advertenciaAyuda == true && statusAyuda == 'error') || (advertenciaAyuda == true && statusAyuda == 'success') || (advertenciaAyuda == true && statusAyuda == 'procesando') || (advertenciaAyuda == false && statusAyuda == 'success')">
+                            <div class="alert alert-primary alertasAyuda" role="alert" *ngIf="statusAyuda == 'procesando'">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <p> Guardando...</p>
+                            </div>
+                            <div class="alert alert-success alertasAyuda" role="alert" *ngIf="statusAyuda == 'success'">
+                                <div class="imgAA">
+                                    <img src="../../../assets/img/affirmative-156538_640.png">
+                                </div>
+                                <p>{{mensajeAyuda}}</p>
+                            </div>
+                            <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'error' && nAyuda != '6'">
+                                <div class="imgAA">
+                                    <img src="../../../assets/img/Icon_Error.png">
+                                </div>
+                                <p>{{mensajeAyuda}}</p>
+                            </div>
+                            <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'error' && nAyuda == '6'">
+                                <div class="imgAA">
+                                    <img src="../../../assets/img/sign-305734_960_720.png">
+                                </div>
+                                <p>{{mensajeAyuda}}</p>
+                            </div>
+                        </div>
+                        <div class="modal-body" *ngIf="(advertenciaAyuda == false && statusAyuda != 'success') || (advertenciaAyuda == true && statusAyuda == 'errorVoluntario')">
+                            <p>Selecciona por lo menos un voluntario, el cual ayude en la emergencia: </p>
+                            <form class="formulario needs-validation" #registerAyuda="ngForm" (ngSubmit)="registrarAyuda(registerAyuda,emerg._id)" novalidate>
+                                <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'errorVoluntario'">
+                                    {{mensajeAyuda}}
+                                </div>
+                                <div class="form-check" *ngFor="let volun of voluntarios">
+                                    <input required type="checkbox" name="checkbox" id="{{volun._id}}" value="{{volun._id}}">
+                                    <label *ngIf="volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                                        <div class="imgVol">
+                                            <img src="{{url + 'obtener-foto/' + volun.foto}}">
+                                        </div>
+                                    </label>
+                                    <label *ngIf="!volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                                        <div class="imgVol">
+                                            <img src="../../../assets/img/user.png">
+                                        </div>
+                                    </label>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerAyuda.form.valid>Guardar</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer" *ngIf="(advertenciaAyuda == true) || (advertenciaAyuda == true && statusAyuda == 'error') || (advertenciaAyuda == true && statusAyuda == 'success') || (advertenciaAyuda == true && statusAyuda == 'procesando') || (advertenciaAyuda == false && statusAyuda == 'success')">
+                            <button type="button" (click)="actualPage()" class="btn btn-secondary">Cerrar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header">
+                <h5>{{emerg.nivelEmergencia}}</h5>
+                <p class="text-muted">Publicado {{(emerg.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</p>
+            </div>
+            <div class="cardImg">
+                <img class="card-img-top" src="{{url + 'obtener-imagen-emergencia/' + emerg.fotoMascota}}" alt="Card image cap">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{emerg.tipoEmergencia}}</h5>
+                <p class="card-text">{{emerg.descripcion}}</p>
+                <p>
+                    <span>Dirección: </span>{{emerg.direccionSector}}, calles {{emerg.direccionCprincipal}} y {{emerg.direccionCsecundaria}}</p>
+                <div class="datosMasc">
+                    <h5>Mascota</h5>
+                    <p>
+                        <span>Sexo: </span>{{emerg.sexoMascota}}
+                        <span>Raza: </span>{{emerg.raza}}</p>
+
+                    <p>
+                        <span>Estado: </span>{{emerg.estadoMascota}}</p>
+
+                </div>
+            </div>
+            <div class="card-footer">
+
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAyudarEmergencia">
+                    Ayudar
+                </button>
+                <a [routerLink]="['/emergencia', emerg._id]" class="btn btn-primary">Detalle completo
+                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12 btnMasEmergencias">
+            <a *ngIf="page > 1" [routerLink]="['/emergencias', prev_page]" class="btn btn-primary">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+            <a *ngIf="pages != page" [routerLink]="['/emergencias', next_page]" class="btn btn-primary">Siguiente
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,233 @@
+.container{
+    padding: 4rem 100px;
+}
+header{
+    margin-top: 8rem;
+
+}
+header .titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header .titulo h3{
+    font-family: 'Righteous', cursive;
+    font-size: 50px;
+    color: #3bbfad;
+}
+
+header .titulo .lineTi{
+    width: 5%;
+    border-radius: 5px;
+    border-top: 3px solid #3bbfad;
+}
+h5,h4,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+}
+p,a,button{
+    font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+.mascota{
+
+}
+
+.mascota .mascota-fotos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel{
+    width: 100%;
+}
+.carousel img{
+    width: 100%;
+    height: 10rem;
+}
+.mascota .mascota-datos{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.mascota .mascota-datos .titulo{
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+}
+.mascota .mascota-datos .titulo h5{
+    color: #3bbfad;
+
+}
+.mascota .mascota-datos .info{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.mascota .mascota-datos .info p{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin: .5rem;
+    font-weight: normal !important;
+}
+.mascota .mascota-datos .info p span{
+  
+    font-weight: bolder !important;
+}
+
+
+.mascota-desc, .mascota-vacunas{
+    display: flex;
+    flex-direction: column;
+}
+.mascota-desc p{
+    text-align: justify;
+    width: 100%;
+    word-wrap: break-word;
+}
+.mascota-desc .ti, .mascota-vacunas .ti{
+    padding: 1rem 0;
+}
+.mascota-vacunas{
+    align-items: center;
+}
+.nav-tabs{
+    justify-content: center;
+}
+
+.adoptante{
+    width: 100%;
+    margin: 0;
+}
+.adoptante .adoptante-foto .foto{
+    width: 100%;
+    height: 14rem;
+}
+.adoptante .adoptante-foto .foto img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.adoptante .adoptante-info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 1rem ;
+    padding-bottom: 1rem ;
+}
+.adoptante .adoptante-info .info{
+    display: flex;
+    width: 50%;
+}
+.adoptante .adoptante-info .info i{
+    width: 15%;
+}
+.adoptante .adoptante-info .info p{
+    width: 80%;
+    word-wrap: break-word;
+}
+.adoptante .adoptante-info .info2{
+    display: flex;
+    width: 100%;
+}
+.adoptante .adoptante-info .info2 i{
+    width: 7%;
+}
+.adoptante .adoptante-info .info2 p{
+    width: 80%;
+    word-wrap: break-word;
+}
+
+.adoptante .adoptante-domicilio, .adoptante .adoptante-referencia{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+.adoptante .adoptante-domicilio .info, .adoptante .adoptante-referencia .info{
+    display: flex;
+    font-weight: bolder;
+ }
+.adoptante .adoptante-domicilio .ti, .adoptante .adoptante-referencia .ti{
+  margin-bottom: .5rem;
+  text-align: center;
+}
+.adoptante .adoptante-domicilio .info p, .adoptante .adoptante-referencia .info p{
+    word-wrap: break-word;
+    font-weight: normal !important;
+ }
+.preguntas{
+    padding: 1rem;
+}
+.preguntas .prg{
+    margin: .5rem 0;
+    font-weight: bolder;
+ }
+ .preguntas .prg p{
+     width: 100%;
+     word-wrap: break-word;
+     
+ }
+ .preguntas .prg p:nth-child(1){
+    width: 100%;
+    word-wrap: break-word;
+    font-weight: bolder;
+}
+.preguntas .prg p:nth-child(2){
+    width: 100%;
+    word-wrap: break-word;
+    font-weight: normal !important;
+}
+
+.formAdopcion{
+    padding: 2rem 5rem;
+}
+.mat-form-field {
+    width: 100%;
+   
+}
+
+.btnEnv{
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+}
+.observaciones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.observaciones .titu{
+    margin: 1rem 0;
+}
+.observaciones p:nth-child(1){
+    width: 100%;
+    word-wrap: break-word;
+}
+.observaciones p:nth-child(2){
+    width: 100%;
+    word-wrap: break-word;
+}
+@media only screen and (max-width:995px){
+    .container{
+        padding: 4rem 50px;
+    }
+    .formAdopcion{
+        padding: 2rem 3rem;
+    }
+    
+  }
+  @media only screen and (max-width:555px){
+    .container{
+        padding: 4rem 0px;
+    }
+    .formAdopcion{
+        padding: 2rem 0;
+    }
+    
+  }

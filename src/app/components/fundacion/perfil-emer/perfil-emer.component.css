@@ -1,0 +1,406 @@
+.container{
+    padding: 4rem 10rem;
+}
+h5,h4,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+}
+p,a,button{
+    font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+header{
+    margin-top: 8rem;
+
+}
+header .titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header .titulo h3{
+    font-family: 'Righteous', cursive;
+    font-size: 50px;
+    color: #3bbfad;
+}
+
+header .titulo .lineTi{
+    width: 5%;
+    border-radius: 5px;
+    border-top: 3px solid #3bbfad;
+}
+.emergencia{
+    padding: 2rem;
+}
+.emergencia .emergencia-datos{
+    display: flex;
+    flex-direction: column;
+   
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+.emergencia .emergencia-datos .info{
+    display: flex;
+    flex-direction: row;
+    font-weight: bolder;
+   
+
+}
+.emergencia .emergencia-publicado{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+
+.emergencia .emergencia-publicado .info,.emergencia .emergencia-publicado .info2{
+    display: flex;
+    flex-direction: row;
+    font-weight: bolder;
+
+}
+
+.emergencia .info p{
+    font-weight: normal !important;
+}
+.emergencia .info2 p{
+    font-weight: normal !important;
+}
+.emergencia .emergencia-publicado .info i{
+    width: 6%;
+}
+.emergencia .emergencia-publicado .info p{
+    width: 80%;
+    word-wrap: break-word;
+}
+
+.emergencia .ti{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.emergencia .ti span{
+    width: 20%;
+    border-top: 1px solid #3bbfad;
+}
+
+.mascota{
+    padding: 2rem;
+}
+.mascota .mascota-foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.mascota .mascota-foto .foto{
+    width: 12rem;
+    height: 12rem;
+}
+.mascota .mascota-foto .foto img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.mascota .mascota-datos{
+    padding: 1rem;
+}
+.mascota .mascota-datos .info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.mascota .mascota-datos .info span{
+    font-weight: bolder;
+}
+.mascota .ti{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.mascota .ti span{
+    width: 20%;
+    border-top: 1px solid #3bbfad;
+}
+
+.direccion{
+    padding: 2rem;
+}
+.direccion .direccion-foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.direccion .direccion-foto .foto{
+    width: 12rem;
+    height: 12rem;
+}
+.direccion .direccion-foto .foto img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.direccion .direccion-datos{
+    padding: 1rem;
+}
+.direccion .direccion-datos .info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.direccion .direccion-datos .info span{
+    font-weight: bolder;
+}
+.btnsACCIONES{
+    display: flex;
+    justify-content: center;
+}
+.btnsACCIONES button{
+    background: #3bbfad;
+    border:1px solid #3bbfad;
+}
+.ACOGIDA{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+.ACOGIDA .acciones-info{
+    text-align: center;
+}
+.ACOGIDA .acciones-info h5{
+    color: #3bbfad;
+}
+
+.ACOGIDA .voluntarios{
+    margin: 2rem 0;
+}
+.ACOGIDA .voluntarios .info{
+    display: flex;
+    flex-direction: column;
+    max-height: 12rem;
+    overflow: auto;
+    align-items: center;
+}
+.ACOGIDA .voluntarios .info{
+    height: 30rem !important;
+    overflow: auto;
+}
+
+.ACOGIDA .voluntarios .info::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    
+}
+.ACOGIDA .voluntarios .info::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.ACOGIDA .voluntarios .info::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.ACOGIDA .voluntarios .info::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+.ACOGIDA .tituloV{
+    text-align: center;
+}
+.ACOGIDA .tituloV p{
+    text-align: center;
+    font-weight: bolder;
+}
+.AYUDA{
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+}
+.AYUDA p{
+    text-align: center;
+    font-weight: bolder;
+}
+.AYUDA .SCROLVOLSE{
+    max-height: 12rem;
+    overflow: auto;
+}
+.AYUDA .SCROLVOLSE::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    
+}
+.AYUDA .SCROLVOLSE::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.AYUDA .SCROLVOLSE::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.AYUDA .SCROLVOLSE::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+.AYUDA .btnm{
+    display: flex;
+    justify-content: center;
+}
+.AYUDA .btnm button{
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+}
+.formulario .form-check{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.formulario h2 {
+    font-size: 16px;
+    color: #001F3F;
+    margin-bottom: 20px;
+    margin-left: 20px; }
+  .formulario > div {
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc; }
+  .formulario .radio label,
+  .formulario .form-check label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+    align-items: center;
+    position: relative;
+    padding: 5px 15px 5px 51px;
+    font-size: 1em;
+
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    .formulario .radio label:hover,
+    .formulario .form-check label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    .formulario .radio label:before,
+    .formulario .form-check label:before {
+      content: "";
+      display: flex;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      border-radius: 50%;
+      background: none;
+      border: 3px solid #3bbfa0; }
+  .formulario input[type="radio"] {
+    display: none; }
+    .formulario input[type="radio"]:checked + label:before {
+      display: none; }
+    .formulario input[type="radio"]:checked + label {
+      padding: 5px 15px;
+      background: #3bbfa0;
+      border-radius: 2px;
+      color: #fff; }
+  .formulario .form-check label:before {
+    border-radius: 3px; }
+  .formulario .form-check input[type="checkbox"] {
+    display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label {
+      background: #3bbfa0;
+      color: #fff;
+      padding: 5px 15px; }
+.formulario .form-check label .imgVol{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+}
+
+.formulario .form-check label .imgVol img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+
+.error{
+    color: #bf3b3b;
+    border-bottom: 1px solid #bf3b3b;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.modal-body img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: .5rem;
+
+}
+.modal-body p{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.ACOGIDAOTRA{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ACOGIDAOTRA img{
+    width: 6rem;
+    height: 6rem;
+   
+}
+.nav-tabs{
+    justify-content: center;
+}
+
+@media only screen and (max-width:1250px){
+    .emergencia .emergencia-publicado .info i{
+        width: 12%;
+    }
+    
+  }
+  @media only screen and (max-width:995px){
+    .container{
+        padding: 4rem 5rem;
+    }
+    
+  }
+  @media only screen and (max-width:575px){
+    .container{
+        padding: 4rem 2rem;
+    }
+    
+  }
+  @media only screen and (max-width:385px){
+    .container{
+        padding: 4rem .8rem;
+    }
+    
+  }
+

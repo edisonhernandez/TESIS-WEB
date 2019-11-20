@@ -1,0 +1,71 @@
+<header id="header">
+
+    <div class="titulo">
+      <h3>Contactanos</h3>
+      <span class="lineTi"></span>
+    </div>
+  
+  
+  </header>
+
+  <div id="mainMS" class="main">
+
+
+      <!--Seccion de cartas de mascotas-->
+      <section class="main-mascotas">
+    
+     <div class="containerLoad" *ngIf="carga == true">
+          <div class="loading">
+            <span>Cargando...</span>
+          </div>
+        </div>
+        <div class="mascots" *ngIf="carga == false">
+          <div class="advertencia" *ngIf="advertencia == true">
+            <div class="imgAd">
+              <img src="../../../../assets/img/dog-2952471_960_720.png">
+            </div>
+            <p *ngIf="status == 'error'">{{mensaje}}</p>
+          </div>
+          <div class="container containerContactanos">
+              <h5>¿Tienes alguna duda?</h5>
+             
+              <p>Descarga la aplicación móvil y realiza tus consultas directamente ó contáctanos por me dio de:</p>
+            
+              <div class="row justify-content-center">
+                <div class="col-6" *ngIf="editarInfContacto == false">
+                  <div class="datosContactos" *ngIf="fundacion">
+                    <ul>
+                      <li>
+                        <span>
+                          <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                        </span>
+                        <p>{{fundacion.correo}}</p>
+                      </li>
+                      <li>
+                        <span>
+                          <i class="fa fa-phone" aria-hidden="true"></i>
+                        </span>
+                        <p>{{fundacion.telefono}}</p>
+                      </li>
+                      <li>
+                        <span>
+                          <i class="fa fa-mobile" aria-hidden="true"></i>
+                        </span>
+                        <p>{{fundacion.celular}}</p>
+                      </li>
+                    
+                    </ul>
+                  </div>
+                </div>
+               
+              </div>
+            
+            </div>
+   
+        </div>
+
+
+      </section>
+    </div>
+
+    <app-footer-fundacion ></app-footer-fundacion>

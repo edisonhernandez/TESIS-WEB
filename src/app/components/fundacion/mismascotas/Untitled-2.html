@@ -1,0 +1,265 @@
+ <div  class="col-12" >
+    
+    
+          <form #registerForm2="ngForm" (ngSubmit)="registrarMascota(registerForm2)" class="needs-validation formNuevaMascota" novalidate>
+    
+            <div class="tituloForm">
+              <h3>Registro de mascota</h3>
+            </div>
+            <div class="col-12 imgRG">
+              <p>Selecciona una foto que identifique a la mascota</p>
+              <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+              <img *ngIf="imL2 == true" src="{{imgUN2}}">
+    
+            </div>
+            <div class="col-12 file-field input-field bntRG">
+              <div class="btn">
+    
+                <label for="file" class="input-label2">Sube una foto</label>
+                <input id="file" (change)="fileChangeEvent2($event)" name="foto" #foto="ngModel" [(ngModel)]="mascota.foto"
+                  type="file">
+              </div>
+    
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+
+                    <mat-form-field>
+                        <mat-select required [formControl]="especie" placeholder="Selecciona la especie" [class.is-invalid]="!especie.valid && especie.touched" [class.is-valid]="especie.valid">
+                          <mat-option value="Felino">Felino</mat-option>
+                          <mat-option value="Canino">Canino</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="especie.invalid">{{getErrorMessage2()}}</mat-error>
+                      </mat-form-field>
+  
+                </div>
+              <div class="form-group col-md-6">
+    
+
+                  <mat-form-field appearance="standard">
+                      <mat-label>Nombre de la mascota</mat-label>
+                    
+                      <input [formControl]="nombre" matInput required type="text" id="nombre" placeholder="¿Cúal es el nombre de la mascota?"  [class.is-invalid]="!nombre.valid && nombre.touched" [class.is-valid]="nombre.valid">
+                      <mat-icon matSuffix><i class="fa fa-paw" aria-hidden="true"></i></mat-icon>
+                     <mat-error *ngIf="nombre.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  
+
+              </div>
+    
+            
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="sexo" placeholder="Selecciona el sexo" [class.is-invalid]="!sexo.valid && sexo.touched"
+                      [class.is-valid]="sexo.valid">
+                        <mat-option value="Macho">Macho</mat-option>
+                        <mat-option value="Hembra">Hembra</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>  <i class="fa fa-venus-mars" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="sexo.invalid">{{getErrorMessage3()}}</mat-error>
+                    </mat-form-field>
+
+              </div>
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-label>¿De qué raza es la mascota?</mat-label>
+                    
+                      <input [formControl]="raza" matInput required type="text" id="raza" placeholder="¿De qué raza es la mascota?"  [class.is-invalid]="!raza.valid && raza.touched" [class.is-valid]="raza.valid">
+                      <mat-icon matSuffix><i class="fa fa-gratipay" aria-hidden="true"></i></mat-icon>
+                     <mat-error *ngIf="raza.invalid">{{getErrorMessage4()}}</mat-error>
+                    </mat-form-field>
+
+                </div>
+                
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="color" placeholder="Color de la mascota" [class.is-invalid]="!color.valid && color.touched"
+                      [class.is-valid]="color.valid">
+                        <mat-option value="Blanco">Blanco</mat-option>
+                        <mat-option value="Negro">Negro</mat-option>
+                        <mat-option value="Café">Negro</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-tint" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="color.invalid">{{getErrorMessage5()}}</mat-error>
+                    </mat-form-field>
+      
+                </div>
+    
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="tamanio" placeholder="Tamaño de la mascota" [class.is-invalid]="!tamanio.valid && tamanio.touched"
+                      [class.is-valid]="tamanio.valid">
+                        <mat-option value="Mediano">Mediano</mat-option>
+                        <mat-option value="Grande">Grande</mat-option>
+                        <mat-option value="Pequeño">Pequeño</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-text-height" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="tamanio.invalid">{{getErrorMessage6()}}</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <mat-form-field appearance="standard">
+                        <mat-select [formControl]="esterilizado" placeholder="La mascota esta esterilizada" [class.is-invalid]="!esterilizado.valid && esterilizado.touched"
+                        [class.is-valid]="esterilizado.valid">
+                          <mat-option value="Si">Si</mat-option>
+                          <mat-option value="No">No</mat-option>
+                        
+                        </mat-select>
+                        <mat-icon matSuffix><i class="fa fa-dot-circle-o" aria-hidden="true"></i></mat-icon>
+                        <mat-error *ngIf="esterilizado.invalid">{{getErrorMessage7()}}</mat-error>
+                      </mat-form-field>
+                  </div>
+                <div class="form-group col-md-4">
+                    <mat-form-field appearance="standard">
+                        <mat-select [formControl]="edad" placeholder="Edad de la mascota" [class.is-invalid]="!edad.valid && edad.touched"
+                        [class.is-valid]="edad.valid">
+                          <mat-option value="Cachorro">Cachorro</mat-option>
+                          <mat-option value="Joven">Joven</mat-option>
+                          <mat-option value="Adulto">Adulto</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix> <i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                        <mat-error *ngIf="edad.invalid">{{getErrorMessage8()}}</mat-error>
+                      </mat-form-field>
+
+                  </div>
+                  <div class="form-group col-md-4 ">
+
+                      <mat-form-field appearance="standard">
+                          <mat-select [formControl]="anios" placeholder="Edad en años" [class.is-invalid]="!anios.valid && anios.touched"
+                          [class.is-valid]="anios.valid">
+                            <mat-option value="0">0</mat-option>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                            <mat-option value="6">6</mat-option>
+                            <mat-option value="7">7</mat-option>
+                            <mat-option value="8">8</mat-option>
+                            <mat-option value="9">9</mat-option>
+                            <mat-option value="10">10</mat-option>
+                            <mat-option value="11">11</mat-option>
+                            <mat-option value="12">12</mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix><i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                          <mat-error *ngIf="anios.invalid">{{getErrorMessage9()}}</mat-error>
+                        </mat-form-field>
+
+                    </div>
+                   
+                    
+              <div class="form-group col-md-4 ">
+
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="meses" placeholder="Edad en meses" [class.is-invalid]="!meses.valid && meses.touched"
+                      [class.is-valid]="meses.valid">
+                        <mat-option value="0">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="6">6</mat-option>
+                        <mat-option value="7">7</mat-option>
+                        <mat-option value="8">8</mat-option>
+                        <mat-option value="9">9</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="11">11</mat-option>
+                        <mat-option value="12">12</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="meses.invalid">{{getErrorMessage10()}}</mat-error>
+                    </mat-form-field>
+
+              </div>
+             
+            </div>
+    
+            <div class="form-row justify-content-center">
+                      <div class="form-group col-md-4 vacunasMSC">
+                          <label for="meses">Vacunas</label>
+    
+                          <div class="row">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Puppy" id="puppy">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          Puppy
+                                        </label>
+                                      </div>
+                                     
+                                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Múltiple" id="multiple">
+                                        <label class="form-check-label" for="defaultCheck2">
+                                            Múltiple
+                                        </label>
+                                      </div>
+                                      
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class="input-group">
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="Bronchicine" id="bron">
+                                          <label class="form-check-label" for="defaultCheck2">
+                                              Bronchicine
+                                          </label>
+                                        </div>
+                                        
+                                  </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="Antirrábica" id="anti">
+                                            <label class="form-check-label" for="defaultCheck2">
+                                                Antirrábica
+                                            </label>
+                                          </div>
+                                    </div>
+                                  </div>
+                          </div>
+                          
+                        </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="form-group col-md-6">
+                    <mat-form-field hintLabel="Máximo 500 caracteres">
+                        <textarea [formControl]="descripcion" cdkTextareaAutosize
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="5" required type="text"  placeholder="Descripción"  [class.is-invalid]="!descripcion.valid && descripcion.touched"
+                        [class.is-valid]="descripcion.valid" matInput minlength="100" maxlength="500"></textarea>
+
+                        <mat-hint align="end">{{descripcion.value?.length || 0}}/500</mat-hint>
+                        <mat-error *ngIf="descripcion.invalid">{{getErrorMessage11()}}</mat-error>
+                      </mat-form-field>
+
+                  </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12 btnsRegMas">
+                <button type="submit" class="btn btn-primary" [disabled]=!registerForm2.form.valid>
+                  <span *ngIf="statusRegMas == null">Registrar</span>
+                  <span *ngIf="statusRegMas == 'procesando'">Registrando...</span>
+                 
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" (click)="cancelarReg(registerForm2)">Cancelar</button>
+    
+              </div>
+            </div>
+    
+          </form>
+        </div>
+        <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important;" >
+            <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+              <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+        
+          </div>
+          </div>

@@ -1,0 +1,471 @@
+  <section class="content" >
+
+    <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important;" *ngIf="advertencia != true">
+        <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+          <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+    
+      </div>
+      </div>
+      <div class="advertencias">
+          <div class="advertencia"  *ngIf="advertencia == true">
+              <div class="imgAd">
+                <img src="../../../../assets/img/dog-2952471_960_720.png">
+              </div>
+              <p *ngIf="status == 'error'">{{mensaje}}</p>
+            </div>
+      </div>
+     
+    <div class="col-12" [class.btnNuevo2]="advertencia != true" [class.btnNuevo]="advertencia == true" *ngIf="newMas == true && identity">
+          <button *ngIf="newMas == true && idFun == identity._id" (click)="nuevoRegiistro()" type="button" class="btn btn-primary">Nueva mascota
+            <i class="fa fa-paw" aria-hidden="true"></i>
+          </button>
+    </div>
+    <div  class="row justify-content-center newMascota" style="width: 100%; margin: 0 !important" >
+     
+        <div  class="col-12" >
+    
+    
+          <form #registerForm2="ngForm" (ngSubmit)="registrarMascota(registerForm2)" class="needs-validation formNuevaMascota" novalidate>
+    
+            <div class="tituloForm">
+              <h3>Registro de mascota</h3>
+            </div>
+            <div class="col-12 imgRG">
+              <p>Selecciona una foto que identifique a la mascota</p>
+              <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+              <img *ngIf="imL2 == true" src="{{imgUN2}}">
+    
+            </div>
+            <div class="col-12 file-field input-field bntRG">
+              <div class="btn">
+    
+                <label for="file" class="input-label2">Sube una foto</label>
+                <input id="file" (change)="fileChangeEvent2($event)" name="foto" #foto="ngModel" [(ngModel)]="mascota.foto"
+                  type="file">
+              </div>
+    
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+
+                    <mat-form-field>
+                        <mat-select required [formControl]="especie" placeholder="Selecciona la especie" [class.is-invalid]="!especie.valid && especie.touched" [class.is-valid]="especie.valid">
+                          <mat-option value="Felino">Felino</mat-option>
+                          <mat-option value="Canino">Canino</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="especie.invalid">{{getErrorMessage2()}}</mat-error>
+                      </mat-form-field>
+  
+                </div>
+              <div class="form-group col-md-6">
+    
+
+                  <mat-form-field appearance="standard">
+                      <mat-label>Nombre de la mascota</mat-label>
+                    
+                      <input [formControl]="nombre" matInput required type="text" id="nombre" placeholder="¿Cúal es el nombre de la mascota?"  [class.is-invalid]="!nombre.valid && nombre.touched" [class.is-valid]="nombre.valid">
+                      <mat-icon matSuffix><i class="fa fa-paw" aria-hidden="true"></i></mat-icon>
+                     <mat-error *ngIf="nombre.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  
+
+              </div>
+    
+            
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="sexo" placeholder="Selecciona el sexo" [class.is-invalid]="!sexo.valid && sexo.touched"
+                      [class.is-valid]="sexo.valid">
+                        <mat-option value="Macho">Macho</mat-option>
+                        <mat-option value="Hembra">Hembra</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>  <i class="fa fa-venus-mars" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="sexo.invalid">{{getErrorMessage3()}}</mat-error>
+                    </mat-form-field>
+
+              </div>
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-label>¿De qué raza es la mascota?</mat-label>
+                    
+                      <input [formControl]="raza" matInput required type="text" id="raza" placeholder="¿De qué raza es la mascota?"  [class.is-invalid]="!raza.valid && raza.touched" [class.is-valid]="raza.valid">
+                      <mat-icon matSuffix><i class="fa fa-gratipay" aria-hidden="true"></i></mat-icon>
+                     <mat-error *ngIf="raza.invalid">{{getErrorMessage4()}}</mat-error>
+                    </mat-form-field>
+
+                </div>
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="color" placeholder="Color de la mascota" [class.is-invalid]="!color.valid && color.touched"
+                      [class.is-valid]="color.valid">
+                        <mat-option value="Blanco">Blanco</mat-option>
+                        <mat-option value="Negro">Negro</mat-option>
+                        <mat-option value="Café">Negro</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-tint" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="color.invalid">{{getErrorMessage5()}}</mat-error>
+                    </mat-form-field>
+      
+                </div>
+    
+              <div class="form-group col-md-6">
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="tamanio" placeholder="Tamaño de la mascota" [class.is-invalid]="!tamanio.valid && tamanio.touched"
+                      [class.is-valid]="tamanio.valid">
+                        <mat-option value="Mediano">Mediano</mat-option>
+                        <mat-option value="Grande">Grande</mat-option>
+                        <mat-option value="Pequeño">Pequeño</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-text-height" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="tamanio.invalid">{{getErrorMessage6()}}</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <mat-form-field appearance="standard">
+                        <mat-select [formControl]="esterilizado" placeholder="La mascota esta esterilizada" [class.is-invalid]="!esterilizado.valid && esterilizado.touched"
+                        [class.is-valid]="esterilizado.valid">
+                          <mat-option value="Si">Si</mat-option>
+                          <mat-option value="No">No</mat-option>
+                        
+                        </mat-select>
+                        <mat-icon matSuffix><i class="fa fa-dot-circle-o" aria-hidden="true"></i></mat-icon>
+                        <mat-error *ngIf="esterilizado.invalid">{{getErrorMessage7()}}</mat-error>
+                      </mat-form-field>
+                  </div>
+                <div class="form-group col-md-4">
+                    <mat-form-field appearance="standard">
+                        <mat-select [formControl]="edad" placeholder="Edad de la mascota" [class.is-invalid]="!edad.valid && edad.touched"
+                        [class.is-valid]="edad.valid">
+                          <mat-option value="Cachorro">Cachorro</mat-option>
+                          <mat-option value="Joven">Joven</mat-option>
+                          <mat-option value="Adulto">Adulto</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix> <i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                        <mat-error *ngIf="edad.invalid">{{getErrorMessage8()}}</mat-error>
+                      </mat-form-field>
+
+                  </div>
+                  <div class="form-group col-md-4 ">
+
+                      <mat-form-field appearance="standard">
+                          <mat-select [formControl]="anios" placeholder="Edad en años" [class.is-invalid]="!anios.valid && anios.touched"
+                          [class.is-valid]="anios.valid">
+                            <mat-option value="0">0</mat-option>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                            <mat-option value="6">6</mat-option>
+                            <mat-option value="7">7</mat-option>
+                            <mat-option value="8">8</mat-option>
+                            <mat-option value="9">9</mat-option>
+                            <mat-option value="10">10</mat-option>
+                            <mat-option value="11">11</mat-option>
+                            <mat-option value="12">12</mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix><i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                          <mat-error *ngIf="anios.invalid">{{getErrorMessage9()}}</mat-error>
+                        </mat-form-field>
+
+                    </div>
+                   
+                    
+              <div class="form-group col-md-4 ">
+
+                  <mat-form-field appearance="standard">
+                      <mat-select [formControl]="meses" placeholder="Edad en meses" [class.is-invalid]="!meses.valid && meses.touched"
+                      [class.is-valid]="meses.valid">
+                        <mat-option value="0">0</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="6">6</mat-option>
+                        <mat-option value="7">7</mat-option>
+                        <mat-option value="8">8</mat-option>
+                        <mat-option value="9">9</mat-option>
+                        <mat-option value="10">10</mat-option>
+                        <mat-option value="11">11</mat-option>
+                        <mat-option value="12">12</mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix><i class="fa fa-birthday-cake" aria-hidden="true"></i></mat-icon>
+                      <mat-error *ngIf="meses.invalid">{{getErrorMessage10()}}</mat-error>
+                    </mat-form-field>
+
+              </div>
+             
+            </div>
+    
+            <div class="form-row justify-content-center">
+                      <div class="form-group col-md-4 vacunasMSC">
+                          <label for="meses">Vacunas</label>
+    
+                          <div class="row">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Puppy" id="puppy">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          Puppy
+                                        </label>
+                                      </div>
+                                     
+                                        </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Múltiple" id="multiple">
+                                        <label class="form-check-label" for="defaultCheck2">
+                                            Múltiple
+                                        </label>
+                                      </div>
+                                      
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class="input-group">
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="Bronchicine" id="bron">
+                                          <label class="form-check-label" for="defaultCheck2">
+                                              Bronchicine
+                                          </label>
+                                        </div>
+                                        
+                                  </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="Antirrábica" id="anti">
+                                            <label class="form-check-label" for="defaultCheck2">
+                                                Antirrábica
+                                            </label>
+                                          </div>
+                                    </div>
+                                  </div>
+                          </div>
+                          
+                        </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="form-group col-md-6">
+                    <mat-form-field hintLabel="Máximo 500 caracteres">
+                        <textarea [formControl]="descripcion" cdkTextareaAutosize
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="5" required type="text"  placeholder="Descripción"  [class.is-invalid]="!descripcion.valid && descripcion.touched"
+                        [class.is-valid]="descripcion.valid" matInput minlength="100" maxlength="500"></textarea>
+
+                        <mat-hint align="end">{{descripcion.value?.length || 0}}/500</mat-hint>
+                        <mat-error *ngIf="descripcion.invalid">{{getErrorMessage11()}}</mat-error>
+                      </mat-form-field>
+
+                  </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12 btnsRegMas">
+                <button type="submit" class="btn btn-primary" [disabled]=!registerForm2.form.valid>
+                  <span *ngIf="statusRegMas == null">Registrar</span>
+                  <span *ngIf="statusRegMas == 'procesando'">Registrando...</span>
+                 
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" (click)="cancelarReg(registerForm2)">Cancelar</button>
+    
+              </div>
+            </div>
+    
+          </form>
+        </div>
+        <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important;" >
+            <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+              <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+        
+          </div>
+          </div>
+      
+      </div>
+    <article *ngIf="advertencia != true">
+        <div class="filtros" >
+            <div class="main">
+                  </div>
+                  <div class="filtroVarios">
+                      <form>
+                          <div class="btnbs">
+                              <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="bus == true">Ver todos</button>
+                              <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    TAMAÑO
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="form-group" id="pills-tamanio">
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="tamM" value="Mediano">
+                                            <label class="form-check-label" for="tamM">
+                                              Mediano
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="tamMe" value="Pequeño">
+                                                <label class="form-check-label" for="tamMe">
+                                                  Pequeño
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="tamG" value="Grande">
+                                                    <label class="form-check-label" for="tamG">
+                                                      Grande
+                                                    </label>
+                                                  </div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      SEXO
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="form-group " id="pills-sexo">
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" id="sexM" value="Macho">
+                                              <label class="form-check-label" for="sexM">
+                                                Macho
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                                  <input class="form-check-input" type="checkbox" id="sexH" value="Hembra">
+                                                  <label class="form-check-label" for="sexH">
+                                                    Hembra
+                                                  </label>
+                                                </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    EDAD
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="form-group" id="pills-edad">
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="edadC" value="Cachorro">
+                                            <label class="form-check-label" for="edadC">
+                                              Cachorro
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="edadJ" value="Joven">
+                                                <label class="form-check-label" for="edadJ">
+                                                  Joven
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="edadA" value="Adulto">
+                                                    <label class="form-check-label" for="edadA">
+                                                      Adulto
+                                                    </label>
+                                                  </div>
+                                      </div>
+                                  </div>
+                                </div>
+    
+                          </div>
+                           <div class="btnbus">
+                                <button class="btn btn-primary" type="button" (click)="busqueda()">Buscar mascotas</button>
+    
+                           </div>
+                          
+    
+    
+                      </form>
+                        
+                  </div>
+    </div>
+    
+    </article>
+    <div class="container dividerTi" *ngIf="carga == false && advertencia != true">
+        <div *ngIf="fl == true;">
+          <span>Filtro: </span><span *ngIf="(tamF != 'tamanioNull' && tamF != undefined) ">Tamaño/</span><span *ngIf="(sexF != 'sexoNull' && sexF != undefined)">Sexo/</span><span *ngIf="(edadF != 'edadNull' && edadF != undefined)">Edad</span>
+        </div>
+        <span *ngIf="itemsMSC > 1">Mostrando {{itemsMSC}} mascotas de {{total}}</span>
+        <span *ngIf="itemsMSC == 1">Mostrando {{itemsMSC}} mascota de {{total}}</span>
+      </div>
+      <div class="conL" *ngIf="carga == true">
+          <div class="containerLoad" >
+              <div class="loading">
+                  <span>Cargando...</span>
+                </div>
+          </div>
+      </div>
+
+    <div class="mascots" *ngIf="carga == false">
+     
+        <div class="clothes-pics" *ngIf="advertencia == false">
+            <div class="row img-row">
+                <figure class="columns four" *ngFor = "let mascota of mascotas">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <a [routerLink]="['/perfilMascota',mascota._id]" class="carousel-item" *ngFor="let fot of mascota.fotos" [class.active]="fot.estado == 'activo'">
+                            <img src="{{url + 'obtener-foto-mascota/' + fot.name}}" class="d-block w-100" alt="...">
+                          </a>
+                        
+                        </div>
+                        <div class="nombreMsc">
+                            <a [routerLink]="['/perfilMascota',mascota._id]">{{mascota.nombre}}</a>
+                          </div>
+                      </div>
+                </figure>
+                
+              </div>
+              
+          </div>
+    </div>
+    <div class="row pp" *ngIf="filtroBTN == false && carga == false && advertencia == false ">
+        <div class="col-12 btnMasMascotas" >
+          <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/perfilFundacion/',idFun,'mascotas', prev_pagee]" class="btn btn-primary">
+            <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+          <a *ngIf="pages != page && advertencia != true" [routerLink]="['/perfilFundacion',idFun,'mascotas', next_pagee]" class="btn btn-primary">Siguiente
+            <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+          </a>
+        </div>
+    
+      </div>
+      <div class="row pp" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+        <div class="col-12 btnMasMascotas">
+          <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/perfilFundacion',idFun,'mascotas', tamF , sexF, edadF, prev_pagee]" class="btn btn-primary">
+            <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+          <a *ngIf="pages != page && advertencia != true" [routerLink]="['/perfilFundacion',idFun,'mascotas', tamF , sexF, edadF, next_pagee]" class="btn btn-primary">Siguiente
+            <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+          </a>
+        </div>
+    
+      </div>
+      <div *ngIf="carga == false" class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; background: #fff; padding-top: 2rem;">
+          <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+            <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+      
+        </div>
+        </div>
+  </section>
+
+  <div class="bgimg-4" *ngIf="carga == false">
+      <div class="tituloInfDonacion">
+          <p>¡No compres, adopta un amigo. Los animales no son cosas.!</p>
+          <p>¡Adopta desde nuestra aplicacion móvil!</p>
+      </div>
+      <div class="btnAdoptar">
+    
+          <div class="social-icons">
+    
+            <button type="button" class="h" (click)="nuevaAdopcion()">Descarga nuestra APP
+              <i class="fa fa-android" aria-hidden="true"></i>
+            </button>
+    
+          </div>
+    
+        </div>
+    </div>
+

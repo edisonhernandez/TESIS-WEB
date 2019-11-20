@@ -1,0 +1,253 @@
+.container{
+    background: #fff;
+    box-shadow: 0px 0px 20px #444;
+    margin: 0 !important;
+   
+    max-width: 100%;
+    
+}
+
+.container .row .colmimgs{
+    padding: 0;
+  
+}
+.container .row .colmimgs .carousel{
+    width: 100%;
+    height: 42rem;
+   
+}
+.container .row .colmimgs .carousel .carousel-inner{
+    width: 100%;
+    height: 42rem;
+   
+}
+.container .row .colmimgs .carousel .carousel-inner .carousel-item{
+    width: 100%;
+    height: 42rem;
+   
+}
+.container .row .colmimgs .carousel .carousel-inner .carousel-item img{
+    width: 100%;
+    height: 100%;
+   
+}
+.container .row .colmimgs .carousel .carousel-inner .carousel-item .carousel-caption{
+    background: #00000073;
+    padding-left: 20px !important;
+    padding-right: 20px !important; 
+    border-radius: 3px;
+   
+}
+.container .row .colmimgs .carousel .carousel-inner .carousel-item .carousel-caption ol{
+    text-align: start !important;
+}
+.container .row .colmimgs .carousel .carousel-inner .carousel-item .carousel-caption ol li{
+    text-align: start !important;
+}
+.container .row .colmform{
+    padding: 25px ;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  
+}
+
+
+
+
+.container .row .colmform .headerLogin{
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-bottom: 25px;
+   
+}
+.container .row .colmform .headerLogin a{
+    background: transparent;
+    color: black;
+    font-family: 'Exo', sans-serif;
+    padding: 5px;
+}
+.container .row .colmform .headerLogin a:nth-child(1){
+    margin-right: 10px;
+
+}
+.container .row .colmform .headerLogin a:nth-child(2){
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.container .row .colmform .headerLogin a:nth-child(3){
+    margin-left: 10px;
+   
+}
+.container .row .colmform .formLogin{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height:85%;
+  
+   
+}
+.container .row .colmform .formLogin .fl{
+    width: 100%;
+    height: 100%;
+}
+.container .row .colmform .formLogin .formRg{
+    margin: 0;
+ 
+    padding: 0 20px 0 20px!important;
+    width: 100%;
+    height: 518px;
+    overflow-y: hidden;
+
+}
+.container .row .colmform .formLogin .formRg:hover{
+    overflow-y: auto;
+}
+.container .row .colmform .formLogin .formRg::-webkit-scrollbar{
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+
+}
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.container .row .colmform .formLogin .formRg::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.container .row .colmform .formLogin .formRg::-webkit-scrollbar-thumb:hover {
+    background: #9e3c3c;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.container .row .colmform .formLogin .formRg::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+
+.container .row .colmform .formLogin .tituloIS{
+    font-family: 'Righteous', cursive;
+    font-size: 1.8rem;
+}
+.formError{
+}
+
+.formError input{
+    border: 1px solid red;
+}
+.imgScss{
+    width: 7rem;
+    height: 7rem;
+}
+
+.imgScss img{
+    width: 100%;
+    height: 100%;
+}
+.msjError{
+    color: red;
+    width: 100%;
+}
+.d-none {
+    display: block !important;
+}
+
+.non{
+    display: inline;
+
+}
+.non2{
+    display: none;
+}
+
+.imgRG{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.imgRG p{
+    max-width: 80%;
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    
+}
+.input-label2{
+    margin-bottom: 2rem;
+    background: #52c234;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #061700, #52c234);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+.btnf{
+    padding: 0 !important;
+}
+.s12{
+    padding: 0 !important;
+}
+.form-row{
+    padding: 0 !important;
+}
+.form-group{
+    padding: 0 !important;
+}
+@media only screen and (max-width: 992px) {
+    .container .row .colmimgs .carousel{
+        width: 100%;
+        height: 18rem;
+       
+    }
+    .container .row .colmimgs .carousel .carousel-inner{
+        width: 100%;
+        height:18rem;
+       
+    }
+    .container .row .colmimgs .carousel .carousel-inner .carousel-item{
+        width: 100%;
+        height: 18rem;
+       
+  }
+  .container .row .colmimgs .carousel .carousel-inner .carousel-item img{
+    width: 100%;
+    height: 100%;
+   
+}
+.non{
+    display: none;
+
+}
+.non2{
+    display: inline;
+}
+.container .row .colmform .formLogin{
+    margin-top: 2rem;
+    height: auto;
+}
+.container .row .colmform .formLogin .formRg{
+    width: auto;
+    overflow-y: auto;
+}
+}

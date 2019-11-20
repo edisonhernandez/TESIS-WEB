@@ -1,0 +1,48 @@
+
+
+.navbar-brand img{
+   width: 2.5rem;
+   height: 2.5rem;
+   border-radius: 50%;
+}
+
+.nvSticky{
+    padding: 0 10px;
+    background: rgba(0,0,0,.85) !important;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    transform: translate3d(0,0px,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+    transition-property: opacity,visibility,transform;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+} 
+
+.nvSticky a{
+   font-family: 'Righteous', cursive;
+}
+.btna2{
+   position: relative;
+   margin: 0px;
+}
+.btna2 a{
+   font-family: 'Righteous', cursive;
+   color: white ;
+   padding: 11px 9px;
+   text-decoration: none;
+   letter-spacing: 2px;
+   font-size: 12px;
+}
+.btna2 a:hover{
+   color: white;
+}
+.active{
+    color: #3bbfad  !important;
+    border-bottom: 1px solid #3bbfad;
+}
+
+

@@ -1,0 +1,9 @@
+<div class="usersDonacion">
+<div class="user" *ngFor="let user of usuarios">
+  <a (click)="selecUser(user._id)" >
+    {{user.apellidos}} {{user.nombres}} 
+  </a>
+</div>
+
+</div>
+

@@ -1,0 +1,151 @@
+<div class="container containerContactanos">
+  <h5>¿Tienes alguna duda?</h5>
+  <div class="row">
+    <div class="col-12 btnAdoptar">
+
+      <div class="social-icons">
+
+        <button type="button" class="h" (click)="nuevaAdopcion()">Descarga nuestra APP
+          <i class="fa fa-android" aria-hidden="true"></i>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+  <p>Descarga la aplicación móvil y realiza tus consultas directamente ó contáctanos por me dio de:</p>
+
+  <div class="row justify-content-center">
+    <div class="col-6" *ngIf="editarInfContacto == false">
+      <div class="datosContactos" *ngIf="fundacion">
+        <ul>
+          <li>
+            <span>
+              <i class="fa fa-envelope-open" aria-hidden="true"></i>
+            </span>
+            <p>{{fundacion.correo}}</p>
+          </li>
+          <li>
+            <span>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+            </span>
+            <p>{{fundacion.telefono}}</p>
+          </li>
+          <li>
+            <span>
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+            </span>
+            <p>{{fundacion.celular}}</p>
+          </li>
+          <li *ngIf="identity">
+            <button *ngIf="idFun == identity._id" (click)="editarContacto()" class="btn btn-primary">
+              <i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-6" *ngIf="editarInfContacto == true">
+      <form #editInfContactos="ngForm" (ngSubmit)="guardarInfContacto(editarInfContactos)" class="needs-validation formDonacion"
+        novalidate>
+        <div class="form-group col-md-12">
+          <label for="correoFundacion">Correo electrónico</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email"
+              class="form-control" id="correo" placeholder="Correo electrónico" name="correo" #correo="ngModel" [(ngModel)]="fundacion.correo"
+              [class.is-invalid]="!correo.valid && correo.touched" [class.is-valid]="correo.valid">
+
+            <div class="msjError" *ngIf="!correo.valid && correo.touched">
+              <div *ngIf="correo.errors.required">
+                El correo es obligatorio
+              </div>
+              <div *ngIf="correo.errors.pattern">
+                Ingresa un correo válido
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group col-md-12">
+          <label for="telefono">Teléfono</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input required pattern="[0-9]{7}" maxlength="10" type="number" class="form-control" id="telefono" placeholder="Teléfono"
+              name="telefono" #telefono="ngModel" [(ngModel)]="fundacion.telefono" [class.is-invalid]="!telefono.valid && telefono.touched"
+              [class.is-valid]="telefono.valid">
+            <div class="msjError" *ngIf="!telefono.valid  &&  telefono.touched">
+
+              <div *ngIf="telefono.errors.required">
+                El teléfono es obligatorio
+              </div>
+              <div *ngIf="telefono.errors.pattern">
+                El teléfono debe contener mínimo y máximo 7 números.
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="celular">Celular</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input pattern="[0-9]{9}" maxlength="10" type="number" class="form-control" id="celular" placeholder="Celular" name="celular"
+              #celular="ngModel" [(ngModel)]="fundacion.celular" [class.is-invalid]="!celular.valid && celular.touched"
+              [class.is-valid]="celular.valid">
+            <div class="msjError" *ngIf="!celular.valid  &&  celular.touched">
+
+
+              <div *ngIf="celular.errors.pattern">
+                El celular debe contener mínimo y máximo 10 números.
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12 advertenciasDonacion" *ngIf="advertenciaDon == true">
+          <div class="alert alert-primary alertAproDes" role="alert" *ngIf="statusDon == 'procesando'">
+
+            <div class="spinner-grow text-danger" role="status">
+
+              <span class="sr-only">Loading...</span>
+            </div>
+
+            <p>Por favor, espera estamos actualizando los datos.</p>
+          </div>
+          <div class="alert alert-danger alertAproDes" role="alert" *ngIf="statusDon == 'error'">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            {{mensajeDon}}
+          </div>
+          <div class="alert alert-success alertAproDes" role="alert" *ngIf="statusDon == 'success'">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            {{mensajeDon}}
+          </div>
+
+        </div>
+        <div class="form-group col-md-12 btnsDonacion" *ngIf="advertenciaDon == false">
+          <button type="submit" class="btn btn-primary" [disabled]=!editInfContactos.form.valid>Guardar</button>
+          <button type="button" (click)="cancelarInfContacto()" class="btn btn-danger">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

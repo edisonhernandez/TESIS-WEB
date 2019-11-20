@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row" style="width: 100%; margin: 0;" *ngIf="advertencia != true">
+        <div class="col-12" style="padding-right: 0 !important;">
+          <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+    
+      </div>
+      </div>
+      <div class="conL" *ngIf="carga == true">
+          <div class="containerLoad" >
+              <div class="loading">
+                  <span>Cargando...</span>
+                </div>
+          </div>
+      </div>
+      <div class="advertencias" *ngIf="advertencia == true">
+          <div class="advertencia"  >
+              <div class="imgAd">
+                <img src="../../../../assets/img/depositphotos_143182805-stock-photo-set-of-rounded-colorful-icons.png">
+              </div>
+              <p >{{mensaje}}</p>
+            </div>
+      </div>
+   
+      <div class="card-deck" *ngIf="advertencia != true && carga != true">
+          <div class="card" *ngFor="let adop of adopciones">
+            <div class="card-header">
+                <p class="card-text"><small class="text-muted">Solicitado: {{(adop.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</small></p>
+                <a class="btn" [routerLink]="['/aprobar-adopcion', adop._id]"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            </div>
+              <div class="imgsAdp">
+                  <div class="imgA">
+                      <span>Edison</span>
+                      <img src="{{url + 'obtener-foto/' + adop.adoptante.foto}}" class="card-img-top" alt="...">
+                  </div>
+                  
+                  <div class="imgA">
+                      <span>{{adop.mascota.nombre}}</span>
+                      <img src="{{url + 'obtener-foto-mascota/' + adop.mascota.fotos[0].name}}" class="card-img-top" alt="...">
+                  </div>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{adop.adoptante.nombres}} {{adop.adoptante.apellidos}}</h5>
+                <div class="datosAdop">
+                    <p class="card-text"><i class="fa fa-id-card-o" aria-hidden="true"></i><span> {{adop.datosAdopcion.cedula}}</span></p>
+                    <p class="card-text"><i class="fa fa-briefcase" aria-hidden="true"></i><span> {{adop.datosAdopcion.ocupacion}}</span></p>
+                    <p class="card-text"><i class="fa fa-birthday-cake" aria-hidden="true"></i><span> {{adop.datosAdopcion.edad}}</span></p>
+                </div>
+                <div class="estadoAdopA" *ngIf="adop.estado == 'aprobado'">
+                  <p>Aprobado</p>
+                </div>
+                <div class="estadoAdopN" *ngIf="adop.estado == 'negado'">
+                    <p>Negado</p>
+                  </div>
+                  <div class="estadoAdopP" *ngIf="adop.estado == 'pendiente'">
+                      <p>Pendiente</p>
+                    </div>
+                
+              </div>
+             
+              
+            </div>
+
+
+    <!--      <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>-->
+          
+        </div>
+
+        <div *ngIf="carga == false" class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; background: #fff; padding-top: 2rem;">
+            <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+              <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+        
+          </div>
+          </div>
+</div>
+<app-footer *ngIf="carga == false "></app-footer>

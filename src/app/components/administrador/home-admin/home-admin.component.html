@@ -1,0 +1,5 @@
+<app-nav-admin></app-nav-admin>
+
+<app-usuarios *ngIf="tipo == 'panel-usuarios'"></app-usuarios>
+<app-aprobar *ngIf="tipo == 'aprobar' || tipo == 'aprobarF'"></app-aprobar>
+<app-newfundacion *ngIf="tipo == 'newFundacion'"></app-newfundacion>

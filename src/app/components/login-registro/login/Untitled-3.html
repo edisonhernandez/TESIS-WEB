@@ -1,0 +1,219 @@
+<div class="formLogin">
+                <div class="fl">
+                   
+                    <form id="RGF" #registerForm2="ngForm" (ngSubmit)="enviarEmailRF(registerForm2)" class="formRg needs-validation" novalidate>
+                      
+                        <div class="col-12 imgRG">
+                          <p>Seleccionar una imagen que represente a la fundación</p>
+                          <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                          <img *ngIf="imL2 == true" src="{{imgUN2}}">
+            
+                        </div>
+                        <div class="col s12 file-field input-field btnf">
+                          <div class="btn ">
+            
+                            <label for="file2" class="input-label2">Seleccionar logo <i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                            <input id="file2" (change)="fileChangeEvent2($event)" name="logo" #logo="ngModel" [(ngModel)]="usuarioFundacion.logo"
+                              type="file">
+                          </div>
+            
+                        </div>
+                        <div class="form-row datosUser">
+                          <div class="form-group col-md-12">
+            
+                            <label for="nombres">Nombre</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input pattern="^[0-9 a-z A-Z]+$" maxlength="50" minlength="5" required type="text" class="form-control" id="nombreFundacion" placeholder="Nombre de la fundación o asociación" name="nombreFundacion"
+                                #nombreFundacion="ngModel" [(ngModel)]="usuarioFundacion.nombreFundacion" [class.is-invalid]="!nombreFundacion.valid && nombreFundacion.touched"
+                                [class.is-valid]="nombreFundacion.valid">
+            
+                              <div class="msjError" *ngIf="(!nombreFundacion.valid && nombreFundacion.touched)">
+                                <div *ngIf="nombreFundacion.errors.required">
+                                  El nombre es obligatorio
+                                </div>
+                                <div *ngIf="nombreFundacion.errors.pattern">
+                                    No se admite simbolos o caracteres especiales
+                                </div>
+                                <div *ngIf="nombreFundacion.errors.maxlength">
+                                    Máximo 50 caracteres
+                                </div>
+                                <div *ngIf="nombreFundacion.errors.minlength">
+                                    Mínimo 5 caracteres
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+            
+                          <div class="form-group col-md-12">
+                            <label for="nombres">Fecha de fundación</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input min="1980-01-01" max="2019-08-31" required type="date" class="form-control" id="fechaFundacion" placeholder="¿En qué fecha fue fundada la fundación?"
+                                name="fechaFundacion" #fechaFundacion="ngModel" [(ngModel)]="usuarioFundacion.fechaFundacion" [class.is-invalid]="!fechaFundacion.valid && fechaFundacion.touched"
+                                [class.is-valid]="fechaFundacion.valid">
+            
+                              <div class="msjError" *ngIf="!fechaFundacion.valid && fechaFundacion.touched">
+                                <div *ngIf="fechaFundacion.errors.required">
+                                  La fecha en que fue fundada es obligatoria
+                                </div>
+            
+                              </div>
+                            </div>
+            
+                          </div>
+            
+                          <div class="form-group col-md-12">
+                            <label for="nombres">Correo electrónico</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                 <i class="fa fa-at" aria-hidden="true"></i>
+            
+                                </span>
+                              </div>
+                              <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email"
+                                class="form-control" id="correoFundacion" placeholder="Correo electrónico" name="correoFundacion" #correoFundacion="ngModel"
+                                [(ngModel)]="usuarioFundacion.correoFundacion" [class.is-invalid]="!correoFundacion.valid && correoFundacion.touched"
+                                [class.is-valid]="correoFundacion.valid">
+            
+                              <div class="msjError" *ngIf="!correoFundacion.valid && correoFundacion.touched">
+                                <div *ngIf="correoFundacion.errors.required">
+                                  El correo es obligatorio
+                                </div>
+                                <div *ngIf="correoFundacion.errors.pattern">
+                                  Ingresa un correo válido
+                                </div>
+                              </div>
+                            </div>
+            
+                          </div>
+            
+                          <div class="form-group col-md-12">
+            
+                            <label for="nombres">Contraseña</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,30}$" required minlength="8" maxlength="30" type="password" class="form-control" id="passwordFundacion" placeholder="Contraseña" name="passwordFundacion"
+                                #passwordFundacion="ngModel" [(ngModel)]="usuarioFundacion.passwordFundacion" [class.is-invalid]="!passwordFundacion.valid && passwordFundacion.touched"
+                                [class.is-valid]="passwordFundacion.valid">
+                                <small id="passwordHelpBlock" class="form-text text-muted">
+                                    La contraseña debe contener entre 8-20 caracteres, al menos 1 letra mayúscula, 1 letra minúscula, 1 número y un caracter no alfanumérico.
+                                  </small>
+                              <div class="msjError" *ngIf="!passwordFundacion.valid && passwordFundacion.touched">
+                                <div *ngIf="passwordFundacion.errors.required">
+                                  La contraseña es obligatoria
+                                </div>
+                                <div *ngIf="passwordFundacion.errors.maxlength">
+                                    Máximo 30 caracteres
+                                  </div>
+                                <div *ngIf="passwordFundacion.errors.minlength">
+                                    Mínimo 8 caracteres
+                                </div>
+                                <div *ngIf="passwordFundacion.errors.pattern">
+                                    La contraseña no es válida
+                                </div>
+                              </div>
+                            </div>
+            
+            
+            
+            
+                          </div>
+                          <div class="form-group col-md-12">
+                            <label for="nombres">Dirección</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input maxlength="200" minlength="30" required type="text" class="form-control" id="direccionFundacion" placeholder="Dirección exacta" name="direccionFundacion"
+                                #direccionFundacion="ngModel" [(ngModel)]="usuarioFundacion.direccionFundacion" [class.is-invalid]="!direccionFundacion.valid && direccionFundacion.touched"
+                                [class.is-valid]="direccionFundacion.valid">
+                              <div class="msjError" *ngIf="!direccionFundacion.valid && direccionFundacion.touched">
+                                <div *ngIf="direccionFundacion.errors.required">
+                                  La dirección es obligatoria
+                                </div>
+                                <div *ngIf="direccionFundacion.errors.maxlength">
+                                    Máximo 200 caracteres
+                                  </div>
+                                  <div *ngIf="direccionFundacion.errors.minlength">
+                                      Específica mejor la dirección
+                                    </div>
+                              </div>
+                            </div>
+                          </div>
+            
+                          <div class="form-group col-md-12">
+                            <label for="nombres">Teléfono</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input required pattern="[0-9]{7}" maxlength="10" type="number" class="form-control" id="telefonoFundacion" placeholder="Teléfono"
+                                name="telefonoFundacion" #telefonoFundacion="ngModel" [(ngModel)]="usuarioFundacion.telefonoFundacion"
+                                [class.is-invalid]="!telefonoFundacion.valid && telefonoFundacion.touched" [class.is-valid]="telefonoFundacion.valid">
+                              <div class="msjError" *ngIf="!telefonoFundacion.valid  &&  telefonoFundacion.touched">
+            
+                                <div *ngIf="telefonoFundacion.errors.required">
+                                  El teléfono es obligatorio
+                                </div>
+                                <div *ngIf="telefonoFundacion.errors.pattern">
+                                  El teléfono debe contener mínimo y máximo 7 números.
+                                </div>
+            
+                              </div>
+                            </div>
+                          </div>
+            
+            
+                          <div class="form-group col-md-12">
+                            <label for="nombres">Página web</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input  type="url" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" class="form-control"
+                                id="link" placeholder="Página web" name="link" #link="ngModel" [(ngModel)]="usuarioFundacion.link" [class.is-invalid]="!link.valid && link.touched"
+                                [class.is-valid]="link.valid ">
+                              <div class="msjError" *ngIf="!link.valid  &&  link.touched">
+            
+                                <div *ngIf="link.errors.pattern">
+                                  Ingresa una URL válida
+                                </div>
+            
+                              </div>
+                            </div>
+            
+                          </div>
+                        </div>
+            
+                        <div class="btnRGL" style="width: 100%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
+                            <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm2.form.valid>Registrarme</button>
+                            <div class="msjIS" style="margin-top: 2rem;">
+                              <label>Ya tienes una cuenta?&nbsp;</label>
+                              <a style="cursor: pointer; color: #3bbfad; " data-dismiss="modal" aria-label="Close">Inicia sesión</a>
+                            </div>
+                        </div>
+                        
+                      </form>
+                </div>
+                  
+              </div>

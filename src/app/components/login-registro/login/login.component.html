@@ -1,0 +1,510 @@
+  <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+               
+  <div class="modal fade"  id="modalFundacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered " role="document">
+
+
+
+    <!--PROCESO DE REGISTRO-->
+    <div class="modal-content" *ngIf="advertencia == true">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="status == 'procesando'">Registrando...</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="status=='error'">Error al registrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" *ngIf="status=='error' || status == 'success'">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--alertas de registro-->
+      <div class="modal-body">
+        <div class="alert alert-info" role="alert" *ngIf="status == 'procesando'">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Registrando...</span>
+          </div>
+          Por favor, espera mientras procesamos tu solicitud.
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="status=='error'">
+          {{mensaje}}
+        </div>
+        <div class="registroExitosoFun" *ngIf="status=='success'" >
+          <div class="imgScss">
+            <img src="../../../assets/img/affirmative-156538_640.png">
+          </div>
+          <p>
+              El proceso de registro fue completado exitosamente, los datos fueron enviados al administrador para la verificación
+              de los datos y la respectiva activación de la cuenta. Este proceso puede tardar entre 24 a 48 horas.
+          </p>
+          
+           
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="status=='error' || status == 'success'">Cerrar</button>
+      </div>
+    </div>
+    <!--VERIFICACION DE CORREO-->
+    <div class="modal-content" *ngIf="advertencia == false">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Verificación de cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" *ngIf="status=='error'">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        
+          <div class="col-12">
+            <p class="">Un código de verificación fue enviado al correo electrónico que proporcionaste. Ingresalo a continuación:</p>
+          </div>
+        </div>
+        <form #registerCodigo="ngForm" (ngSubmit)="registrarCodigo(registerCodigo)" class="needs-validation" novalidate>
+          <div class="form-group col-md-12">
+
+            <label for="codigo">Código</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </span>
+              </div>
+              <input required pattern="[0-9]{4}" type="number" class="form-control" id="codigo" placeholder="Ingresa el código de verificación"
+                name="codigo" #codigo="ngModel" [(ngModel)]="codi.codigo" [class.is-invalid]="!codigo.valid && codigo.touched"
+                [class.is-valid]="codigo.valid">
+
+              <div class="msjError" *ngIf="(!codigo.valid && codigo.touched)">
+                <div *ngIf="codigo.errors.required">
+                  Es necesario que ingreses el código.
+                </div>
+                <div *ngIf="codigo.errors.pattern">
+                  El código debe contener mínimo y máximo 4 números.
+                </div>
+               
+              </div>
+              <div class="msjError" *ngIf="status == 'codIn'">
+
+                  <div >
+                      El código ingresado es incorrecto.
+                    </div>
+              </div>
+             
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <button type="button" (click)="verificarCodigo()" class="btn btn-primary btnRGA" [disabled]=!registerCodigo.form.valid>Verificar</button>
+            
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--fin modal-->
+
+  <!-- Modal registro -->
+  <div class="modal fade" id="modalRGLG" tabindex="-1" role="dialog" aria-labelledby="modalRGLG" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="formGr1">
+
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                <mat-step [stepControl]="formGr1">
+                    <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorNC'" >
+                        <p  style="text-align: center;">El nombre y correo electrónico ya están en uso</p>
+                      </div>
+                      <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCampos'" >
+                        <p  style="text-align: center;">Revisa el formulario, no se permite campos vacíos</p>
+                      </div>
+                      <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCampos2T'" >
+                        <p  style="text-align: center;">Revisa el formulario, el nombre de la fundación y representante no son válidos</p>
+                      </div>
+                      <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCampos2N'" >
+                          <p  style="text-align: center;">Revisa el formulario, el nombre de la fundación no es válido</p>
+                        </div>
+                        <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCampos2R'" >
+                            <p  style="text-align: center;">Revisa el formulario, Los nombres y apellidos del representante no son válidos</p>
+                          </div>
+
+                      <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorValidar'" >
+                          <p  style="text-align: center;">Error al validar datos, intentalo nuevamente</p>
+                        </div>
+                    <form [formGroup]="formGr1" class="formRg needs-validation" novalidate>
+                    
+                    <ng-template matStepLabel></ng-template>
+                    <div class="col-12 imgRG">
+
+                        <p >Selecciona una imagen que represente a la fundación</p>
+                        <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                        <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                        <div class="btnIM">
+          
+                            <label for="file2" class="input-label2"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                            <input required id="file2" (change)="fileChangeEvent2($event)" formControlName="foto"
+                              type="file">
+                              
+                          </div>
+                         
+                      </div>
+                      <p style="text-align: center;" class="errIM" *ngIf="statusIMG == 'error'">Selecciona una foto</p>
+                     
+                      <div class="form-row datosUser">
+                          <div class="form-group col-md-6">
+            
+                              <mat-form-field appearance="standard">
+                                  <mat-label>Nombre de la fundación</mat-label>
+                                
+                                  <input  formControlName="nombres"  matInput type="text" id="nombre" placeholder="Nombres de la fundación"  >
+                                  <mat-icon matSuffix><i class="fa fa-university" aria-hidden="true"></i></mat-icon>
+                                  
+                                    <mat-error *ngIf="f.nombres.errors">
+                                      <p *ngIf="f.nombres.errors.required">Nombre requerido</p> 
+                                      <p *ngIf="f.nombres.errors.minlength">Nombre no válido</p> 
+                                      <p *ngIf="f.nombres.errors.maxlength">Nombre demasiado largo</p> 
+                                      <p *ngIf="f.nombres.errors.pattern">Nombre no válido, no se admite números o caracteres especiales</p> 
+
+                                    </mat-error>
+                                   
+                                
+                                </mat-form-field>
+                                <p id="nmbr" class="errNC" *ngIf="statusValid == 'errorNombre' || statusValid == 'errorNC'">El nombre ya está en uso</p>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <input required [min]="minDate" [max]="maxDate" formControlName="fechaFunda" matInput [matDatepicker]="picker" placeholder="Fecha en que fue fundada">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error *ngIf="f.fechaFunda.errors">
+                                      <p *ngIf="f.fechaFunda.errors.required">Fecha requerida</p> 
+                                    </mat-error>
+                                  </mat-form-field>
+
+                              </div>
+                              <div style="margin: 0;" class="form-group col-md-12">
+                                <label style="margin: 0;">Representante de la fundación</label>
+                              </div>
+                              <div class="form-group col-md-10">
+            
+                                  <mat-form-field appearance="standard">
+                                      <mat-label>Nombres y Apellidos</mat-label>
+                                    
+                                      <input required formControlName="representante" matInput type="text" id="representante" placeholder="Nombres y Apellidos"  >
+                                      <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                                      <mat-error *ngIf="f.representante.errors">
+                                        <p *ngIf="f.representante.errors.required">Nombres y Apellidos  requeridos</p> 
+                                        <p *ngIf="f.representante.errors.maxlength">Exceso de caracteres</p> 
+                                        <p *ngIf="f.representante.errors.minlength">No válido</p> 
+
+                                        <p *ngIf="f.representante.errors.pattern">Ingresa al menos un nombre y un apellido</p> 
+  
+                                      </mat-error>
+                                    </mat-form-field>
+                                  
+                                </div>
+                             
+                        </div>
+                    </form>
+                    <div class="btnNEXT">
+                      <button mat-button [disabled]="!formGr1.valid" (click)="validarNextStep('1',stepper)">Siguiente</button>
+                    </div>
+                  
+                </mat-step>
+                <mat-step [stepControl]="formGr2">
+                  
+                  <form [formGroup]="formGr2">
+                    <ng-template matStepLabel></ng-template>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+
+                            <mat-form-field appearance="standard">
+                                <mat-label>Teléfono (domicilio)</mat-label>
+                              
+                                <input required formControlName="telefono" matInput type="text" id="telefono" >
+                                <mat-icon matSuffix><i class="fa fa-phone-square" aria-hidden="true"></i></mat-icon>
+                                <mat-error *ngIf="f2.telefono.errors">
+                                  <p *ngIf="f2.telefono.errors.required">Teléfono requerido</p> 
+                                  <p *ngIf="f2.telefono.errors.minlength">Teléfono no válido</p> 
+                                  <p *ngIf="f2.telefono.errors.maxlength">Teléfono no válido</p> 
+                                  <p *ngIf="f2.telefono.errors.pattern">Teléfono no válido</p> 
+
+                                </mat-error>
+                              </mat-form-field>
+          
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <mat-form-field appearance="standard">
+                                <mat-label>Celular</mat-label>
+                              
+                                <input required formControlName="celular" matInput type="text" id="celular"   >
+                                <mat-icon matSuffix><i class="fa fa-phone-square" aria-hidden="true"></i></mat-icon>
+                                <mat-error *ngIf="f2.celular.errors">
+                                  <p *ngIf="f2.celular.errors.required">Celular requerido</p> 
+                                  <p *ngIf="f2.celular.errors.minlength">Celular no válido</p> 
+                                  <p *ngIf="f2.celular.errors.maxlength">Celular no válido</p> 
+                                  <p *ngIf="f2.celular.errors.pattern">Celular no válido</p> 
+
+                                </mat-error>
+                              </mat-form-field>
+          
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field appearance="standard">
+                                <mat-label>Correo electrónico</mat-label>
+                              
+                                <input required formControlName="correo2" matInput type="text" id="correo2" placeholder="Correo electrónico"  [class.is-invalid]="!f2.correo2.errors" [class.is-valid]="f2.correo2.errors">
+                                <mat-icon matSuffix><i class="fa fa-envelope" aria-hidden="true"></i></mat-icon>
+                                <mat-error *ngIf="f2.correo2.errors">
+                                  <p *ngIf="f2.correo2.errors.required">Correo requerido</p> 
+                                 
+                                  <p *ngIf="f2.correo2.errors.pattern">Correo no válido</p> 
+
+                                </mat-error>
+                              </mat-form-field>
+                              <p id="corr" class="errNC" *ngIf="statusValid == 'errorCorreo' || statusValid == 'errorNC'">El correo electrónico ya está en uso</p>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <mat-form-field appearance="standard">
+                                <mat-label>Contraseña</mat-label>
+                              
+                                <input required formControlName="password2" matInput type="password" id="password2"   [class.is-invalid]="f2.password2.errors" [class.is-valid]="f2.password2.errors">
+                                <mat-icon matSuffix><i class="fa fa-key" aria-hidden="true"></i></mat-icon>
+                                <mat-hint align="start">La contraseña debe contener entre 8-20 caracteres, al menos 1 letra mayúscula, 1 letra minúscula, 1 número y un caracter no alfanumérico.</mat-hint>
+                                <mat-error *ngIf="f2.password2.errors">
+                                  <p *ngIf="f2.password2.errors.required">Contraseña requerida</p> 
+                                  <p *ngIf="f2.password2.errors.minlength">Contraseña muy corta</p> 
+                                  <p *ngIf="f2.password2.errors.maxlength">Contraseña demasiado larga</p> 
+                                  <p *ngIf="f2.password2.errors.pattern">Contraseña no válida</p> 
+
+                                </mat-error>
+                              </mat-form-field>
+                        </div>   
+                    </div>
+                      
+                    <div class="btnNEXT2">
+                      <button mat-button matStepperPrevious>Regresar</button>
+                      <button mat-button matStepperNext>Siguiente</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="formGr3">
+                  <ng-template matStepLabel></ng-template>
+                  <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCamposFR2'" >
+                      <p  style="text-align: center;">Revisa el formulario, no se permite campos vacíos</p>
+                    </div>
+                    <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCamposFR2E'" >
+                      <p  style="text-align: center;">Revisa el formulario, la dirección especificada no es válida</p>
+                    </div>
+                  <form class="row" [formGroup]="formGr3">
+                      <div class="form-group col-md-6">
+
+                      <mat-form-field appearance="standard">
+                          <mat-label>Sector</mat-label>
+                          <mat-select required formControlName="sector">
+                            <mat-option *ngFor="let s of sector2" [value]="s.value">
+                              {{s.value}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group col-md-6">
+
+                          <mat-form-field appearance="standard">
+                              <mat-label>Barrio</mat-label>
+                            
+                              <input required formControlName="barrio" matInput type="text" id="barrio" [class.is-invalid]="f3.barrio.errors" [class.is-valid]="f3.barrio.errors">
+                              <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                              <mat-error *ngIf="f3.barrio.errors">
+                                <p *ngIf="f3.barrio.errors.required">Barrio requerido</p> 
+                                <p *ngIf="f3.barrio.errors.minlength">Barrio no válido</p> 
+                                <p *ngIf="f3.barrio.errors.maxlength">Exceso de caracteres</p> 
+                                <p *ngIf="f3.barrio.errors.pattern">Barrio no válido</p> 
+
+                              </mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div class="form-group col-md-6">
+
+                          <mat-form-field appearance="standard">
+                              <mat-label>Calle principal</mat-label>
+                            
+                              <input required formControlName="calleP" matInput type="text" id="calleP" [class.is-invalid]="f3.calleP.errors" [class.is-valid]="f3.calleP.errors">
+                              <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                              <mat-error *ngIf="f3.calleP.errors">
+                                <p *ngIf="f3.calleP.errors.required">Calle principal requerida</p> 
+                                <p *ngIf="f3.calleP.errors.minlength">Calle principal válida</p> 
+                                <p *ngIf="f3.calleP.errors.maxlength">Exceso de caracteres</p> 
+                                <p *ngIf="f3.calleP.errors.pattern">Calle principal válida</p> 
+
+                              </mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div class="form-group col-md-6">
+
+                          <mat-form-field appearance="standard">
+                              <mat-label>Calle secundaria</mat-label>
+                            
+                              <input required formControlName="calleS" matInput type="text" id="calleS" [class.is-invalid]="f3.calleS.errors" [class.is-valid]="f3.calleS.errors">
+                              <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                              <mat-error *ngIf="f3.calleS.errors">
+                                <p *ngIf="f3.calleS.errors.required">Calle secundaria requerida</p> 
+                                <p *ngIf="f3.calleS.errors.minlength">Calle secundaria válida</p> 
+                                <p *ngIf="f3.calleS.errors.maxlength">Exceso de caracteres</p> 
+                                <p *ngIf="f3.calleS.errors.pattern">Calle secundaria válida</p> 
+
+                              </mat-error>
+                            </mat-form-field>
+                      </div>
+                  </form> 
+                  <div class="btnNEXT2">
+                    <button mat-button matStepperPrevious>Regresar</button>
+                    <button mat-button (click)="validarNextStep('2',stepper)" [disabled]="">Finalizar</button>
+                  </div>
+                </mat-step>
+              </mat-horizontal-stepper>
+            
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<div class="container">
+    <div class="row"> 
+      <div class="colmimgs col-12 col-lg-8">
+        <div class="fond">
+
+        </div>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+               
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="../../../../assets/img/52a3b22a15457a4472eca1673d8d6076.jpg" alt="First slide">
+                  <div class="tituloCA">
+                      <h5>ASI</h5>
+                  </div>
+                  <div class="carousel-caption d-none d-md-block">
+                      <p>Nuestro proyecto tiene la misión de conectar a todas las asociaciones, 
+                          fundaciones o protectoras de animalesy demás entidades colaboradoras con 
+                          aquellos interesados en sumar a un miembro más a la familia, para que aquellos 
+                          animales que no lo han tenido fácil logren encontrar su hogar definitivo.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="../../../../assets/img/426f46a7d0569db433ddc7aa905c6a41.jpg" alt="Second slide">
+                  <div class="tituloCA">
+                      <h5>Únete a nuestra plataforma</h5>
+                  </div>
+                  <div class="carousel-caption d-none d-md-block">
+                      
+                      <ol class="non">
+                          <li>Llena el formulario de registro</li>
+                          <li>Recibirás un email pidiéndote que confirmes tu cuenta.</li>   
+                          <li>Pasadas 72 horas, recibirás un email cuando hayamos verificado que la información es correcta y tu cuenta haya sido activada.</li>   
+                          <li>Entonces ya podrás publicar en la web.</li>   
+                      </ol >
+                     
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../../../assets/img/d1add943796e090d5fe6daf088f06ca5.jpg" alt="Second slide">
+                    <div class="tituloCA">
+                        <h5>Adopta una mascota</h5>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        
+                        <p>Descarga nuestra App Móbil y ayuda a nuestros amiguitos a coseguir un hogar</p>
+                        <button class="btn btn-primary btnRGA">Descargar</button>
+                      </div>
+                  </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+        
+      </div>
+      <div class="colmform col-12 col-lg-4">
+        <div class="headerLogin">
+            <a [routerLink]="['/inicio']" class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i></a>
+         
+          <!-- Button trigger modal -->
+<a style="cursor: pointer;"  class="btn btn-primary" data-toggle="modal" data-target="#modalRGLG">
+    Registrarme
+</a>
+          <a class="btn btn-primary"><i class="fa fa-android" aria-hidden="true"></i></a>
+        </div>
+        <div class="formLogin">
+          <div class="fl">
+              <h1 class="tituloIS">Accede a tu cuenta</h1>
+              <div class="alert alert-primary" role="alert" *ngIf="proLogin == false">
+                      <div class="spinner-grow text-success" role="status" >
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                            Identificando usuario...
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+                      {{mensaje}}
+              </div>
+    
+             
+    
+              <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                  <div class="form-group" [class.formError]="!correo.valid && correo.touched">
+                    <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email" class="form-control" id="correo" name="correo" #correo="ngModel" [(ngModel)]="usuarioLogin.correo" aria-describedby="emailHelp" placeholder="Ingresa tu correo electrónico">
+                    <div class="msjError" *ngIf="!correo.valid && correo.touched">
+                        <div *ngIf="correo.errors.required">
+                            El correo es obligatorio
+                        </div>
+    
+                        <div *ngIf="correo.errors.pattern">
+                            Ingresa un correo electrónico válido
+                        </div>
+                      
+                    </div>
+                  
+                  </div>
+                  <div class="form-group" [class.formError]="!password.valid && password.touched">
+                    <input  required type="password" class="form-control" id="password" placeholder="Contraseña" name="password" #password="ngModel" [(ngModel)]="usuarioLogin.password" >
+                    <div class="msjError" *ngIf="!password.valid && password.touched">
+                        <div *ngIf="password.errors.required">
+                            La contraseña es obligatoria
+                        </div>
+    
+                     
+                      </div>
+                  </div>
+                  
+                  <button [disabled]=!loginForm.form.valid type="submit" class="btn btn-primary btnRGA">Acceder</button>
+                </form>
+                <div style="margin-top: 2rem" class="olvidado"><a [routerLink]="['/recover']">¿Has olvidado tu contraseña?</a></div>
+          </div>
+            
+        </div>
+       
+      </div>
+    </div>
+   
+  
+  </div>
+  
+  <app-footer></app-footer>

@@ -1,0 +1,256 @@
+
+
+h5,h4,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+p ,a, button{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo', sans-serif;
+}
+
+.text-muted{
+    color: #6c757d!important;
+    font-size: .9rem !important;
+    border-left: 1px solid gray !important;
+    margin-left: 1rem !important;
+    padding-left: 1rem !important;
+    text-transform: lowercase !important;
+}
+
+
+/*---EFECTO CARGANDO---*/
+.containerLoad{
+    position: absolute;
+    height: 12%;
+    width: 100%;
+
+    padding-top: 2rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1020;
+}
+.loading{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top: 10px solid #e74c3c;
+   position: relative;
+   animation: a1 2s linear infinite;
+}
+.loading::before, .loading::after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    left: 0;
+    top: -10px;
+    box-sizing: border-box;
+    border-radius: 50%
+}
+
+.loading::before{
+    border-top: 10px solid #e67e22;
+    transform: rotate(120deg);
+}
+
+.loading::after{
+    border-top: 10px solid #3498db;
+    transform: rotate(240deg);
+}
+
+.loading span{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: black;
+    text-align: center;
+    line-height: 100px;
+    animation: a2 2s linear infinite;
+
+}
+@keyframes a1{
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes a2{
+    to{
+        transform: rotate(-360deg);
+    }
+}
+
+
+
+
+.advertencia{
+    display: flex;
+    width: 100%;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.advertencia .imgAd{
+    width: 10rem;
+    height: 10rem;
+    
+}
+
+.advertencia .imgAd img{
+    width: 100%;
+    height: 100%;
+    
+}
+.btnMasMascotas{
+    text-align: center;
+    padding-top: 15px;
+    margin-top: 0;
+  
+}
+.btnMasMascotas button{
+    color: #3bbfa0;
+    background: transparent;
+    border: 2px solid #3bbfa0;
+    padding: .4rem;
+    border-radius: 5px;
+}
+.btnMasMascotas a:nth-child(1){
+   margin-right: 10px;
+   color: #3bbfa0;
+   background: transparent;
+   border: 2px solid #3bbfa0
+
+
+}
+.btnMasMascotas a:nth-child(2){
+    margin-left: 10px;
+   
+    color: #3bbfa0;
+    background: transparent;
+    border: 2px solid #3bbfa0
+
+    
+}
+
+@media only screen and (max-width:600px){
+    .cardo{
+       height: 28rem;
+        
+    }
+  }
+
+  /*****CARTAS******/
+  #team img{
+      width: 7rem !important;
+      min-height: 7rem;
+      margin-top: -50px;
+  }
+  #team .hace{
+      font-size: 15px;
+  }
+ 
+
+.titulo{
+    color: #3bbfad;
+}
+  #team .card{
+    max-width: 20rem;
+    min-width: 20rem;
+
+    border-radius: 0;
+    margin: .5rem;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 5px 5px 15px #97aba8;
+    transition: all 0.3 ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+     
+  }
+
+  #team .fundaciones{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  #team .yes i{
+    color: #3bbfad;
+    font-size: 25px;
+  }
+  #team .no i{
+    color: #bf3b3b;
+    font-size: 25px;
+  }
+  #team .info{
+      margin-top: 1rem;
+      display: flex;
+      max-height: 10rem;
+      overflow: auto;
+      flex-direction: column;
+  }
+  #team .info .item{
+      display: flex;
+  }
+  #team .info .item .icon{
+      width: 15%;
+      text-align: start;
+}
+#team .info .item p{
+    width: 80%;
+    text-align: start;
+}
+
+#team .card-footer{
+    display: flex;
+    padding: 0;
+}
+
+.info::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+   
+}
+.info::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.info::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.info::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+/***MODAL--*/
+mat-form-field{
+    width:90% !important;
+}
+#formMsjPer{
+    display: none;
+}
+
+.modal-footer button{
+    padding: .3rem;
+}
+.modal-footer .btnAp{
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+}
+.modal-footer .btnNe{
+    background: #bf3b3b;
+    border: 1px solid #bf3b3b;
+}

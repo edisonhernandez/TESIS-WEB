@@ -1,0 +1,91 @@
+<div class="container contAdvertecia"  *ngIf="advertencia == true" >
+
+<div class="containerCargando" *ngIf="status == 'procesando'">
+  <div class="circleC">
+      <div class="dots">
+  
+      </div>
+  </div>
+
+  <p>Por favor, espera estamos obteniendo las mascotas disponibles.</p>
+</div>
+
+<div class="alert alert-warning errores" role="alert" *ngIf="status == 'error' &&  n == '2'" >
+  <div class="imgErr">
+          <img src="../../../assets/img/sign-305734_960_720.png">
+  </div>
+  
+ 
+  <hr>
+  <p class="mb-0">{{mensaje}}</p>
+</div>
+
+<div class="alert alert-danger errores" role="alert" *ngIf="(status == 'error' &&  n == '3') || (status == 'error' &&  n == 'n') " >
+      <div class="imgErr">
+              <img src="../../../assets/img/Icon_Error.png">
+      </div>
+      
+     
+      <hr>
+      <p class="mb-0">{{mensaje}}</p>
+    </div>
+</div>
+<div class="container" >
+
+<div class="card-deck">
+<div class="cardb" *ngFor = "let mascota of mascotas">
+<input type="checkbox">
+<div class="toggleb">+</div>
+<a class="imgBx" [routerLink]="['/perfilMascota',mascota._id]">
+<div class="mscImg">
+    <img src="{{url + 'obtener-foto-mascota/' + mascota.foto}}">
+</div>
+
+<div class="mascNombre">
+    <h5>{{mascota.nombre}}</h5>
+</div>
+
+</a>
+<div class="details">
+<h2>{{mascota.nombre}} <br></h2>
+<span class="timeMS">{{(mascota.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</span>
+<br>
+<br>
+<div class="biography">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec turpis ut diam euismod interdum eget vitae libero. Ut ac ipsum lectus. Mauris sed tellus sodales, pulvinar nisi nec, vestibulum ipsum. Nunc metus nisi, ultrices non tincidunt eu, gravida sit amet risus. Sed enim tellus, efficitur quis dolor eget, iaculis finibus dui. Aenean dapibus malesuada tortor, non tincidunt sapien rhoncus id. Proin eu magna felis. Nunc lobortis quis dolor a hendrerit. Duis commodo ligula nec accumsan rhoncus. Morbi enim lorem, eleifend eu congue vel, faucibus at sapien.
+</div>
+<div class="card-datos">
+    <div class="row dd">
+        <div class="col-4 col-md-6 col-lg-4 dc">
+            <span>Raza</span>
+            <p>{{mascota.raza}}</p>
+          </div>
+          <div class="col-4 col-md-6 col-lg-4 dc3">
+              <span>Sexo</span>
+              <p>{{mascota.sexo}}</p>
+          </div>
+          <div class="col-4 col-md-6 col-lg-4 dc2">
+              <span>Edad</span>
+              <p>{{mascota.edad}}</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-12">
+              <span>Lugar de adopción</span>
+              <p>{{mascota.responsable.nombreFundacion}}</p>
+            </div>
+    </div>
+    </div>
+
+</div>
+</div>
+<div class="row">
+  <div class="col-12 btnMasMascotas">
+      <button class="btn btn-primary btnVermas" (click)="viewMore()" *ngIf="!noMore">Ver más mascotas <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+    </div>
+
+</div>
+</div>
+
+
+</div>
+
+<app-footer></app-footer>

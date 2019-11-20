@@ -1,0 +1,679 @@
+<header id="header">
+
+    <div class="titulo">
+      <h3>Donaciones</h3>
+      <span class="lineTi"></span>
+    </div>
+  
+  
+  </header>
+
+  <div id="mainMS" class="main" *ngIf="valid == true">
+
+      <!--Seccion de filtros y cantidad de resultados-->
+      <section class="main-filtros">
+        <div class="btnRGM  btn-group dropright" *ngIf="identity">
+            <button *ngIf="identity._id == idFun" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Registrar donación</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="selectTipo('econ')"  style="cursor: pointer;">Económica</a>
+               <a class="dropdown-item" (click)="selectTipo('prod')" style="cursor: pointer;">Producto</a>
+              </div>
+          </div>
+        
+        <form>
+    
+          <h5>Ordenar por</h5>
+    
+          <div class="form-group btnDPR">
+              <label for="tamDrop">Tipo de donación</label>
+              <select class="form-control" id="tamDrop">
+                <option *ngFor="let t of tipoFL" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)" >{{t}}</option>
+    
+              </select>
+            </div>
+           
+            
+    
+          <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+       
+        </form>
+    
+    
+        <div class="container dividerTi" *ngIf="carga == false">
+        
+          <span >Total donaciones: {{total}}</span>
+          
+        </div>
+      </section>
+      <!--Seccion de cartas de donaciones-->
+      <section class="main-mascotas">
+ 
+    
+     <div class="containerLoad" *ngIf="carga == true">
+          <div class="loading">
+            <span>Cargando...</span>
+          </div>
+        </div>
+        <div class="mascots" *ngIf="carga == false">
+          <div class="advertencia" *ngIf="advertencia == true">
+            <div class="imgAd">
+              <img src="../../../../assets/img/dog-2952471_960_720.png">
+            </div>
+            <p *ngIf="status == 'error'">{{mensaje}}</p>
+          </div>
+           <!--Inventario de donaciones-->
+  <div class="card-deck" *ngIf="idFun && advertencia != true"  >
+
+      <!-- Modal para seleccionar voluntarios-->
+  <div class="modal fade"  id="modalSelecVoluntarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Donación</h5>
+              <button type="button"  class="close" aria-label="Close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+
+          <div class="modal-body">
+             <div *ngIf="mensajeVSLE != ''" class="alert alert-danger" role="alert">
+                 {{mensajeVSLE}}
+               </div>
+              <p>Selecciona por lo menos un voluntario, el cual se haga cargo de la donación: </p>
+              <form class="formulario needs-validation" #aprobDon="ngForm" (ngSubmit)="aprobarDonacion(aprobDon)" novalidate>
+                  
+                  <div id="vlts" class="form-check" *ngFor="let volun of voluntarios">
+                      <input required type="checkbox" name="checkbox" id="{{volun._id}}" value="{{volun._id}}">
+                      <label *ngIf="volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                          <div class="imgVol">
+                              <img src="{{url + 'obtener-foto/' + volun.foto}}">
+                          </div>
+                      </label>
+                      <label *ngIf="!volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                          <div class="imgVol">
+                              <img src="../../../assets/img/user.png">
+                          </div>
+                      </label>
+                  </div>
+       
+              </form>
+          </div>
+          <div class="modal-footer" >
+              <div class="mdfoo">
+            
+             <button type="button" class="btn btn-primary btnRGA" (click)="aprobarDonacion()">Guardar</button>
+</div>
+          </div>
+      </div>
+  </div>
+</div>
+     <!-- Modal para ver foto del comprobante-->
+ <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+        
+         <div class="modal-body" *ngIf="imgCom">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+               <div class="imgModalCom">
+                   <img src="{{url + 'obtener-comprobante/' + imgCom}}">
+               </div>
+           
+         </div>
+        
+       </div>
+     </div>
+   
+   </div>
+
+   <div class="card" *ngFor="let dona of donaciones">
+       <div class="card-header">
+         <div class="tituloDonacion">
+           <span *ngIf="dona.tipo == 'producto'">
+               Producto
+           </span>
+           <span *ngIf="dona.tipo == 'economica'">
+               Económica
+           </span>
+            <span style="cursor: pointer;" (click)="visualizarDonacion(dona._id)"><i class="fa fa-expand" aria-hidden="true"></i></span>
+         </div>
+           
+           <small class="text-muted">Solicitado: {{(dona.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</small>
+         </div>
+     <div class="card-body">
+       <div class="contentCardBody">
+           <div class="dropCom" >
+               <a style="cursor: pointer;" class="btn btn-primary comprobante" (click)="verComprobante(dona.comprobante)" role="button">
+                   <span *ngIf="dona.tipo == 'economica'">Comprobante</span> 
+                   <span *ngIf="dona.tipo == 'producto'">{{dona.nombreProducto}}</span>
+                  <div class="imgCom"><img src="{{url + 'obtener-comprobante/' + dona.comprobante}}"></div>
+                 </a>
+            </div>
+     
+            <div class="biography">{{dona.descripcion}}</div>
+
+           
+               <div class="donador" *ngIf="dona.direccionRetiro">
+                   <p >{{dona.direccionRetiro}}</p>
+                 </div>
+             <div class="dividerInDon">
+               Donador
+             </div>
+             <div class="donador">
+               <p *ngIf="dona.donante">{{dona.donante.nombres}} {{dona.donante.apellidos}}</p>
+               <p *ngIf="dona.donanteR">{{dona.donanteR.nombres}} {{dona.donanteR.apellidos}}</p>
+             </div>
+             <div class="dividerInDon" *ngIf="dona.estado !='fundacion' && dona.tipo == 'producto' && dona.voluntarios.length > 0">
+                 Voluntario/s
+                 
+               </div>
+               <div class="donador" *ngIf="dona.estado !='fundacion' && dona.tipo == 'producto' && dona.voluntarios.length > 0">
+                   <p >{{dona.voluntarios.length}} Voluntario/s asignados </p>
+                 </div>
+             <div class="voluntarios" *ngIf="dona.estado !='fundacion' && dona.tipo == 'producto' && dona.voluntarios.lenght > 0">
+               <ol>
+                 <li *ngFor="let cl of dona.voluntarios">
+                     <p>{{vl.nombres}} {{vl.apellidos}}</p>
+                     
+                 </li>
+                 
+               </ol>
+               
+             </div>
+       </div>
+      
+
+       <div class="estadoDonA" *ngIf="dona.estado == 'aprobado' || dona.estado == 'fundacion'">
+        <span>Aprobada</span>
+       </div>
+       <div class="estadoDonN" *ngIf="dona.estado == 'negado'">
+           <span>Negada</span>
+          </div>
+          <div class="estadoDonP" *ngIf="dona.estado == 'pendiente'">
+             <span>Pendiente</span>
+            </div>
+
+     </div>
+     <div class="card-footer" *ngIf="dona.estado == 'pendiente'">
+
+         <button *ngIf="dona.tipo == 'producto'" class="btn btn-success" (click)=" obtVoluntarios(dona._id, dona.tipo)" [disabled]="dona.estado == 'aprobado'">Aprobar</button>
+         <button *ngIf="dona.tipo == 'economica'" class="btn btn-success" (click)=" aprobarDonacionEco(dona._id, dona.tipo)" [disabled]="dona.estado == 'aprobado'">Aprobar</button>
+         <button class="btn btn-danger" [disabled]="dona.estado == 'negado'" (click)=" negarDonacion(dona._id)">Negar</button>
+       
+     </div>
+ 
+   </div>
+   
+ </div>
+        </div>
+      
+        <div class="selectPages" *ngIf="filtroBTN == false && carga == false && advertencia == false ">
+          <div class="pageAnt2">
+              <a  [routerLink]="['/fundacion',idFun,'donaciones', 'all', '1']"
+                class="btn btn-primary">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+            </div>
+        <div class="pageAnt">
+          <button [disabled]="page == 1"  [routerLink]="['/fundacion',idFun,'donaciones', 'all', prev_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+        </div>
+        <div class="pagess">
+  
+         <a *ngFor="let p of pagesSelec" [routerLink]="['/fundacion',idFun,'donaciones', 'all', p]"  [class.pgActive]="page == p">{{p}}</a>
+     
+        </div>
+        <div class="pageNex">
+          <button [disabled]="page == pages"  [routerLink]="['/fundacion',idFun,'donaciones', 'all', next_page]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="pageNex2">
+            <a  [routerLink]="['/fundacion',idFun,'donaciones', 'all', pages]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          </a>
+          </div>
+      </div>
+      <div class="selectPages" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+          <div class="pageAnt2">
+              <a  [routerLink]="['/fundacion',idFun,'donaciones', 'busqueda', '1']"
+                class="btn btn-primary">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+            </div>
+        <div class="pageAnt">
+          <button [disabled]="page == 1" [routerLink]="['/fundacion',idFun,'donaciones', 'busqueda', prev_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+        </div>
+        <div class="pagess">
+  
+         <a *ngFor="let p of pagesSelec" [routerLink]="['/fundacion',idFun,'donaciones', 'busqueda', p]"  [class.pgActive]="page == p">{{p}}</a>
+        </div>
+        <div class="pageNex">
+          <button [disabled]="page == pages"  [routerLink]="['/fundacion',idFun,'donaciones', 'busqueda', next_page]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="pageNex2">
+            <a  [routerLink]="['/fundacion',idFun,'donaciones', 'busqueda', pages]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          </a>
+          </div>
+      </div>
+      </section>
+    </div>
+    <!--REGISTRO DE DONACION-->
+  <div *ngIf="valid == true" class="row" id="formRD" class="row" style="margin: 0; width: 100%; margin-top: 5rem;">
+      <div class="col-12 registroDonacionMain">
+          <div class="registroDonacion">
+            <div class="titulo">
+              <h4>Registro de donación</h4>
+              <button type="button" class="btn btn-secondary" (click)="cancelarDonacion()">( Cancelar registro )</button>
+            </div>
+
+             <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+          <mat-step >
+            <div class="tituStep">
+              <h5>Datos del donador</h5>
+            </div>
+            <div *ngIf="statusValid == 'errorUser'" style="text-align: center;" class="alert alert-danger" role="alert">
+                Selecciona un usuario
+              </div>
+            <div id="forms" class="forms">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-home-tab" (click)="mostrarTab1()" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Buscar usuario</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" (click)="mostrarTab2()" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">LLenar formulario</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="mainD">
+      
+                            <!-- Actual search box -->
+                            <div class="form-group has-search">
+                              <span class="fa fa-search form-control-feedback"></span>
+                              <input id="bsUsuersApel" type="text" (keyup)="prob($event)" class="form-control" placeholder="Buscar usuario por apellidos">
+                            </div>
+                            <div id="busquedaUsers">
+                              <div class="userD" *ngFor="let user of usuarios">
+                                <a (click)="seleccionarUsuario(user._id)">{{user.nombres}} {{user.apellidos}}</a>
+                              </div>
+                  
+                            </div>
+                  
+                          </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <form id="RGDO" #registerForm2="ngForm"  class="formRg needs-validation" novalidate>
+                            <ng-template matStepLabel></ng-template>
+                         
+                            
+                                <div class="form-row justify-content-center" id="formUsuer" *ngIf="usS == true;">
+                      
+                                  <div class="form-group col-md-4">
+                      
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Nombres</mat-label>
+                                        
+                                          <input required [formControl]="nombres" matInput type="text" id="nombres" placeholder="Nombres del voluntario"  [class.is-invalid]="!nombres.valid && nombres.touched" [class.is-valid]="nombres.valid">
+                                          <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="nombres.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                    
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Apellidos</mat-label>
+                                        
+                                          <input required [formControl]="apellidos" matInput type="text" id="apellidos" placeholder="Apellidos del voluntario"  [class.is-invalid]="!apellidos.valid && apellidos.touched" [class.is-valid]="apellidos.valid">
+                                          <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="apellidos.invalid">{{getErrorMessage2()}}</mat-error>
+                                        </mat-form-field>
+                        
+                                  </div>
+                                  <div class="form-group col-md-4">
+                      
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Cédula</mat-label>
+                                        
+                                          <input required [formControl]="cedula" matInput type="text" id="cedula" placeholder="Cédula del voluntario"  [class.is-invalid]="!cedula.valid && cedula.touched" [class.is-valid]="cedula.valid">
+                                          <mat-icon matSuffix><i class="fa fa-id-card-o" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="cedula.invalid">{{getErrorMessage3()}}</mat-error>
+                                        </mat-form-field>
+                                        <p id="nmbr4" class="errNC" *ngIf="statusValid == 'errorCedula2'">El número de cédula no es válido</p>
+
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Correo electrónico</mat-label>
+                                        
+                                          <input required [formControl]="correo" matInput type="text" id="correo" placeholder="Correo electrónico"  [class.is-invalid]="!correo.valid && correo.touched" [class.is-valid]="correo.valid">
+                                          <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="correo.invalid">{{getErrorMessage12()}}</mat-error>
+                                        </mat-form-field>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Teléfono</mat-label>
+                                        
+                                          <input required [formControl]="telefono" matInput type="text" id="telefono" placeholder="Teléfono del voluntario"  [class.is-invalid]="!telefono.valid && telefono.touched" [class.is-valid]="telefono.valid">
+                                          <mat-icon matSuffix><i class="fa fa-phone-square" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="telefono.invalid">{{getErrorMessage9()}}</mat-error>
+                                        </mat-form-field>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Celular</mat-label>
+                                        
+                                          <input required [formControl]="celular" matInput type="text" id="celular" placeholder="Celular del voluntario"  [class.is-invalid]="!celular.valid && celular.touched" [class.is-valid]="celular.valid">
+                                          <mat-icon matSuffix><i class="fa fa-mobile" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="celular.invalid">{{getErrorMessage10()}}</mat-error>
+                                        </mat-form-field>
+                                  </div>
+                                 
+                                  <div class="form-group col-md-10">
+                                      <mat-form-field appearance="standard">
+                                          <mat-label>Dirección</mat-label>
+                                        
+                                          <input required [formControl]="direccion" matInput type="text" id="direccion"   [class.is-invalid]="!direccion.valid && direccion.touched" [class.is-valid]="direccion.valid">
+                                          <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                                         <mat-error *ngIf="direccion.invalid">{{getErrorMessage11()}}</mat-error>
+                                        </mat-form-field>
+                                  </div>
+                                </div>
+                     
+                        </form>
+                    </div>
+   
+                  </div>
+            </div>
+            
+           
+                <div class="form-row" id="userSlc" *ngIf="userSelect">
+    
+    
+                    <div class="usrsImg col-md-4">
+                      <div class="Img">
+                        <img src="{{url + 'obtener-foto/' + userSelect.foto}}">
+                      </div>
+        
+                    </div>
+        
+                    <div class="usrsInf  col-md-8">
+                      <button class="btn" (click)="eliminarSeleccion();">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                      </button>
+                      <p>{{userSelect.nombres}} {{userSelect.apellidos}}</p>
+                      <p>{{userSelect.cedula}}</p>
+                      <p>{{userSelect.direccion}}</p>
+                      <p>{{userSelect.telefono}}</p>
+                      <p>{{userSelect.celular}}</p>
+                    </div>
+        
+        
+                  </div>
+            
+              <div class="btnNEXT">
+                <button [class.noval]="nombres.invalid || apellidos.invalid || cedula.invalid || correo.invalid || 
+                telefono.invalid || direccion.invalid || celular.invalid"  *ngIf="formSelect == true" mat-button matStepperNext [disabled]="nombres.invalid || apellidos.invalid || cedula.invalid || correo.invalid || 
+                telefono.invalid || direccion.invalid || celular.invalid">Siguiente</button>
+                <button [class.noval]="userSelect == ''" *ngIf="formSelect == false" mat-button matStepperNext [disabled]="userSelect == ''">Siguiente</button>
+
+              </div>
+            
+          </mat-step>
+          <mat-step >
+              <div *ngIf="statusValid2 == 'errorFoto'" style="text-align: center;" class="alert alert-danger" role="alert">
+                  Selecciona una foto
+                </div>
+            <form id="RGF2">
+              <ng-template matStepLabel></ng-template>
+              <div class="form-row justify-content-center TipoEco" *ngIf="tipE == true;">
+                  <div class="col-12 imgRG">
+                    <p>Selecciona la foto del comprobante que asegure que se realizo la donación</p>
+                    <div class="imgRD">
+                        <img *ngIf="imL2 == false" src="../../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                        <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                        <div class="btnIM">
+          
+                            <label for="file2" class="input-label2"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                        <input id="file2" (change)="fileChangeEvent2($event)" name="comprobante" #comprobante="ngModel" [(ngModel)]="donacion.comprobante"
+                          type="file">
+                          </div>
+                    </div>
+                   
+                  </div>
+              
+                  <div class="form-group col-md-10">
+                      <mat-form-field appearance="standard">
+                          <mat-label>Cantidad de dinero</mat-label>
+                        
+                          <input required [formControl]="cantidad" matInput type="text" id="cantidad"   [class.is-invalid]="!cantidad.valid && cantidad.touched" [class.is-valid]="cantidad.valid">
+                          <mat-icon matSuffix><i class="fa fa-money" aria-hidden="true"></i></mat-icon>
+                         <mat-error *ngIf="cantidad.invalid">{{getErrorMessage13()}}</mat-error>
+                        </mat-form-field>
+                  </div>
+                  <div class="form-group col-md-10">
+                      <mat-form-field appearance="standard">
+                          <mat-label>Descripción de la donación</mat-label>
+                        
+                          <input required [formControl]="descripcion" matInput type="text" id="descripcion1"   [class.is-invalid]="!descripcion.valid && descripcion.touched" [class.is-valid]="descripcion.valid">
+                          <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                         <mat-error *ngIf="descripcion.invalid">{{getErrorMessage14()}}</mat-error>
+                        </mat-form-field>
+                  </div>
+                
+                 
+                </div>
+      
+                <div class="form-row justify-content-center TipoProd " *ngIf="tipP == true;">
+                    <div class="col-12 imgRG">
+
+                        
+                        <p >Selecciona una foto del producto que asegure que se realizó la donación</p>
+
+                        <div class="imgRD">
+                            <img *ngIf="imL2 == false" src="../../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                            <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                            <div class="btnIM">
+              
+                                <label for="file2" class="input-label2"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                            <input id="file2" (change)="fileChangeEvent2($event)" name="comprobante" #comprobante="ngModel" [(ngModel)]="donacion.comprobante"
+                              type="file">
+                              </div>
+                        </div>
+                       
+          
+                      </div>
+                    
+                      <div class="form-group col-md-10">
+                          <mat-form-field appearance="standard">
+                              <mat-label>Nombre del producto</mat-label>
+                            
+                              <input required [formControl]="nombreProducto" matInput type="text" id="nombreProducto"   [class.is-invalid]="!nombreProducto.valid && nombreProducto.touched" [class.is-valid]="nombreProducto.valid">
+                              <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                             <mat-error *ngIf="nombreProducto.invalid">{{getErrorMessage13()}}</mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div class="form-group col-md-10">
+                          <mat-form-field appearance="standard">
+                              <mat-label>Descripción de la donación</mat-label>
+                            
+                              <input required [formControl]="descripcion" matInput type="text" id="descripcion2"   [class.is-invalid]="!descripcion.valid && descripcion.touched" [class.is-valid]="descripcion.valid">
+                              <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                             <mat-error *ngIf="descripcion.invalid">{{getErrorMessage14()}}</mat-error>
+                            </mat-form-field>
+                      </div>
+                  
+                </div>
+              <div class="btnNEXT2">
+                <button mat-button matStepperPrevious>Regresar</button>
+                <button [class.noval]="cantidad.invalid || descripcion.invalid" [disabled]="cantidad.invalid || descripcion.invalid" mat-button *ngIf="tipE == true;" (click)="registrarDonacion(stepper)">Finalizar</button>
+                <button [class.noval]="nombreProducto.invalid || descripcion.invalid" [disabled]="nombreProducto.invalid || descripcion.invalid" mat-button *ngIf="tipP == true;" (click)="registrarDonacion(stepper)">Finalizar</button>
+
+              </div>
+            </form>
+          </mat-step>
+         
+        </mat-horizontal-stepper>
+           
+         
+          
+          </div>
+   
+      
+  
+         
+        </div>
+  </div>
+  <div class="row inforDONACIONES" style="margin-top: 4rem; width: 100%; margin-left: 0; margin-right: 0;">
+
+
+        
+          <div class="col-12 col-md-6 cardD">
+            <div class="titulo">
+                <h5>Depositos y transferencias bancarias</h5>
+               
+            </div>
+            <p style="color: #535353">Desde la aplicación móvil podrás subir el comprobante para verificar tu donación económica.</p>
+
+            <div class="infor">
+                <div class="imgDon">
+                    <img src="../../../assets/img/puerta-para-perros-grandes-mascotas-D_NQ_NP_758821-MEC26331135264_112017-F.jpg">
+                  </div>
+                  <div class="datosDona" *ngIf="fundacion">
+  
+                      <p>Titular: {{fundacion.titular}}</p>
+                      <p>Banco: {{fundacion.banco}}</p>
+                      <p>Número de cuenta: {{fundacion.numCuenta}}</p>
+          
+                    </div>
+            </div>
+            
+          </div>
+          <div class="col-12 col-md-6 cardD">
+              <div class="titulo">
+                  <h5>Donaciones en productos</h5>
+                 
+              </div>
+              <p style="color: #535353">Desde la aplicación móvil podrás registrar la donación en productos, despúes uno de nuestros voluntarios serán
+                  asignados para contactar contigo y retirar la donación.</p>
+              <div class="infor">
+                  <div class="imgDon">
+                      <img src="../../../assets/img/puerta-para-perros-grandes-mascotas-D_NQ_NP_758821-MEC26331135264_112017-F.jpg">
+                    </div>
+                  
+              </div>
+              
+            </div>
+      
+       
+      
+  
+     
+    </div>
+
+    <!--MODAL VISUALIZACION DE LA DONACION-->
+<!-- Modal -->
+<div class="modal fade" id="modalDonacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Donación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="donacionOB">
+        <div class="row donacionOBT">
+          <div class="col-6">
+            <div class="tituloOB">
+              <h5>Donación</h5>
+              <span></span>
+            </div>
+            <div class="infoOB" *ngIf="donacionOB">
+                <img (click)="verComprobante(donacionOB.comprobante)" src="{{url + 'obtener-comprobante/' + donacionOB.comprobante}}">
+
+              <p>Tipo: <span>{{donacionOB.tipo}}</span></p>
+              <p *ngIf="donacionOB.tipo == 'economica'">Cantidad: <span>{{donacionOB.cantidad}}</span></p>
+              <p *ngIf="donacionOB.tipo == 'producto'">Nombre del producto: <span>{{donacionOB.nombreProducto}}</span></p>
+              <p >Descripción: <span>{{donacionOB.descripcion}}</span></p>
+            </div>
+          </div>
+          <div class="col-6">
+              <div class="tituloOB">
+                  <h5>Donador</h5>
+                  <span></span>
+                </div>
+                <div class="infoOB2" >
+                    <div class="imgDON" *ngIf="donacionOB.donanteR">
+                        <img  class="profile-img card-img-top" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" alt="Card image cap" *ngIf="!donacionOB.donanteR.foto">
+
+                        <img src="{{url + 'obtener-foto/' + donacionOB.donanteR.foto}}" *ngIf="donacionOB.donanteR.foto" class="profile-img card-img-top">
+                    </div>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.nombres}} {{donacionOB.donanteR.apellidos}}</span></p>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.cedula}}</span></p>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.telefono}}</span></p>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.celular}}</span></p>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.correo}}</span></p>
+                    <p *ngIf="donacionOB.donanteR"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donanteR.direccion}}</span></p>
+
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.nombres}} {{donacionOB.donante.apellidos}}</span></p>
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.cedula}}</span></p>
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.telefono}}</span></p>
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.celular}}</span></p>
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.correo}}</span></p>
+                    <p *ngIf="donacionOB.donante"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;<span>{{donacionOB.donante.direccion}}</span></p>
+
+                   
+                   
+                  </div>
+          </div>
+          <div class="col-6" *ngIf="donacionOB.voluntarios.length > 0">
+              <div class="tituloOB">
+                  <h5>Voluntarios asignados</h5>
+                  <span></span>
+                </div>
+                <div class="infoOB2" >
+                    <p *ngFor="let volun of voluntariosAS"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<span>{{volun.voluntarioC.nombres}} {{volun.voluntarioC.apellidos}}  </span> <span>({{volun.estadoD}})</span></p> 
+                  </div>
+          </div>
+          <div class="col-6" *ngIf="donacionOB.tipo == 'producto'">
+              <div class="tituloOB">
+                  <h5>Dirección de retiro</h5>
+                  <span></span>
+                </div>
+                <div class="infoOB" *ngIf="donacionOB">
+                    <p>Sector: <span>Norte</span></p>
+                    <p>Barrio: <span>La leon</span></p>
+                    <p>Calle principal: <span>arenillas</span></p>
+                    <p>Calle secundaria: <span>huaquillas</span></p>
+                    <p>Referencia: <span>Alado de una iglesia</span></p>
+
+                  </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer" *ngIf="donacionOB">
+        <div class="mdfoo" *ngIf="donacionOB.estado == 'pendiente'">
+            <button *ngIf="donacionOB.tipo == 'producto'" class="btn btn-success" (click)=" obtVoluntarios(donacionOB._id, donacionOB.tipo)" [disabled]="donacionOB.estado == 'aprobado'">Aprobar</button>
+            <button *ngIf="donacionOB.tipo == 'economica'" class="btn btn-success" (click)=" aprobarDonacionEco(donacionOB._id,donacionOB.tipo)" [disabled]="donacionOB.estado == 'aprobado'">Aprobar</button>
+            <button class="btn btn-danger" [disabled]="donacionOB.estado == 'negado'" (click)=" negarDonacion(donacionOB._id)">Negar</button>
+          
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>  
+<app-footer-fundacion ></app-footer-fundacion>
+

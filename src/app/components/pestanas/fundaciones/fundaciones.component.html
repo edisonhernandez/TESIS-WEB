@@ -1,0 +1,198 @@
+<app-nav></app-nav>
+
+
+<header>
+  <div class="titulo">
+    <h3>Fundaciones</h3>
+    <span></span>
+  </div>
+  <div class="descripcionPes">
+
+      <div class="imgIcon">
+        <div class="imgI">
+          <img src="../../../../assets/img/depositphotos_147298583-stock-illustration-lovers-union-icon.jpg">
+        </div>
+      </div>
+        <p>
+            Mediante la unión de las fundaciones y ciudadanía es posible que decenas de perros y gatos callejeros, 
+            encuentren familias que les brinden amor y protección, una vez finalizado su proceso de recuperación.
+        </p>
+    </div>
+</header>
+
+<div class="main" >
+   
+  <section class="main-filtros">
+    <form>
+      <!-- Actual search box -->
+      <div class="form-group has-search">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input id="bsFunNombre" type="text" class="form-control" placeholder="Busca por nombre">
+      </div>
+      
+     
+    
+</form>
+<form>
+
+  <h5>Ordenar por</h5>
+
+  <div class="form-group btnDPR">
+      <label for="sectorDrop">Sector</label>
+      <select class="form-control" id="sectorDrop">
+        <option *ngFor="let s of sectores" [disabled]="s == 'Todos'" [value]="s" (click)="filtroBSQD(t)" >{{s}}</option>
+
+      </select>
+    </div>
+   
+
+    <button *ngIf="carga == false && ( busqueda == true || filtroBTN == true)" class="btn btn-danger" type="button" (click)="cancelarBusqueda()">Ver todas <i class="fa fa-times-circle" aria-hidden="true"></i></button>
+
+</form>
+
+<div class="container dividerTi" *ngIf="carga == false && advertencia == false">
+  <span *ngIf="itemsFund > 1">Total fundaciones: {{total}}</span>
+ 
+</div>
+  </section>
+  <section class="main-fundaciones">
+    <div class="containerLoad" *ngIf="carga == true">
+      <div class="loading">
+          <span>Cargando...</span>
+        </div>
+  </div>
+<div class="mascots" *ngIf="carga == false">
+    <div class="advertencia"  *ngIf="advertencia == true">
+        <div class="imgAd">
+          <img src="../../../../assets/img/dog-2952471_960_720.png">
+        </div>
+        <p *ngIf="status == 'error'">{{mensaje}}</p>
+      </div>
+ 
+      <div class="clothes-pics" *ngIf="advertencia == false">
+        <div class="row img-row">
+          <figure class="columns four card" *ngFor="let fund of fundaciones">
+              <div class="card-header">
+                  <div class="tituloDonacion">
+                    <span >
+                        Barrio {{fund.barrio}}
+                    </span>
+                   
+                     <a style="cursor: pointer;" matTooltip="Ver perfil"  [routerLink]="['/fundacion',fund._id,'nosotros','all']" target="_blank"><i class="fa fa-expand" aria-hidden="true"></i></a>
+                  </div>
+                    
+                  </div>
+              <div class="card-body" >
+                <div class="contentCardBody">
+                    <div class="dropCom" >
+                        <div  class="btn btn-primary nomFMascota"  role="button">
+                            <a matTooltip="Ver perfil" [routerLink]="['/fundacion',fund._id,'nosotros','all']">{{fund.nombreFundacion}}</a><div class="imgCom">
+                                <img  matTooltip="Ver perfil" *ngIf="fund.logo" src="{{url + 'obtener-foto/' + fund.logo}}" class="d-block w-100 active" alt="...">
+                                <img matTooltip="Ver perfil" [routerLink]="['/fundacion',fund._id,'nosotros','all']"  class="d-block w-100 active" *ngIf="!fund.logo" src="../../../../assets/img/Captura2.png">
+                            </div>
+                        </div>
+                     </div>
+              
+                      <div class="biography">{{fund.perfil}}</div>
+                     
+                      <div class="dividerInDon">
+                        Contactos
+                      </div>
+                      <div class="donador">
+                        <p >{{fund.telefono}} / {{fund.celular}} </p>
+                       
+                      </div>
+                    
+                      
+                     
+                </div>
+               
+         
+                <div class="estadoDonA">
+                    Sector {{fund.sector}}
+                </div>
+           
+         
+              </div>
+          </figure>
+
+        </div>
+
+      </div>
+   
+</div>
+
+
+  <div class="selectPages" *ngIf="advertencia == false && busqueda == false && filtroBTN == false && carga == false">
+      <div class="pageAnt2">
+          <a  [routerLink]="['/fundaciones', 'todos', '1']"
+            class="btn btn-primary">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+        </div>
+    <div class="pageAnt">
+      <button [disabled]="page == 1"  [routerLink]="['/fundaciones', 'todos',prev_page]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="pagess">
+
+     <a  [routerLink]="['/fundaciones', 'todos', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+ 
+    </div>
+    <div class="pageNex">
+      <button [disabled]="page == pages"  [routerLink]="['/fundaciones', 'todos',next_page]"
+      class="btn btn-primary">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </button>
+    </div>
+    <div class="pageNex2">
+        <a  [routerLink]="['/fundaciones', 'todos', pages]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+      </a>
+      </div>
+  </div>
+  <div class="selectPages" *ngIf="filtroBTN == true && carga == false && busqueda == false && advertencia == false && carga == false">
+      <div class="pageAnt2">
+          <a  [routerLink]="['/fundaciones', 'busqueda', '1']"
+            class="btn btn-primary">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+        </div>
+    <div class="pageAnt">
+      <button [disabled]="page == 1"  [routerLink]="['/fundaciones', 'busqueda', prev_page]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="pagess">
+
+     <a [routerLink]="['/fundaciones', 'busqueda', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+    </div>
+    <div class="pageNex">
+      <button  [disabled]="page == pages" [routerLink]="['/fundaciones', 'busqueda', next_page]"
+      class="btn btn-primary">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </button>
+    </div>
+    <div class="pageNex2" >
+        <a  [routerLink]="['/fundaciones', 'busqueda', pages]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+      </a>
+      </div>
+  </div>
+ 
+  <!--
+  <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; background: #fff; padding-top: 2rem;">
+      <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+        <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+  
+    </div>
+    </div>-->
+    
+  </section>
+  
+
+ 
+   
+      </div>
+<app-footer></app-footer>

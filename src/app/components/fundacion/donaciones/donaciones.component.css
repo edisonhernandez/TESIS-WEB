@@ -1,0 +1,1337 @@
+
+h5,h4,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+}
+p,a,button{
+    font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+.containerLoad{
+    position: absolute;
+    height: 12%;
+    width: 100%;
+
+    padding-top: 6rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1020;
+}
+.loading{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top: 10px solid #e74c3c;
+   position: relative;
+   animation: a1 2s linear infinite;
+}
+.loading::before, .loading::after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    left: 0;
+    top: -10px;
+    box-sizing: border-box;
+    border-radius: 50%
+}
+
+.loading::before{
+    border-top: 10px solid #e67e22;
+    transform: rotate(120deg);
+}
+
+.loading::after{
+    border-top: 10px solid #3498db;
+    transform: rotate(240deg);
+}
+
+.loading span{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: black;
+    text-align: center;
+    line-height: 100px;
+    animation: a2 2s linear infinite;
+
+}
+@keyframes a1{
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes a2{
+    to{
+        transform: rotate(-360deg);
+    }
+}
+.pp{
+    width: 100%;
+    margin: 0;
+    background: #fff;
+}
+
+
+/*--HEADER-*/
+header{
+    margin-top: 8rem;
+
+}
+header .titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header .titulo h3{
+    font-family: 'Righteous', cursive;
+    font-size: 60px;
+    color: #3bbfad;
+}
+
+header .titulo .lineTi{
+    width: 5%;
+    border-radius: 5px;
+    border-top: 3px solid #3bbfad;
+}
+
+header .descripcionPes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2rem 5rem;
+    flex-wrap: wrap;
+}
+header .descripcionPes .imgIcon{
+   
+    text-align: end;
+    display: flex;
+    padding-right: 1rem;
+    justify-content: flex-end;
+}
+header .descripcionPes p{
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+header .descripcionPes .imgIcon .imgI{
+    width: 7rem;
+    height: 7rem;
+}
+header .descripcionPes .imgIcon .imgI img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/*--MAIN, FILTROS Y MASCOTAS--*/
+
+.main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 5rem !important;
+    padding: 0 2rem;
+    justify-content: space-evenly;
+}
+.main .main-filtros{
+    max-width: 20%;
+    width: 20%;
+    min-width: 20%;
+    padding: 25px 0;
+    margin: 20px 0;
+}
+.main .main-filtros form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.main .main-filtros form .btnDPR{
+    
+}
+.main .main-mascotas{
+    max-width: 70%;
+    position: relative;
+    width: 70%;
+    min-width: 70%;
+}
+
+
+.content{
+    position: relative;
+   
+}
+
+figure{
+    margin: auto
+}
+
+
+.content article{
+    padding: 0 0;
+    padding-bottom: 0;
+
+}
+
+
+
+
+.eluid36c84ad4 {
+    margin-top: 25px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.eluid36c84ad4.zn_separator--icon-yes .zn_separator__line {
+    border-top-width: 3px;
+    border-top-color: #3bbfa0;
+    width: calc(8% - 35px);
+}
+
+.zn_separator--icon-yes .zn_separator__line {
+    content: '';
+    display: inline-block;
+    border-top-style: solid;
+    width: calc(8% - 50px);
+    vertical-align: middle;
+}
+.eluid36c84ad4 .zn_separator__icon {
+    font-size: 16px;
+    margin: 0 5px;
+    color: #3bbfa0;
+}
+.clearfix:before{
+    content: " ";
+    display: table;
+}
+
+
+
+.clearfix:after{
+    clear: both;
+}
+.mascots{
+    background: #fff;
+}
+.clothes-pics{
+    width: 100%;
+    padding: 25px 20px;
+    background: #fff;
+}
+.clothes-pics figure{
+    margin-bottom: 20px;
+    position: relative;
+    width: 15rem;
+    box-shadow: 0px 0px 20px #444;
+    height: 17rem;
+    
+    margin: 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.clothes-pics figure img{
+    width: 100%;
+    height: 100%;
+}
+.clothes-pics .is-showing{
+    opacity: 1;
+    transform: translateX(0px)
+}
+
+.img-row{
+    justify-content: center;
+}
+
+ .btnMasMascotas{
+     text-align: center;
+     padding-top: 15px;
+     margin-top: 0;
+   
+ }
+ 
+ .btnMasMascotas a:nth-child(1){
+    margin-right: 10px;
+    color: #3bbfa0;
+    background: transparent;
+    border: 2px solid #3bbfa0
+ 
+ 
+ }
+ .btnMasMascotas a:nth-child(2){
+     margin-left: 10px;
+    
+     color: #3bbfa0;
+     background: transparent;
+     border: 2px solid #3bbfa0
+ 
+     
+ }
+
+ .carousel{
+     widows: 100%;
+     height: 100%;
+     border-radius: 5px;
+ }
+ .carousel-inner{
+    widows: 100%;
+    height: 80%;
+    border-radius: 5px;
+ }
+ .carousel-item{
+    widows: 100%;
+    height: 100%;
+    border-radius: 5px;
+ }
+
+ .nombreMsc{
+    widows: 100%;
+    height: 20%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+ }
+
+ .nombreMsc a{
+     text-align: center;
+        font-size: 1.8rem;
+     color: #3bbfad;
+     font-family: 'Righteous', cursive;
+ }
+
+ 
+.dividerTi{
+    border-bottom: 1px solid #bfbebecc;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    margin-bottom: 25px;
+    color: #656363;
+}
+ 
+
+
+  @media only screen and (max-width:1095px){
+    .clothes-pics figure{
+        width: 15rem;
+        height: 17rem;
+    }
+  }
+  @media only screen and (max-width:880px){
+    .clothes-pics figure{
+        width: 18rem;
+        height: 20rem;
+    }
+  }
+
+  @media only screen and (max-width:650px){
+    .main .main-filtros{
+        max-width: 80%;
+        width: 80%;
+        min-width: 80%;
+    }
+    .main .main-mascotas{
+        max-width: 100%;
+        width: 100%;
+        min-width: 100%;
+    }
+    
+    .clothes-pics figure{
+        width: 18rem;
+        height: 20rem;
+    }
+    header .descripcionPes p{
+        max-width: 100%;
+        margin-top: 1rem;
+        
+    }
+  }
+  @media only screen and (max-width:528px){
+    .clothes-pics figure{
+        width: 21rem;
+        height: 23rem;
+        min-width: 18rem;
+        min-height: 20rem;
+    }
+  }
+  
+  @media only screen and (max-width:978px){
+    .logo{
+        width: 70%;
+        
+    }
+  }
+  @media only screen and (max-width:796px){
+    .logo{
+        width: 85%;
+        
+    }
+  }
+  @media only screen and (max-width:676px){
+    .logo{
+        width: 100%;
+        
+    }
+  }
+
+  @media only screen and (max-width:576px){
+    .fore-bird{
+        background-size: 200px 230px;
+        left: -35%;
+        
+    }
+    .logo h4{
+        font-size: 2.1rem;
+    }
+  }
+
+  @media only screen and (max-width:420px){
+    .fore-bird{
+       display: none;
+        
+    }
+    .logo h4{
+        font-size: 1.5rem;
+        -webkit-transform: skew(0deg);
+    -moz-transform: skew(0deg);
+    -ms-transform: skew(0deg);
+    -o-transform: skew(0deg);
+     transform: skew(0deg);
+    }
+    
+  }
+ /* Styles for wrapping the search box */
+
+.mainD {
+    width: 50%;
+    margin: 25px auto;
+    margin-bottom: 8rem !important;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.filtros{
+    width: 100%;
+    background: transparent;
+    margin: 0px 0px 25px 0px;
+    border-radius: 5px;
+    
+
+}
+.filtros .filtroVarios form{
+    border-radius: 5px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10rem;
+    padding-right: 10rem;
+
+}
+.filtros .filtroVarios form ul{
+    
+    display: flex;
+    justify-content: space-evenly;
+
+
+}
+.btnbs{
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+.btnbs .dropdown{
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0.548)
+}
+.btnbs .dropdown button{
+    background: transparent;
+    border: 0;
+    font-size: 1.3rem;
+    font-family: 'Righteous', cursive;
+}
+.btnbus{
+    margin-left: 10px;
+    
+}
+
+
+.btnbs .dropdown:nth-child(1){
+    margin-right: 10px;
+}
+.btnbs .dropdown:nth-child(2){
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.btnbs .dropdown:nth-child(3){
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
+.btnbs .dropdown:nth-child(4){
+    margin-left: 10px;
+    
+}
+
+.advertencia{
+    display: flex;
+    width: 100%;
+    padding-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.advertencia .imgAd{
+    width: 10rem;
+    height: 10rem;
+    
+}
+
+.advertencia .imgAd img{
+    width: 100%;
+    height: 100%;
+    
+}
+
+
+.btnRGM{
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+    
+}
+.btnRGM button{
+    background: #3bbfad;
+    color: white;
+}
+
+
+.registroDonacionMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5rem 0 5rem;
+    margin-bottom: 0rem;
+}
+.rgM{
+    display: flex;
+}
+.registroDonacion{
+    width: 100%;
+    padding: 25px 0 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 5px;
+   
+} 
+.registroDonacion .titulo{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.registroDonacion .titulo button{
+    background: transparent !important;
+    border:0;
+    color: #bf3b3b;
+    margin-left: 10px;
+}
+.registroDonacion .titulo h4{
+    
+    font-weight: 600;
+    color: #3bbfa0;
+}
+.registroDonacion .mainD{
+    width: 50%;
+
+}
+.registroDonacion form{
+    width: 100%;
+    
+}
+
+.input-label2{
+    background: #3bbfad;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+
+.bntRG{
+    display: flex;
+    justify-content: center;
+}
+
+.TipoEco, .TipoProd{
+   
+}
+.ti button{
+    margin-left: 10px;
+    background: transparent;
+    border: 1px solid #3bbfa0;
+}
+.ti button i{
+    color: #3bbfa0;
+}
+#busquedaUsers{
+    display: none;
+    width: 100%;
+    border: 1px solid #80808085;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 5px;
+}
+mat-form-field{
+    width: 90%;
+}
+#userSlc{
+    display: none;
+    box-shadow: 0px 0px 20px #444;
+    border-radius: 5px;
+    margin: 2rem;
+}
+
+.diU{
+    display: flex !important;
+}
+
+#userSlc .usrsImg{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+#userSlc .usrsImg .Img{
+    width: 7rem;
+    height: 7rem;
+    
+}
+
+#userSlc .usrsImg .Img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#userSlc .usrsInf{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    
+}
+#userSlc .usrsInf p{
+    position: relative;
+    font-family: 'Exo', sans-serif;
+}
+#userSlc .usrsInf button{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#userSlc .usrsInf button i{
+    color: red;
+}
+.userD a{
+    text-transform: capitalize;
+}
+.divider{
+    width: 80%;
+    border-bottom: 1px solid #80808069;
+    text-align: start;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.divider2{
+    width: 100%;
+    border-bottom: 1px solid #80808069;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.divider p, .divider2 p{
+    color: #777070;
+}
+
+.tipD .input-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgRG{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.imgRG .imgRD{
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    
+}
+.imgRG .imgRD img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    
+}
+.btnIM{
+    position: absolute;
+    top: 5%;
+    right: -15%;
+}
+
+
+.msjError{
+    width: 100%;
+    text-align: center;
+    color: red;
+}
+#formRD{
+    display: none;
+}
+
+.btnsDonacion2{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    border-top: 1px solid #80808069;
+    padding-top: 15px;
+}
+
+.btnsDonacion2 .btnG{
+    margin-right: 5px;
+    background: #3bbfad;
+    border: #3bbfad;
+
+}
+
+
+.btnsDonacion2 .btnC{
+    margin-left: 5px;
+    background: #bf3b3b;
+    border:#bf3b3b;
+}
+/*INVENTARIO DE DONACIONES*/
+.card-deck{
+
+    justify-content: center;
+    margin: 0;
+    padding: 20px 25px !important;
+    background: #fff;
+}
+.pp{
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    background: white !important;
+}
+.card-deck .card-header .tituloDonacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+}
+.card-deck .card{
+    box-shadow: 0px 0px 5px #444;
+    margin: 10px 10px;
+    min-width: 15rem;
+    max-width: 20rem;
+    font-family: 'Exo', sans-serif;
+}
+
+.card-body{
+    position: relative;
+   
+    background-color: white;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+}
+.card-body .contentCardBody{
+    padding: 1.25rem !important;
+    margin-top: 10px;
+}
+.card-body .itemsD{
+    color: black;
+    font-weight: 600;
+    
+}
+.biography {
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 50px;
+    margin: .5rem auto;
+    line-height: 1;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Exo', sans-serif;
+}
+.card-body .itemsD span{
+    font-weight: normal !important;
+}
+.dropCom .comprobante{
+    padding: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 0;
+    margin-bottom: 10px;
+   
+
+
+}
+.dropCom .comprobante span{
+    color: black;
+}
+
+
+.dropCom .comprobante .imgCom{
+    width: 4rem;
+    height: 3rem;
+    margin: 5px;
+}
+.dropCom .comprobante .imgCom img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.nombreProducto p{
+    margin: 0;
+}
+
+.dividerInDon{
+    text-align: end;
+    border-bottom: 1px solid gray;
+    color: #b1a9a9;
+    margin-bottom: 5px;
+}
+.donador p{
+    color: black;
+    text-transform: capitalize;
+
+}
+
+.voluntarios{
+
+}
+.voluntarios ol{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+
+}
+
+.voluntarios ol li p{
+
+    color: black;
+    text-transform: capitalize;
+    margin: 0;
+}
+#modalComprobante .modal-body{
+    position: relative;
+    padding: 0;
+}
+
+#modalComprobante .modal-body{
+    position: relative;
+}
+
+
+#modalComprobante .modal-body button{
+    position: absolute;
+    top: 1%;
+    right: 2%;
+}
+
+#modalComprobante .modal-body .imgModalCom{
+    width: 100%;
+    height: 25rem;
+}
+#modalComprobante .modal-body .imgModalCom img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.estadoDonA{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    background: #3bbfad;
+}
+.estadoDonP{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    background: #3bbfad;
+}
+
+.estadoDonN{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    background: #3bbfad;
+    
+}
+
+.estadoDonA span, .estadoDonN span, .estadoDonP span{
+    color: white;
+}
+.card-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.modal-footer .mdfoo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.modal-footer .mdfoo button:nth-child(1){
+    margin-right: 5px;
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+
+}
+.modal-footer .mdfoo button:nth-child(2){
+    margin-left: 5px;
+    background: #bf3b3b;
+    border: 1px solid #bf3b3b;
+}
+.card-footer button:nth-child(1){
+    margin-right: 5px;
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+
+}
+.card-footer button:nth-child(2){
+    margin-left: 5px;
+    background: #bf3b3b;
+    border: 1px solid #bf3b3b;
+}
+
+
+.btnMasDonaciones{
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid #3bbfa0;
+}
+
+.btnMasDonaciones a:nth-child(1){
+    margin-right: 10px;
+    background: #3bbfa0;
+    font-family: 'Exo', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+
+}
+.btnMasDonaciones a:nth-child(2){
+    margin-left: 10px;
+    background: #3bbfa0;
+    font-family: 'Exo', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/*-----APROBAR NEGAR ---*/
+.formulario .form-check{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.formulario h2 {
+    font-size: 16px;
+    color: #001F3F;
+    margin-bottom: 20px;
+    margin-left: 20px; }
+  .formulario > div {
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc; }
+  .formulario .radio label,
+  .formulario .form-check label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+    align-items: center;
+    position: relative;
+    padding: 5px 15px 5px 51px;
+    font-size: 1em;
+
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    .formulario .radio label:hover,
+    .formulario .form-check label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    .formulario .radio label:before,
+    .formulario .form-check label:before {
+      content: "";
+      display: flex;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      border-radius: 50%;
+      background: none;
+      border: 3px solid #3bbfad; }
+  .formulario input[type="radio"] {
+    display: none; }
+    .formulario input[type="radio"]:checked + label:before {
+      display: none; }
+    .formulario input[type="radio"]:checked + label {
+      padding: 5px 15px;
+      background: #3bbfad;
+      border-radius: 2px;
+      color: #fff; }
+  .formulario .form-check label:before {
+    border-radius: 3px; }
+  .formulario .form-check input[type="checkbox"] {
+    display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label {
+      background: #3bbfad;
+      color: #fff;
+      padding: 5px 15px; }
+.formulario .form-check label .imgVol{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+}
+
+.formulario .form-check label .imgVol img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#modalSelecVoluntarios .modal-body{
+    height: 25rem;
+    overflow: auto;
+}
+
+.titulosDona{
+    
+    margin-bottom: 20px;
+    
+}
+
+
+
+ .donacionOBT .tituloOB{
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     margin-bottom: 1rem;
+     
+ }
+ .donacionOBT .tituloOB h5{
+     color: #3bbfad;
+ }
+ .donacionOBT .tituloOB span{
+     width: 20%;
+     border: 1px solid #3bbfad;
+ }
+ .donacionOBT .infoOB img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5px;    
+}
+.donacionOBT .infoOB2 .imgDON{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5px;    
+}
+.donacionOBT .infoOB2 .imgDON img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;    
+}
+ .donacionOBT .infoOB p{
+    font-weight: bolder;
+    word-wrap: break-word;
+ }
+ .donacionOBT .infoOB p span{
+    font-weight: normal !important;
+ }
+ .donacionOBT .infoOB2 p{
+    font-weight: bolder;
+    word-wrap: break-word;
+
+ }
+ .donacionOBT .infoOB2 i{
+    width: 8%;
+}
+ .donacionOBT .infoOB2 p span{
+    font-weight: normal !important;
+ }
+
+ #modalComprobante{
+     z-index: 20000 !important;
+ }
+ mat-horizontal-stepper{
+    padding: 0 6rem;
+    
+}
+
+@media only screen and (max-width:992px){
+    mat-horizontal-stepper{
+        padding: 0 3rem;
+    }
+    
+  }
+  @media only screen and (max-width:770px){
+    mat-horizontal-stepper{
+        padding: 0 2rem;
+    }
+    
+  }
+
+  
+.btnNEXT{
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+.btnNEXT button{
+    background: #3bbfad;
+    color: white;
+}
+
+.btnNEXT2{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btnNEXT2 button{
+    background: #3bbfad;
+    color: white;
+}
+.btnNEXT2 button:nth-child(1){
+    margin-right: 10px;
+}
+.btnNEXT2 button:nth-child(2){
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+#btnFORMVISIBLE2{
+    display: none;
+}
+#btnFORMVISIBLE{
+    text-align: center;
+    margin-bottom: 5rem;
+}
+#btnFORMVISIBLE2{
+    text-align: center;
+    
+}
+#btnFORMVISIBLE button{
+    background: transparent;
+    border: 1px solid #3bbfad;
+    color: black;
+}
+
+#btnFORMVISIBLE2 button{
+    background: transparent;
+    border: 1px solid #3bbfad;
+    color: black;
+}
+.tituStep{
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #3bbfad;
+    text-align: center;
+    
+}
+.tituStep h5{
+    font-size: 1rem;
+}
+.nav-tabs{
+    justify-content: center !important;
+}
+.nav-tabs a{
+    color: black;
+}
+.nav-tabs .active{
+    background: #3bbfad !important;
+    color: white !important;
+}
+.noval{
+    opacity: .6;
+}
+.errNC{
+    margin: 0;
+    position: absolute;
+    top: 74%;
+    font-size: 13px;
+    color: red;
+}
+
+.inforDONACIONES{
+    padding: 0 5rem !important;
+}
+.inforDONACIONES .cardD{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+
+}
+.inforDONACIONES .cardD .titulo{
+    margin-bottom: 1rem;
+}
+.inforDONACIONES .cardD .infor{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.datoss{
+    margin-bottom: 3rem;
+}
+ .datoss .ddon{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.imgDon{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    margin-right: 20px;
+   
+ }
+ .imgDon img{
+     border-radius: 50%;
+     width: 100%;
+     height: 100%;
+ }
+ 
+/*----PAGES---*/
+.selectPages{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.selectPages a, .selectPages button{
+    margin: .5rem;
+    color: #3bbfad;
+}
+.selectPages .pagess{
+    max-width: 40%;
+    overflow-x: auto;
+}
+.selectPages .pageAnt button, .selectPages .pageNex button{
+    background: transparent;
+    border: 0;
+}
+.selectPages .pageAnt2 a, .selectPages .pageNex2 a{
+    background: transparent;
+    border: 0;
+    margin: .5rem 0 !important;
+}
+
+.pgActive{
+    background: #3bbfad;
+    color: white !important;
+    padding: .1rem .5rem;
+    border-radius: 25%;
+}

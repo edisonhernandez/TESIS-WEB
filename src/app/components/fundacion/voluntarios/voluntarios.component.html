@@ -1,0 +1,637 @@
+<!-- Modal para editar usuario -->
+<div class="modal fade" id="editUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Editar voluntario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="eVL == true" style="text-align: center;">
+            <form *ngIf="usuario" #editVoluntario="ngForm"  class="needs-validation"
+            novalidate>
+
+         
+        
+            <div class="col-12 imgRG">
+              <p *ngIf="!usuario.foto">Selecciona una foto que represente al voluntario</p>
+              <div class="imgRD">
+                  <img *ngIf="usuario.foto || usuario.foto != null" src="{{url + 'obtener-foto/' + usuario.foto}}" class="img-fluid" alt="Responsive image">
+                  <img *ngIf="!usuario.foto && imL == false" src="../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" class="img-fluid" alt="Responsive image">
+                  <img *ngIf="!usuario.foto && imL == true" src="{{imgUN}}">
+               
+                  <div class="btnIM" *ngIf="!usuario.foto">
+
+                      <label for="fileVol" class="input-labelVol"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                        <input id="fileVol" (change)="fileChangeEvent($event)"
+                          type="file">
+                    </div>
+                    <div class="btnIM" *ngIf="usuario.foto || usuario.foto != null">
+                        <button type="button" *ngIf="usuario.foto" class="btn btnElimLog" (click)="eliminarLogo(usuario._id,usuario.foto)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                      </div>
+
+              </div>
+
+
+
+                
+              </div>
+            <div class="form-row datosUser">
+              <div class="form-group col-md-6">
+      
+                        <mat-form-field appearance="standard">
+                            <mat-label>Nombres</mat-label>
+                          
+                            <input required [formControl]="nombres" id="nombres" matInput type="text"  placeholder="Nombres del voluntario"  [class.is-invalid]="!nombres.valid && nombres.touched" [class.is-valid]="nombres.valid">
+                            <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                           <mat-error *ngIf="nombres.invalid">{{getErrorMessage()}}</mat-error>
+                          </mat-form-field>
+  
+                      </div>
+                      <div class="form-group col-md-6">
+                          <mat-form-field appearance="standard">
+                              <mat-label>Apellidos</mat-label>
+                            
+                              <input required [formControl]="apellidos" id="apellidos" matInput type="text"  placeholder="Apellidos del voluntario"  [class.is-invalid]="!apellidos.valid && apellidos.touched" [class.is-valid]="apellidos.valid">
+                              <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                             <mat-error *ngIf="apellidos.invalid">{{getErrorMessage2()}}</mat-error>
+                            </mat-form-field>
+  
+                        </div>
+                       
+                        <div class="form-group col-md-6">
+      
+                            <mat-form-field appearance="standard">
+                                <mat-label>Cédula</mat-label>
+                              
+                                <input required [formControl]="cedula" id="cedula2" matInput type="text"  placeholder="Cédula del voluntario"  [class.is-invalid]="!cedula.valid && cedula.touched" [class.is-valid]="cedula.valid">
+                                <mat-icon matSuffix><i class="fa fa-id-card-o" aria-hidden="true"></i></mat-icon>
+                               <mat-error *ngIf="cedula.invalid">{{getErrorMessage3()}}</mat-error>
+                              </mat-form-field>
+                              <p id="nmbr" class="errNC" *ngIf="statusValid == 'error' && nm == 'sie'">El número de cédula ya está en uso</p>
+                              <p id="nmbr2" class="errNC" *ngIf="nm2 == 'nov'">El número de cédula ya está en uso</p>
+                          </div>
+                          <div class="form-group col-md-6" [class.formError]="!fechaNacimiento.valid && fechaNacimiento.touched">
+         
+                              <mat-form-field appearance="standard">
+                                  <input required [min]="minDate" [max]="maxDate" [formControl]="fechaNacimiento" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                  <mat-error *ngIf="fechaNacimiento.invalid">{{getErrorMessage4()}}</mat-error>
+                                </mat-form-field>
+                    
+                          
+                    
+                          </div>
+                          <div class="form-group col-md-6">
+  
+                              <mat-form-field appearance="standard">
+                                  <mat-label>Correo electrónico</mat-label>
+                                
+                                  <input required [formControl]="correo" id="correo2" matInput type="email"  placeholder="Correo electrónico del voluntario"  [class.is-invalid]="!correo.valid && correo.touched" [class.is-valid]="correo.valid">
+                                  <mat-icon matSuffix><i class="fa fa-envelope" aria-hidden="true"></i></mat-icon>
+                                 <mat-error *ngIf="correo.invalid">{{getErrorMessage5()}}</mat-error>
+                                </mat-form-field>
+                                <p id="corr" class="errNC" *ngIf="statusValid == 'error' && cor == 'sie'">El correo electrónico ya está en uso</p>
+        
+                          </div>
+                        
+                          <div class="form-group col-md-6">
+                              <mat-form-field appearance="standard">
+                                  <mat-select [formControl]="tipoVoluntario" placeholder="Tipo de voluntario" [class.is-invalid]="!tipoVoluntario.valid && tipoVoluntario.touched"
+                                  [class.is-valid]="tipoVoluntario.valid">
+                                    <mat-option value="Estudiante">Estudiante</mat-option>
+                                    <mat-option value="Profesional">Profesional</mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix><i class="fa fa-briefcase" aria-hidden="true"></i></mat-icon>
+                                  <mat-error *ngIf="tipoVoluntario.invalid">{{getErrorMessage7()}}</mat-error>
+                                </mat-form-field>
+                          </div>
+                          <div class="form-group col-md-6">
+                              <mat-form-field appearance="standard">
+                                  <mat-select [formControl]="disponibilidadTiempo" placeholder="Disponibilidad de tiempo" [class.is-invalid]="!disponibilidadTiempo.valid && disponibilidadTiempo.touched"
+                                  [class.is-valid]="disponibilidadTiempo.valid">
+                                    <mat-option value="Entre semana">Entre semana</mat-option>
+                                    <mat-option value="Fines de semana">Fines de semana</mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix><i class="fa fa-clock-o" aria-hidden="true"></i></mat-icon>
+                                  <mat-error *ngIf="disponibilidadTiempo.invalid">{{getErrorMessage8()}}</mat-error>
+                                </mat-form-field>
+                          </div>   
+                          <div class="form-group col-md-6">
+  
+                              <mat-form-field appearance="standard">
+                                  <mat-label>Teléfono</mat-label>
+                                
+                                  <input required [formControl]="telefono" matInput type="text"  placeholder="Teléfono del voluntario"  [class.is-invalid]="!telefono.valid && telefono.touched" [class.is-valid]="telefono.valid">
+                                  <mat-icon matSuffix><i class="fa fa-phone-square" aria-hidden="true"></i></mat-icon>
+                                 <mat-error *ngIf="telefono.invalid">{{getErrorMessage9()}}</mat-error>
+                                </mat-form-field>
+                          </div>
+                          <div class="form-group col-md-6">
+            
+                              <mat-form-field appearance="standard">
+                                  <mat-label>Celular</mat-label>
+                                
+                                  <input required [formControl]="celular" matInput type="text"  placeholder="Celular del voluntario"  [class.is-invalid]="!celular.valid && celular.touched" [class.is-valid]="celular.valid">
+                                  <mat-icon matSuffix><i class="fa fa-mobile" aria-hidden="true"></i></mat-icon>
+                                 <mat-error *ngIf="celular.invalid">{{getErrorMessage10()}}</mat-error>
+                                </mat-form-field>
+                          </div>
+                          <div class="form-group col-md-6">
+            
+                              <mat-form-field appearance="standard">
+                                  <mat-label>Dirección</mat-label>
+                                
+                                  <input required [formControl]="direccion" id="direccion" matInput type="text"  placeholder="Dirección domiciliaria del voluntario"  [class.is-invalid]="!direccion.valid && direccion.touched" [class.is-valid]="direccion.valid">
+                                  <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                                 <mat-error *ngIf="direccion.invalid">{{getErrorMessage11()}}</mat-error>
+                                </mat-form-field>
+                          </div>
+                          <div class="form-group col-md-6 disponibilidad" >
+            
+                              <p>¿El voluntario tiene la posibilidad de ayudar con casa temporal para un animal en emergencia?</p>
+                      
+                              <div class="form-check">
+                                <input required class="form-check-input" type="radio" id="ds1" value="Si" name="disponibilidadCasa" #disponibilidadCasa="ngModel"
+                                  [(ngModel)]="usuario.disponibilidadCasa">
+                                <label class="form-check-label" for="exampleRadios1">
+                                  Si
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input required class="form-check-input" type="radio" id="ds2" value="No" name="disponibilidadCasa" #disponibilidadCasa="ngModel"
+                                  [(ngModel)]="usuario.disponibilidadCasa">
+                                <label class="form-check-label" for="exampleRadios2">
+                                  No
+                                </label>
+                              </div>
+                              <div class="msjError" *ngIf="(!disponibilidadCasa.valid && disponibilidadCasa.touched)">
+                                <div *ngIf="disponibilidadCasa.errors.required">
+                                  Es necesario que seleccione la disponibilidad de casa.
+                                </div>
+                      
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6 disponibilidad">
+                              <p>¿El voluntario tiene la posibilidad de participar en capacitaciones y mingas?</p>
+                      
+                              <div class="form-check">
+                                <input required class="form-check-input" type="radio" id="dp1" value="Si" name="disponibilidadParticipacion" #disponibilidadParticipacion="ngModel"
+                                  [(ngModel)]="usuario.disponibilidadParticipacion">
+                                <label class="form-check-label" for="exampleRadios1">
+                                  Si
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input required class="form-check-input" type="radio" id="dp2" value="No" name="disponibilidadParticipacion" #disponibilidaParticipacion="ngModel"
+                                  [(ngModel)]="usuario.disponibilidadParticipacion">
+                                <label class="form-check-label" for="exampleRadios2">
+                                  No
+                                </label>
+                              </div>
+                              <div class="msjError" *ngIf="(!disponibilidadParticipacion.valid && disponibilidadParticipacion.touched)">
+                                <div *ngIf="disponibilidadParticipacion.errors.required">
+                                  Es necesario que seleccione la disponibilidad de casa.
+                                </div>
+                      
+                              </div>
+                      
+                            </div>
+
+            </div>
+           
+            <div class="form-group col-md-12 " *ngIf="advertenciaNewVolun == true">
+                <div class="alert alert-primary advertenciasREGVOL" role="alert" *ngIf="statusNewVolun == 'procesando'">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <p>Registrando voluntario...</p>
+                  </div>
+            </div>
+           
+          </form>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group col-md-12 btnRGV" >
+                <button class="btn btn-danger" style="background: #bf3b3b !important;" (click)="eliminarVoluntarioEstado(usuario,usuario._id)">Eliminar usuario </button>
+                <button type="button" (click)="actualizarVoluntario()" class="btn btn-primary" [disabled]="nombres.invalid || apellidos.invalid || cedula.invalid || fechaNacimiento.invalid || correo.invalid || 
+                 tipoVoluntario.invalid || disponibilidadTiempo.invalid || telefono.invalid || direccion.invalid || celular.invalid || statusValid == 'error'">Actualizar</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+   <!-- Modal para ver foto del voluntario-->
+   <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+         
+          <div class="modal-body" *ngIf="imgCom">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="imgModalCom">
+                    
+                    <img *ngIf="imgCom == 's'"   class="profile-img card-img-top" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" alt="Card image cap" >
+                    <img *ngIf="imgCom != 's'"  src="{{url + 'obtener-foto/' + imgCom}}"  class="profile-img card-img-top">
+
+                </div>
+            
+          </div>
+         
+        </div>
+      </div>
+    
+    </div>
+<header id="header">
+  <div class="titulo">
+      <h3>Voluntarios</h3>
+      <span></span>
+  </div>
+  
+
+</header>
+
+<div class="main" id="mainVL">
+  <section class="main-filtros">
+      <div class="btnRGM" *ngIf="identity">
+          <button *ngIf="identity._id == idFun" class="btn" (click)="nuewVoluntario()">Registrar voluntario</button>
+      </div>
+      <form>
+
+          
+
+          <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input id="bsFunNombre" type="text" class="form-control" placeholder="Buscar por apellidos">
+            </div>
+
+          <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+
+      </form>
+
+
+      <div class="container dividerTi" *ngIf="carga == false">
+
+          <span>Total voluntarios: {{total}}</span>
+
+      </div>
+  </section>
+  <section class="main-emergencias">
+      <div class="containerLoad" *ngIf="carga == true">
+          <div class="loading">
+              <span>Cargando...</span>
+          </div>
+      </div>
+      <div class="mascots" *ngIf="carga == false">
+
+          <div class="advertencia" *ngIf="advertencia == true">
+              <div class="imgAd" *ngIf="status == 'error'">
+                  <img src="../../../../assets/img/dog-2952471_960_720.png">
+              </div>
+              <p *ngIf="status == 'error'">{{mensaje}}</p>
+          </div>
+          <div class="clothes-pics" *ngIf="advertencia ==  false">
+
+            <div class="card-group">
+              <div class="card " *ngFor="let vol of voluntarios" >
+                  <div class="card-header" (click)="obtenerVoluntario(vol,vol._id)" style="cursor: pointer;">
+                      <div class="tituloDonacion"   >
+                        <a matTooltip="Ver perfil" style="cursor: pointer;" (click)="obtenerVoluntario(vol,vol._id)">
+                            {{vol.tipoVoluntario}}
+                        </a>
+                        
+                         <span style="cursor: pointer;" matTooltip="Ver perfil" (click)="obtenerVoluntario(vol,vol._id)"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                      </div>
+                        <!-- <small class="text-muted">Registrado: {{(mascota.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</small>
+         -->
+                      </div>
+                      <div class="card-body"  >
+                        <div class="contentCardBody">
+                            <div class="dropCom">
+                                <div  class="btn btn-primary nomFMascota"  role="button">
+                                    <a matTooltip="Ver perfil" (click)="obtenerVoluntario(vol,vol._id)">{{vol.nombres}} {{vol.apellidos}}</a><div class="imgCom">
+                                        <img matTooltip="Ver foto" (click)="verFoto('s')" class="profile-img card-img-top" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" alt="Card image cap" *ngIf="!vol.foto">
+                                        <img matTooltip="Ver foto" (click)="verFoto(vol.foto)" src="{{url + 'obtener-foto/' + vol.foto}}" *ngIf="vol.foto" class="profile-img card-img-top">
+ 
+                                    </div>
+                                </div>
+                             </div>
+                      
+                      
+                             <div class="biography">Correo: {{vol.correo}}</div>
+                              
+                               
+                              <div class="dividerInDon">
+                                Contactos
+                              </div>
+                              <div class="donador">
+                                <p >{{vol.telefono}} / {{vol.celular}} </p>
+                              </div>
+        
+                        </div>
+                       
+                 
+                        <div class="estadoDonA" >
+                         <span>{{vol.cedula}}</span>
+                        </div>
+        
+                      </div>
+        
+              </div>
+            </div>
+
+            
+
+          </div>
+      </div>
+   
+      <div class="selectPages" *ngIf="filtroBTN == false && carga == false && advertencia == false">
+        <div class="pageAnt2">
+            <a  [routerLink]="['/fundacion',idFun,'voluntarios', 'all', '1']"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+          </div>
+      <div class="pageAnt">
+        <button [disabled]="page == 1"  [routerLink]="['/fundacion',idFun,'voluntarios', 'all', prev_page]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      </div>
+      <div class="pagess">
+
+       <a *ngFor="let p of pagesSelec" [routerLink]="['/fundacion',idFun,'voluntarios', 'all', p]"  [class.pgActive]="page == p">{{p}}</a>
+   
+      </div>
+      <div class="pageNex">
+        <button [disabled]="page == pages"  [routerLink]="['/fundacion',idFun,'voluntarios', 'all', next_page]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="pageNex2">
+          <a  [routerLink]="['/fundacion',idFun,'voluntarios', 'all', pages]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+        </div>
+    </div>
+   
+  </section>
+</div>
+<div id="RGVL" class="row" style="margin: 0; width: 100%;">
+<!--FORMULARIO DE REGISTRO PARA VOLUNTARIO-->
+<div class="col-12 containerFormVoluntario" >
+   
+    <div class="tituloForm">
+        <h3>Registro de voluntario</h3>
+        <button type="button" class="btn btn-secondary" (click)="cancelarVolun()">( Cancelar registro )</button>
+
+      </div>
+
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+          <mat-step >
+              <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorCC'" >
+                  <p  style="text-align: center;">La cédula y correo electrónico ya están en uso</p>
+                </div>
+                <div style="text-align: center;" class="alert alert-danger" role="alert" *ngIf="statusValid == 'errorValidar'" >
+                    <p  style="text-align: center;">Error al validar datos, intentalo nuevamente</p>
+                  </div>
+              <form id="RGF" #registerForm2="ngForm" class="formRg needs-validation" novalidate>
+              
+              <ng-template matStepLabel></ng-template>
+              <div class="col-12 imgRG">
+  
+                  <p >Selecciona una foto que represente al voluntario</p>
+                  <div class="imgRD">
+                      <img *ngIf="imL == false" src="../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png"
+                      class="img-fluid" alt="Responsive image">
+                    <img *ngIf="imL == true" src="{{imgUN}}">
+                      <div class="btnIM">
+        
+                          <label for="fileVol" class="input-labelVol"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                            <input id="fileVol" (change)="fileChangeEvent($event)" name="foto" #foto="ngModel" [(ngModel)]="usuarioVoluntario.foto"
+                              type="file">
+                        </div>
+                  </div>
+                  
+                </div>
+               
+                <div class="form-row datosUser">
+                    <div class="form-group col-md-6">
+      
+                        <mat-form-field appearance="standard">
+                            <mat-label>Nombres</mat-label>
+                          
+                            <input required [formControl]="nombres" id="nombres" matInput type="text"  placeholder="Nombres del voluntario"  [class.is-invalid]="!nombres.valid && nombres.touched" [class.is-valid]="nombres.valid">
+                            <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                           <mat-error *ngIf="nombres.invalid">{{getErrorMessage()}}</mat-error>
+                          </mat-form-field>
+                          <p id="nmbr" class="errNC" *ngIf="statusValid == 'errorNombre' || statusValid == 'errorNC'">El nombre ya está en uso</p>
+  
+                      </div>
+                      <div class="form-group col-md-6">
+                          <mat-form-field appearance="standard">
+                              <mat-label>Apellidos</mat-label>
+                            
+                              <input required [formControl]="apellidos" id="apellidos" matInput type="text"  placeholder="Apellidos del voluntario"  [class.is-invalid]="!apellidos.valid && apellidos.touched" [class.is-valid]="apellidos.valid">
+                              <mat-icon matSuffix><i class="fa fa-user" aria-hidden="true"></i></mat-icon>
+                             <mat-error *ngIf="apellidos.invalid">{{getErrorMessage2()}}</mat-error>
+                            </mat-form-field>
+  
+                        </div>
+                       
+                        <div class="form-group col-md-6">
+      
+                            <mat-form-field appearance="standard">
+                                <mat-label>Cédula</mat-label>
+                              
+                                <input required [formControl]="cedula" id="cedula2" matInput type="text"  placeholder="Cédula del voluntario"  [class.is-invalid]="!cedula.valid && cedula.touched" [class.is-valid]="cedula.valid">
+                                <mat-icon matSuffix><i class="fa fa-id-card-o" aria-hidden="true"></i></mat-icon>
+                               <mat-error *ngIf="cedula.invalid">{{getErrorMessage3()}}</mat-error>
+                              </mat-form-field>
+                              <p id="nmbr" class="errNC" *ngIf="statusValid == 'errorCedula' || statusValid == 'errorCC'">El número de cédula  ya está en uso</p>
+                              <p id="nmbr4" class="errNC" *ngIf="statusValid == 'errorCedula2'">El número de cédula no es válido</p>
+
+                          </div>
+                          <div class="form-group col-md-6" [class.formError]="!fechaNacimiento.valid && fechaNacimiento.touched">
+         
+                              <mat-form-field appearance="standard">
+                                  <input required [min]="minDate" [max]="maxDate" [formControl]="fechaNacimiento" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                  <mat-error *ngIf="fechaNacimiento.invalid">{{getErrorMessage4()}}</mat-error>
+                                </mat-form-field>
+                    
+                          
+                    
+                          </div>
+                  </div>
+              </form>
+              <div class="btnNEXT">
+                <button mat-button matStepperNext>Siguiente</button>
+              </div>
+            
+          </mat-step>
+          <mat-step >
+            <form id="RGF2">
+              <ng-template matStepLabel></ng-template>
+              <div class="row">
+                  <div class="form-group col-md-6">
+  
+                      <mat-form-field appearance="standard">
+                          <mat-label>Correo electrónico</mat-label>
+                        
+                          <input required [formControl]="correo" id="correo2" matInput type="email"  placeholder="Correo electrónico del voluntario"  [class.is-invalid]="!correo.valid && correo.touched" [class.is-valid]="correo.valid">
+                          <mat-icon matSuffix><i class="fa fa-envelope" aria-hidden="true"></i></mat-icon>
+                         <mat-error *ngIf="correo.invalid">{{getErrorMessage5()}}</mat-error>
+                        </mat-form-field>
+                        <p id="corr" class="errNC" *ngIf="statusValid == 'errorCorreo' || statusValid == 'errorCC'">El correo electrónico ya está en uso</p>
+
+                  </div>
+                  <div class="form-group col-md-6">
+  
+                      <mat-form-field appearance="standard">
+                          <mat-label>Contraseña</mat-label>
+                        
+                          <input required [formControl]="password" id="password" matInput type="password"  placeholder="Cédula del voluntario"  [class.is-invalid]="!password.valid && password.touched" [class.is-valid]="password.valid">
+                          <mat-icon matSuffix><i class="fa fa-key" aria-hidden="true"></i></mat-icon>
+                          <mat-hint align="start">La contraseña debe contener entre 8-20 caracteres, al menos 1 letra mayúscula, 1 letra minúscula, 1 número y un caracter no alfanumérico.</mat-hint>
+                         <mat-error *ngIf="password.invalid">{{getErrorMessage6()}}</mat-error>
+                        </mat-form-field>
+    
+                  </div>
+                  <div class="form-group col-md-6">
+                      <mat-form-field appearance="standard">
+                          <mat-select [formControl]="tipoVoluntario" placeholder="Tipo de voluntario" [class.is-invalid]="!tipoVoluntario.valid && tipoVoluntario.touched"
+                          [class.is-valid]="tipoVoluntario.valid">
+                            <mat-option value="Estudiante">Estudiante</mat-option>
+                            <mat-option value="Profesional">Profesional</mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix><i class="fa fa-briefcase" aria-hidden="true"></i></mat-icon>
+                          <mat-error *ngIf="tipoVoluntario.invalid">{{getErrorMessage7()}}</mat-error>
+                        </mat-form-field>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <mat-form-field appearance="standard">
+                          <mat-select [formControl]="disponibilidadTiempo" placeholder="Disponibilidad de tiempo" [class.is-invalid]="!disponibilidadTiempo.valid && disponibilidadTiempo.touched"
+                          [class.is-valid]="disponibilidadTiempo.valid">
+                            <mat-option value="Entre semana">Entre semana</mat-option>
+                            <mat-option value="Fines de semana">Fines de semana</mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix><i class="fa fa-clock-o" aria-hidden="true"></i></mat-icon>
+                          <mat-error *ngIf="disponibilidadTiempo.invalid">{{getErrorMessage8()}}</mat-error>
+                        </mat-form-field>
+                  </div>   
+              </div>
+                
+              <div class="btnNEXT2">
+                <button mat-button matStepperPrevious>Regresar</button>
+                <button mat-button matStepperNext>Siguiente</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel></ng-template>
+            <form id="RGF3" class="row">
+                <div class="form-group col-md-6">
+  
+                    <mat-form-field appearance="standard">
+                        <mat-label>Teléfono</mat-label>
+                      
+                        <input required [formControl]="telefono" matInput type="text"  placeholder="Teléfono del voluntario"  [class.is-invalid]="!telefono.valid && telefono.touched" [class.is-valid]="telefono.valid">
+                        <mat-icon matSuffix><i class="fa fa-phone-square" aria-hidden="true"></i></mat-icon>
+                       <mat-error *ngIf="telefono.invalid">{{getErrorMessage9()}}</mat-error>
+                      </mat-form-field>
+                </div>
+                <div class="form-group col-md-6">
+  
+                    <mat-form-field appearance="standard">
+                        <mat-label>Celular</mat-label>
+                      
+                        <input required [formControl]="celular" matInput type="text"  placeholder="Celular del voluntario"  [class.is-invalid]="!celular.valid && celular.touched" [class.is-valid]="celular.valid">
+                        <mat-icon matSuffix><i class="fa fa-mobile" aria-hidden="true"></i></mat-icon>
+                       <mat-error *ngIf="celular.invalid">{{getErrorMessage10()}}</mat-error>
+                      </mat-form-field>
+                </div>
+                <div class="form-group col-md-6">
+  
+                    <mat-form-field appearance="standard">
+                        <mat-label>Dirección</mat-label>
+                      
+                        <input required [formControl]="direccion" matInput type="text" id="direccion"  placeholder="Dirección domiciliaria del voluntario"  [class.is-invalid]="!direccion.valid && direccion.touched" [class.is-valid]="direccion.valid">
+                        <mat-icon matSuffix><i class="fa fa-home" aria-hidden="true"></i></mat-icon>
+                       <mat-error *ngIf="direccion.invalid">{{getErrorMessage11()}}</mat-error>
+                      </mat-form-field>
+                </div>
+                <div class="form-group col-md-6 disponibilidad" >
+  
+                    <p>¿El voluntario tiene la posibilidad de ayudar con casa temporal para un animal en emergencia?</p>
+            
+                    <div class="form-check">
+                      <input required class="form-check-input" type="radio" id="ds1" value="Si" name="disponibilidadCasa" #disponibilidadCasa="ngModel"
+                        [(ngModel)]="usuarioVoluntario.disponibilidadCasa">
+                      <label class="form-check-label" for="exampleRadios1">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input required class="form-check-input" type="radio" id="ds2" value="No" name="disponibilidadCasa" #disponibilidadCasa="ngModel"
+                        [(ngModel)]="usuarioVoluntario.disponibilidadCasa">
+                      <label class="form-check-label" for="exampleRadios2">
+                        No
+                      </label>
+                    </div>
+                    <div class="msjError" *ngIf="(!disponibilidadCasa.valid && disponibilidadCasa.touched)">
+                      <div *ngIf="disponibilidadCasa.errors.required">
+                        Es necesario que seleccione la disponibilidad de casa.
+                      </div>
+            
+                    </div>
+                </div>
+                <div class="form-group col-md-6 disponibilidad">
+                    <p>¿El voluntario tiene la posibilidad de participar en capacitaciones y mingas?</p>
+            
+                    <div class="form-check">
+                      <input required class="form-check-input" type="radio" id="dp1" value="Si" name="disponibilidadParticipacion" #disponibilidadParticipacion="ngModel"
+                        [(ngModel)]="usuarioVoluntario.disponibilidadParticipacion">
+                      <label class="form-check-label" for="exampleRadios1">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input required class="form-check-input" type="radio" id="dp2" value="No" name="disponibilidadParticipacion" #disponibilidaParticipacion="ngModel"
+                        [(ngModel)]="usuarioVoluntario.disponibilidadParticipacion">
+                      <label class="form-check-label" for="exampleRadios2">
+                        No
+                      </label>
+                    </div>
+                    <div class="msjError" *ngIf="(!disponibilidadParticipacion.valid && disponibilidadParticipacion.touched)">
+                      <div *ngIf="disponibilidadParticipacion.errors.required">
+                        Es necesario que seleccione la disponibilidad de casa.
+                      </div>
+            
+                    </div>
+            
+                  </div>
+
+            </form> 
+
+            <div class="btnNEXT3">
+              <button mat-button matStepperPrevious>Regresar</button>
+              <button type="submit" class="btn btn-primary" (click)="registrarVoluntario(stepper)" [disabled]="nombres.invalid || apellidos.invalid || cedula.invalid || fechaNacimiento.invalid || correo.invalid || 
+              password.invalid || tipoVoluntario.invalid || disponibilidadTiempo.invalid || telefono.invalid || direccion.invalid || celular.invalid" >Registrar</button>
+
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+
+  
+</div>
+</div>
+
+<app-footer-fundacion ></app-footer-fundacion>
+

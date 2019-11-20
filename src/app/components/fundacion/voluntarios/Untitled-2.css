@@ -1,0 +1,503 @@
+
+/*-------------copiado de mascotas-----*/
+.container{
+    
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100%;
+    padding: 0 !important;
+    
+}
+.advertencias{
+    background-color: white;
+}
+.eluid36c84ad4 {
+    margin-top: 6px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.eluid36c84ad4.zn_separator--icon-yes .zn_separator__line {
+    border-top-width: 3px;
+    border-top-color: #3bbfa0;
+    width: calc(50% - 35px);
+}
+
+.zn_separator--icon-yes .zn_separator__line {
+    content: '';
+    display: inline-block;
+    border-top-style: solid;
+    width: calc(50% - 50px);
+    vertical-align: middle;
+}
+.eluid36c84ad4 .zn_separator__icon {
+    font-size: 30px;
+    color: #3bbfa0;
+}
+.clearfix:before{
+    content: " ";
+    display: table;
+}
+
+
+
+.clearfix:after{
+    clear: both;
+}
+/*--FORM DE REGISTRO DE VOLUNTARIO----*/
+.containerFormVoluntario{
+    padding: 1rem 6rem;
+    
+}
+
+
+.containerFormVoluntario form{
+    margin-top: 30px;
+    padding: 30px 80px;
+    border-radius: 10px;
+    background: white;
+    
+}
+.containerFormVoluntario form .imgRV{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+   
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.containerFormVoluntario form .imgRV img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    
+}
+
+.imgRG{
+    position: relative;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.containerACTUALIZAR{
+    height: 29rem;
+    overflow: auto;
+}
+.btnElimLog{
+    position: absolute;
+    top: 7%;
+    border-radius: 50%;
+    right: 37%;
+    background: #484444;
+    
+}
+.btnElimLog i{
+    color: #3bbfa0;
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    
+}
+.containerFormVoluntario form .disponibilidad p{
+    color: black;
+}
+.containerFormVoluntario form .disponibilidad label{
+    color: black;
+}
+.btnNewVol2{
+    text-align: center;
+    background: transparent;
+}
+.btnNewVol{
+    text-align: center;
+    background: white;
+}
+.btnNewVol button, .btnNewVol2 button{
+    background: #3bbfa0;
+    margin-bottom: 3rem;
+}
+.input-labelVol{
+    background: #52c234;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #061700, #52c234);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-labelVol:hover{
+    cursor: pointer;
+}
+
+#fileVol{
+    display: none;
+}
+
+.containerFormVoluntario form .bntImgVol{
+    text-align: center;
+}
+
+.btnRGV{
+    text-align: center;
+}
+
+.btnRGV button:nth-child(1){
+    margin-right: 5px;
+}
+
+.btnRGV button:nth-child(2){
+    margin-left: 5px;
+}
+
+
+.containerVoluntarios .card-deck{
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: 0;
+    padding: 20px 25px;
+}
+
+.containerVoluntarios .card{
+    min-width: 25rem;
+    margin: 15px;
+    max-width: 25rem;
+    box-shadow: 0px 0px 20px #444;
+}
+
+.containerVoluntarios .card-img-nombre{
+    width: 100%;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containerVoluntarios .card-img-top {
+    width: 7rem;
+    height: 7rem;
+}
+
+.containerVoluntarios .card-img-top img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.containerVoluntarios .btnsEdDes {
+    margin-top: 10px;
+}
+
+.containerVoluntarios .btnsEdDes button:nth-child(1){
+    margin-right: 5px;
+}
+
+.containerVoluntarios .btnsEdDes button:nth-child(2){
+    margin-left: 5px;
+}
+.containerVoluntarios .card-body{
+    background-color: #262626;
+    padding:0;
+    height: 15rem;
+    overflow-x: auto;
+   border-radius: 5px;
+}
+.containerVoluntarios .card-body::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+   
+}
+
+.containerVoluntarios .card-body::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.containerVoluntarios .card-body::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.containerVoluntarios .card-body::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+.containerVoluntarios .card-body .card-title{
+    color: white;
+   
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.containerVoluntarios .card-body  .datos{
+    border-top: 5px solid #fc2827;
+    padding: 20px 20px;
+
+}
+.containerVoluntarios .card-body  .datos .margv{
+    margin-bottom: 10px;
+
+}
+.containerVoluntarios .card-body  .datos p{
+    color: white;
+}
+.containerVoluntarios .card-body  .datos2{
+  
+    padding: 20px 20px;
+
+}
+
+.containerVoluntarios .card-body  .datos2 p{
+    color: white;
+}
+.containerVoluntarios .card-footer{
+    text-align: center;
+}
+
+.btnMasVoluntarios{
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #ada9a9bd;
+}
+
+.btnMasVoluntarios a:nth-child(1){
+    margin-right: 10px;
+    background: #c94b4b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+.btnMasVoluntarios a:nth-child(2){
+    margin-left: 10px;
+    background: #c94b4b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    
+}
+
+.advertenciasREGVOL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.advertenciasREGVOL p{
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+.msjError{
+    color: red;
+    top: 66%;
+    width: 90%;
+    position: absolute;
+    text-align: start;
+    background-color: transparent;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+.form-group label{
+    color: white;
+    font-weight: 500;
+}
+
+
+/*-MENSAJE DE ADVERTENCIA PARA PESTANA MASCOTAS--*/
+.contAdvertecia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-grow {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;}
+.contAdvertecia .procesando{
+    width: 50%;
+    text-align: center;
+}
+
+.contAdvertecia .errores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+}
+
+.contAdvertecia .errores .imgErr{
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}
+
+
+.contAdvertecia .errores .imgErr img{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+
+.conL{
+    position: relative;
+    width: 100%;
+    height: 6rem;
+}
+
+.containerLoad{
+    position: absolute;
+    height: 12%;
+    width: 100%;
+
+    padding-top: 2rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1020;
+}
+.loading{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top: 10px solid #e74c3c;
+   position: relative;
+   animation: a1 2s linear infinite;
+}
+.loading::before, .loading::after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    left: 0;
+    top: -10px;
+    box-sizing: border-box;
+    border-radius: 50%
+}
+
+.loading::before{
+    border-top: 10px solid #e67e22;
+    transform: rotate(120deg);
+}
+
+.loading::after{
+    border-top: 10px solid #3498db;
+    transform: rotate(240deg);
+}
+
+.loading span{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: black;
+    text-align: center;
+    line-height: 100px;
+    animation: a2 2s linear infinite;
+
+}
+@keyframes a1{
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes a2{
+    to{
+        transform: rotate(-360deg);
+    }
+}
+.msjRGV-e{
+    width: 100%;
+    height: 100%;
+    padding: .75rem;
+    background: #333333;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #dd1818, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #dd1818, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.msjRGV-s{
+    width: 100%;
+    height: 100%;
+    padding: .75rem;
+    background: #56ab2f;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+.btnActivar{
+   
+    color: white;
+    background: #f12711;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+
+}
+.btnDesactivar{
+    color: white;
+    text-transform: inherit;
+    background: #8E0E00;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1F1C18, #8E0E00);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1F1C18, #8E0E00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+.btnActivo{
+  
+    color: white;
+    text-transform: inherit;
+    background: #000428;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+.advertencia{
+    display: flex;
+    width: 100%;
+    padding-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.advertencia .imgAd{
+    width: 10rem;
+    height: 10rem;
+    
+}
+
+.advertencia .imgAd img{
+    width: 100%;
+    height: 100%;
+    
+}
+
+mat-form-field{
+    width: 90%;
+}

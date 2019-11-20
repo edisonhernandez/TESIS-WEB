@@ -1,0 +1,30 @@
+<app-nav-admin></app-nav-admin>
+
+  <div class="titulo">
+    
+    <h3>Panel de usuarios</h3>
+  </div>
+
+  <nav class="navPU">
+    
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a  class="nav-item nav-link " [class.active]="tipo == 'fundaciones'" id="nav-home-tab" data-toggle="tab" [routerLink]="['/admin','panel-usuarios','fundaciones']" role="tab" aria-controls="nav-home" aria-selected="true">Fundaciones</a>
+      <a  class="nav-item nav-link" [class.active]="tipo == 'voluntarios'" id="nav-profile-tab" data-toggle="tab" [routerLink]="['/admin','panel-usuarios','voluntarios']" role="tab" aria-controls="nav-profile" aria-selected="false">Voluntarios</a>
+      <a  class="nav-item nav-link" [class.active]="tipo == 'ciudadanos'" id="nav-contact-tab" data-toggle="tab" [routerLink]="['/admin','panel-usuarios','ciudadanos']" role="tab" aria-controls="nav-contact" aria-selected="false">Ciudadanos</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane" [class.show]="tipo == 'fundaciones'" [class.active]="tipo == 'fundaciones'" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      
+            <app-afundaciones *ngIf="tipo == 'fundaciones'"></app-afundaciones>
+    </div>
+    <div class="tab-pane" [class.show]="tipo == 'voluntarios'" [class.active]="tipo == 'voluntarios'" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <app-avoluntarios></app-avoluntarios>
+    </div>
+    <div class="tab-pane" [class.show]="tipo == 'ciudadanos'" [class.active]="tipo == 'ciudadanos'" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <app-aciudadanos></app-aciudadanos>
+    </div>
+  
+  </div>
+
+

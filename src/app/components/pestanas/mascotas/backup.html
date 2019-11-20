@@ -1,0 +1,177 @@
+<app-nav></app-nav>
+
+<!--<header class="bird-box">
+    <div class="back-bird"></div>
+    <div class="logo">
+      <h4><p>¡Adopta, un amigo te espera, cambia su vida y la tuya!</p></h4>
+      <button class="btn btn-success"> <span>Adoptar</span> <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  
+    
+  </header>-->
+
+<!--TITULOS Y DESCRIPCION-->
+<header>
+
+  <div class="titulo">
+    <h3>Mascotas</h3>
+    <span class="lineTi"></span>
+  </div>
+  <div class="descripcionPes">
+
+    <div class="imgIcon">
+      <div class="imgI">
+        <img src="../../../../assets/img/iconohuouse.jpg">
+      </div>
+    </div>
+    <p>
+
+      Uno de nuestros objetivos es encontrar hogares definitivos para aquellos animales que rescatamos de las calles,
+      asegurándoles una nueva oportunidad de vida, con familias responsables que asuman el compromiso de velar por su
+      bienestar.
+    </p>
+  </div>
+
+</header>
+<div class="main">
+
+  <!--Seccion de filtros y cantidad de resultados-->
+  <section class="main-filtros">
+
+    <form>
+
+      <h5>Ordenar por</h5>
+
+      <div class="form-group btnDPR">
+          <label for="tamDrop">Tamaño</label>
+          <select class="form-control" id="tamDrop">
+            <option *ngFor="let t of taman" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)" >{{t}}</option>
+
+          </select>
+        </div>
+        <div class="form-group btnDPR">
+            <label for="sexoDrop">Sexo</label>
+            <select class="form-control" id="sexoDrop">
+                <option *ngFor="let s of sexo" [disabled]="s == 'Todos'" [value]="s" (click)="filtroBSQD(s)">{{s}}</option>
+            </select>
+          </div>
+          <div class="form-group btnDPR">
+              <label for="edadDrop">Edad</label>
+              <select class="form-control" id="edadDrop">
+                  <option *ngFor="let e of edad" [disabled]="e == 'Todos'" [value]="e" (click)="filtroBSQD(e)">{{e}}</option>
+              
+              </select>
+            </div>
+
+      <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+   
+    </form>
+
+
+    <div class="container dividerTi" *ngIf="carga == false">
+    
+      <span >Total mascotas: {{total}}</span>
+      
+    </div>
+  </section>
+  <!--Seccion de cartas de mascotas-->
+  <section class="main-mascotas">
+
+    <!-- <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important;">
+            <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+              <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+        
+          </div>
+          </div>-->
+
+ <div class="containerLoad" *ngIf="carga == true">
+      <div class="loading">
+        <span>Cargando...</span>
+      </div>
+    </div>
+    <div class="mascots" *ngIf="carga == false">
+      <div class="advertencia" *ngIf="advertencia == true">
+        <div class="imgAd">
+          <img src="../../../../assets/img/dog-2952471_960_720.png">
+        </div>
+        <p *ngIf="status == 'error'">{{mensaje}}</p>
+      </div>
+      <div class="clothes-pics" *ngIf="advertencia == false">
+        <div class="row img-row">
+          <figure class="columns four" *ngFor="let mascota of mascotas">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+              <div class="carousel-inner">
+                <a [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]" class="carousel-item" *ngFor="let fot of mascota.fotos"
+                  [class.active]="fot.estado == 'activo'">
+                  <img src="{{url + 'obtener-foto-mascota/' + fot.name}}" class="d-block w-100" alt="...">
+                </a>
+
+              </div>
+              <div class="nombreMsc">
+                <a matTooltip="Ver perfil" [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]">{{mascota.nombre}}</a>
+                <a matTooltip="Ver perfil" [routerLink]="['/fundacion',mascota.responsable._id,'nosotros','all']" class="text-muted">{{mascota.responsable.nombreFundacion}}</a>
+              </div>
+            </div>
+          </figure>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="row pp" *ngIf="filtroBTN == false && carga == false && advertencia == false ">
+      <div class="col-12 btnMasMascotas">
+        <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/mascotas', 'todos', prev_pagee]" class="btn btn-primary">
+          <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+        <a *ngIf="pages != page && advertencia != true" [routerLink]="['/mascotas', 'todos', next_pagee]"
+          class="btn btn-primary">Siguiente
+          <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="row pp" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+      <div class="col-12 btnMasMascotas">
+        <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/mascotas', 'busqueda', prev_pagee]"
+          class="btn btn-primary">
+          <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+        <a *ngIf="pages != page && advertencia != true" [routerLink]="['/mascotas', 'busqueda', next_pagee]"
+          class="btn btn-primary">Siguiente
+          <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+   
+  <!-- <div class="row"
+      style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; background: #fff; padding-top: 2rem;">
+      <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+        <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span
+            class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon"
+            data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw"
+              aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+
+      </div>
+    </div>-->
+  </section>
+</div>
+
+<!--
+  <div class="bgimg-4" *ngIf="carga == false">
+      <div class="tituloInfDonacion">
+          <p>¡No compres, adopta un amigo. Los animales no son cosas.!</p>
+          <p>¡Adopta desde nuestra aplicacion móvil!</p>
+      </div>
+      <div class="btnAdoptar">
+    
+          <div class="social-icons">
+    
+            <button type="button" class="h" (click)="nuevaAdopcion()">Descarga nuestra APP
+              <i class="fa fa-android" aria-hidden="true"></i>
+            </button>
+    
+          </div>
+    
+        </div>
+    </div>
+  -->
+<app-footer></app-footer>

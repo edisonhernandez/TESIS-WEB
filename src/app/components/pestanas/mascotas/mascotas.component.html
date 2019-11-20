@@ -1,0 +1,261 @@
+<app-nav></app-nav>
+
+<!--<header class="bird-box">
+    <div class="back-bird"></div>
+    <div class="logo">
+      <h4><p>¡Adopta, un amigo te espera, cambia su vida y la tuya!</p></h4>
+      <button class="btn btn-success"> <span>Adoptar</span> <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  
+    
+  </header>-->
+   <!-- Modal para ver foto de la mascota-->
+   <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+         
+          <div class="modal-body" *ngIf="imgCom">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="imgModalCom">
+                    <img src="{{url + 'obtener-foto-mascota/' + imgCom}}">
+                </div>
+            
+          </div>
+         
+        </div>
+      </div>
+    
+    </div>
+<!--TITULOS Y DESCRIPCION-->
+<header>
+
+  <div class="titulo">
+    <h3>Mascotas</h3>
+    <span class="lineTi"></span>
+  </div>
+  <div class="descripcionPes">
+
+    <div class="imgIcon">
+      <div class="imgI">
+        <img src="../../../../assets/img/iconohuouse.jpg">
+      </div>
+    </div>
+    <p>
+
+      Uno de nuestros objetivos es encontrar hogares definitivos para aquellos animales que rescatamos de las calles,
+      asegurándoles una nueva oportunidad de vida, con familias responsables que asuman el compromiso de velar por su
+      bienestar.
+    </p>
+  </div>
+
+</header>
+<div class="main">
+
+  <!--Seccion de filtros y cantidad de resultados-->
+  <section class="main-filtros">
+
+    <form>
+
+      <h5>Ordenar por</h5>
+
+      <div class="form-group btnDPR">
+          <label for="tamDrop">Tamaño</label>
+          <select class="form-control" id="tamDrop">
+            <option *ngFor="let t of taman" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)" >{{t}}</option>
+
+          </select>
+        </div>
+        <div class="form-group btnDPR">
+            <label for="sexoDrop">Sexo</label>
+            <select class="form-control" id="sexoDrop">
+                <option *ngFor="let s of sexo" [disabled]="s == 'Todos'" [value]="s" (click)="filtroBSQD(s)">{{s}}</option>
+            </select>
+          </div>
+          <div class="form-group btnDPR">
+              <label for="edadDrop">Edad</label>
+              <select class="form-control" id="edadDrop">
+                  <option *ngFor="let e of edad" [disabled]="e == 'Todos'" [value]="e" (click)="filtroBSQD(e)">{{e}}</option>
+              
+              </select>
+            </div>
+
+      <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+   
+    </form>
+ 
+
+    <div class="container dividerTi" *ngIf="carga == false">
+    
+      <span >Total mascotas: {{total}}</span>
+      
+    </div>
+  </section>
+  <!--Seccion de cartas de mascotas-->
+  <section class="main-mascotas">
+
+    <!-- <div class="row" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important;">
+            <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+              <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon" data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw" aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+        
+          </div>
+          </div>-->
+
+ <div class="containerLoad" *ngIf="carga == true">
+      <div class="loading">
+        <span>Cargando...</span>
+      </div>
+    </div>
+    <div class="mascots" *ngIf="carga == false">
+      <div class="advertencia" *ngIf="advertencia == true">
+        <div class="imgAd">
+          <img src="../../../../assets/img/dog-2952471_960_720.png">
+        </div>
+        <p *ngIf="status == 'error'">{{mensaje}}</p>
+      </div>
+      <div class="clothes-pics" *ngIf="advertencia == false">
+          
+        <div class="row img-row">
+          <figure class="columns four card" *ngFor="let mascota of mascotas">
+            <div class="card-header">
+              <div class="tituloDonacion"   >
+                <a matTooltip="Ver fundación" style="cursor: pointer;" [routerLink]="['/fundacion',mascota.responsable._id,'nosotros','all']" target="_blank">
+                    {{mascota.responsable.nombreFundacion}}
+                </a>
+                
+                 <span style="cursor: pointer;" matTooltip="Ver mascota"  [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]"><i class="fa fa-expand" aria-hidden="true"></i></span>
+              </div>
+                <!-- <small class="text-muted">Registrado: {{(mascota.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</small>
+ -->
+              </div>
+              <div class="card-body"  > 
+                <div class="contentCardBody">
+                    <div class="dropCom">
+                        <div  class="btn btn-primary nomFMascota"  role="button">
+                            <a matTooltip="Ver mascota" [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]">{{mascota.nombre}}</a><div class="imgCom">
+                                <div matTooltip="Ver foto" id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <a  class="carousel-item" *ngFor="let fot of mascota.fotos"
+                                        [class.active]="fot.estado == 'activo'">
+                                        <img (click)="verFoto(fot.name)" src="{{url + 'obtener-foto-mascota/' + fot.name}}" class="d-block w-100" alt="...">
+                                      </a>
+                      
+                                    </div>
+                                   
+                                  </div>
+
+                            </div>
+                        </div>
+                     </div>
+              
+              
+                      <p class="card-text itemsD" [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]">Raza: <span>{{mascota.raza}}</span></p>
+                      
+                       
+                      <div class="dividerInDon" [routerLink]="['/perfilMascota',mascota._id,mascota.responsable._id]">
+                        Edad
+                      </div>
+                      <div class="donador">
+                        <p >{{mascota.edadT}} 
+                          
+                          <span *ngIf="mascota.anios > 1 && mascota.meses > 1" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.anios}} años y {{mascota.meses}} meses)</span>
+                          <span *ngIf="mascota.anios > 1 && mascota.meses == 0" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.anios}} años)</span>
+                          <span *ngIf="mascota.anios == 0 && mascota.meses > 1" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.meses}} meses)</span>
+                          
+                          <span *ngIf="mascota.anios == 1 && mascota.meses == 1" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.anios}} año y {{mascota.meses}} mes)</span>
+                          <span *ngIf="mascota.anios == 1 && mascota.meses == 0" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.anios}} año)</span>
+                          <span *ngIf="mascota.anios == 0 && mascota.meses == 1" class="text-muted" style="text-transform: initial; font-size: .7rem;">({{mascota.meses}} mes)</span>
+                        
+                        </p>
+                      </div>
+
+                </div>
+               
+         
+                <div class="estadoDonA" >
+                 <span>{{mascota.sexo}}</span>
+                </div>
+
+              </div>
+
+          </figure>
+
+        </div>
+
+      </div>
+    </div>
+  
+    <div class="selectPages" *ngIf="filtroBTN == false && carga == false && advertencia == false && carga == false">
+        <div class="pageAnt2">
+            <a  [routerLink]="['/mascotas', 'todos', '1']"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+          </div>
+      <div class="pageAnt">
+        <button [disabled]="page == 1"  [routerLink]="['/mascotas', 'todos', prev_pagee]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      </div>
+      <div class="pagess">
+
+       <a  [routerLink]="['/mascotas', 'todos', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+   
+      </div>
+      <div class="pageNex">
+        <button [disabled]="page == pages"  [routerLink]="['/mascotas', 'todos', next_pagee]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="pageNex2">
+          <a  [routerLink]="['/mascotas', 'todos', pages]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+        </div>
+    </div>
+    <div class="selectPages" *ngIf="filtroBTN == true && carga == false && advertencia == false && carga == false">
+        <div class="pageAnt2">
+            <a  [routerLink]="['/mascotas', 'busqueda', '1']"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+          </div>
+      <div class="pageAnt">
+        <button [disabled]="page == 1" [routerLink]="['/mascotas', 'busqueda', prev_pagee]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      </div>
+      <div class="pagess">
+
+       <a [routerLink]="['/mascotas', 'busqueda', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+      </div>
+      <div class="pageNex">
+        <button [disabled]="page == pages"  [routerLink]="['/mascotas', 'busqueda', next_pagee]"
+        class="btn btn-primary">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="pageNex2">
+          <a  [routerLink]="['/mascotas', 'busqueda', pages]"
+          class="btn btn-primary">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+        </div>
+    </div>
+   
+  <!-- <div class="row"
+      style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; background: #fff; padding-top: 2rem;">
+      <div class="col-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+        <div class="zn_separator clearfix eluid36c84ad4 zn_separator--icon-yes "><span
+            class="zn_separator__line zn_separator__line--left"></span><span class="zn_separator__icon"
+            data-zniconfam="glyphicons_halflingsregular" data-zn_icon=""><i class="fa fa-paw"
+              aria-hidden="true"></i></span><span class="zn_separator__line zn_separator__line--right"></span></div>
+
+      </div>
+    </div>-->
+  </section>
+</div>
+
+
+<app-footer></app-footer>

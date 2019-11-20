@@ -1,0 +1,207 @@
+<app-nav></app-nav>
+<header>
+    <div class="titulo">
+        <h3>Emergencias</h3>
+        <span></span>
+    </div>
+    <div class="descripcionPes">
+
+        <div class="imgIcon">
+            <div class="imgI">
+                <img src="../../../../../assets/img/corEm.png">
+            </div>
+        </div>
+        <p>
+            Gracias a la ayuda de las fundaciones, voluntarios y ciudadanos es posible
+            ayudar a animales que se encuentran en peligro o que han sufrido algun
+            accidente y brindarles la atención necesaria para que puedan encontrar una familia.
+        </p>
+    </div>
+
+</header>
+   <!-- Modal para ver foto de la emergencia-->
+   <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+           
+            <div class="modal-body" *ngIf="imgCom">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div class="imgModalCom">
+                      <img *ngIf="imgCom != 's'" src="{{url + 'obtener-imagen-emergencia/' + emerg.fotoMascota}}">
+                      <img *ngIf="imgCom == 's'" src="../../../../assets/img/Captura2.png">
+
+                  </div>
+              
+            </div>
+           
+          </div>
+        </div>
+      
+      </div>
+<div class="main">
+    <section class="main-filtros">
+        <form>
+
+            <h5>Ordenar por</h5>
+
+            <div class="form-group btnDPR">
+                <label for="tipoDrop">Tipo</label>
+                <select class="form-control" id="tipoDrop">
+                    <option *ngFor="let t of tipoE" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)">{{t}}</option>
+
+                </select>
+            </div>
+            <div class="form-group btnDPR">
+                <label for="nivelDrop">Nivel</label>
+                <select class="form-control" id="nivelDrop">
+                    <option *ngFor="let n of nivelE"  [disabled]="n == 'Todos'" [value]="n" (click)="filtroBSQD(n)">{{n}}</option>
+                </select>
+            </div>
+
+            <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+
+        </form>
+
+
+        <div class="container dividerTi" *ngIf="carga == false">
+
+            <span>Total emergencias: {{total}}</span>
+
+        </div>
+    </section>
+    <section class="main-emergencias">
+        <div class="containerLoad" *ngIf="carga == true">
+            <div class="loading">
+                <span>Cargando...</span>
+            </div>
+        </div>
+        <div class="mascots" *ngIf="carga == false">
+
+            <div class="advertencia" *ngIf="advertencia == true">
+                <div class="imgAd" *ngIf="status == 'error'">
+                    <img src="../../../../assets/img/dog-2952471_960_720.png">
+                </div>
+                <p *ngIf="status == 'error'">{{mensaje}}</p>
+            </div>
+            <div class="clothes-pics" *ngIf="advertencia == false">
+
+                <div class="row img-row">
+                    <figure   class="columns four card" *ngFor="let emerg of emergencias">
+
+                        <div class="card-header" style="cursor: pointer;" [routerLink]="['/emergencia', emerg._id]">
+                                <div class="tituloDonacion">
+                                  <span matTooltip="Ver emergencia" >
+                                        {{emerg.nivelEmergencia}}
+                                  </span>
+                                 
+                                   <span matTooltip="Ver emergencia" style="cursor: pointer;" [routerLink]="['/emergencia', emerg._id]"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                                </div>
+                                <small class="text-muted">Solicitado: {{(emerg.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</small>
+
+                                </div>
+                            <div class="card-body" >
+                              <div class="contentCardBody">
+                                  <div class="dropCom" >
+                                      <div  class="btn btn-primary nomFMascota"  role="button">
+                                          <a matTooltip="Ver emergencia" [routerLink]="['/emergencia', emerg._id]">{{emerg.tipoMascota}}</a><div class="imgCom">
+                                                <img matTooltip="Ver foto" (click)="verFoto(emerg.fotoMascota)" style="cursor: pointer;" *ngIf="emerg.fotoMascota != null" class="card-img-top" src="{{url + 'obtener-imagen-emergencia/' + emerg.fotoMascota}}"
+                                                alt="Card image cap">
+                                                <img  matTooltip="Ver foto" (click)="verFoto('s')" style="cursor: pointer;" *ngIf="emerg.fotoMascota == null" class="card-img-top" src="../../../../assets/img/Captura2.png"
+                                                alt="Card image cap">
+                                          </div>
+                                      </div>
+                                   </div>
+                            
+                                    <div class="biography">{{emerg.descripcion}}</div>
+                                   
+                                    <div class="dividerInDon">
+                                      Tipo
+                                    </div>
+                                    <div class="donador">
+                                      <p >{{emerg.tipoEmergencia}}</p>
+                                     
+                                    </div>
+                                  
+                                    
+                                   
+                              </div>
+                             
+                       
+                              <div class="estadoDonA">
+                                  {{emerg.estado}}
+                              </div>
+                         
+                       
+                            </div>
+                      
+                    </figure>
+
+                </div>
+
+            </div>
+        </div>
+       
+        <div class="selectPages" *ngIf="filtroBTN == false && carga == false && advertencia == false">
+            <div class="pageAnt2">
+                <a  [routerLink]="['/emergencias', 'todos', '1']"
+                  class="btn btn-primary">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+              </div>
+          <div class="pageAnt">
+            <button [disabled]="page == 1"  [routerLink]="['/emergencias', 'todos',prev_page]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          </div>
+          <div class="pagess">
+      
+           <a  [routerLink]="['/emergencias', 'todos', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+       
+          </div>
+          <div class="pageNex">
+            <button [disabled]="page == pages"  [routerLink]="['/emergencias', 'todos',next_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pageNex2">
+              <a  [routerLink]="['/emergencias', 'todos', pages]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+            </div>
+        </div>
+        <div class="selectPages" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+            <div class="pageAnt2">
+                <a  [routerLink]="['/emergencias', 'busqueda', '1']"
+                  class="btn btn-primary">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+              </div>
+          <div class="pageAnt">
+            <button [disabled]="page == 1"  [routerLink]="['/emergencias', 'busqueda', prev_page]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          </div>
+          <div class="pagess">
+      
+           <a [routerLink]="['/emergencias', 'busqueda', p]" *ngFor="let p of pagesSelec" [class.pgActive]="page == p">{{p}}</a>
+          </div>
+          <div class="pageNex">
+            <button [disabled]="page == 1"  [routerLink]="['/emergencias', 'busqueda', next_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pageNex2">
+              <a  [routerLink]="['/emergencias', 'busqueda', pages]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+            </div>
+        </div>
+       
+    </section>
+</div>
+
+<app-footer></app-footer>

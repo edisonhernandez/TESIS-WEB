@@ -1,0 +1,143 @@
+
+.container{
+    margin-top: 5rem;
+}
+
+h5,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+}
+a,p,button{
+    margin: 0;
+    font-family: 'Exo', sans-serif !important;
+}
+a{
+    color: #3bbfa0;
+}
+.active{
+    background: #3bbfa0 !important;
+}
+.titulo{
+    margin-bottom: 1rem;
+    color: #3bbfa0;
+}
+.datosUser small{
+    width: 100%;
+}
+
+.msjError{
+    color: red;
+    width: 100%;
+    text-align: start;
+    background-color: transparent;
+    border-radius: 5px;
+   
+    padding: 5px;
+    position: absolute;
+    top: 72%;
+    font-size: 12px;
+}
+::ng-deep .cdk-overlay-container{
+    z-index: 1200 !important;
+}
+.errNC{
+    margin: 0;
+    position: absolute;
+    top: 74%;
+    font-size: 13px;
+    color: red;
+}
+.msjError2{
+    color: red;
+    width: 100%;
+    text-align: start;
+    background-color: transparent;
+    border-radius: 5px;
+   
+    padding: 5px 0;
+    position: absolute;
+    top: 85%;
+    font-size: 12px;
+}
+.formP{
+    background: white;
+    padding: 0 4rem;
+}
+.formP form{
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+mat-form-field{
+    width: 100% !important;
+}
+
+.divider{
+    border-bottom: 1px solid #adb7b5;
+    color: gray;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: end;
+}
+
+.btnsACP{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: end;
+}
+
+.btnsACP button{
+    background: #3bbfa0;
+    color: white;
+    font-weight: bold;
+}
+
+.imgRG{
+    position: relative;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.input-label2{
+    background: #52c234;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #061700, #52c234);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+#file23{
+    display: none;
+}
+.btnElimLog{
+    position: absolute;
+    top: 7%;
+    border-radius: 50%;
+    right: 37%;
+    background: #484444;
+    
+}
+.btnElimLog i{
+    color: #3bbfa0;
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    
+}
+.btnf{
+    text-align: center;
+}

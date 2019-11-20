@@ -1,0 +1,246 @@
+.container{
+
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+
+
+
+.eluid36c84ad4 {
+    margin-top: 6px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.eluid36c84ad4.zn_separator--icon-yes .zn_separator__line {
+    border-top-width: 3px;
+    border-top-color: #3bbfa0;
+    width: calc(50% - 35px);
+}
+
+.zn_separator--icon-yes .zn_separator__line {
+    content: '';
+    display: inline-block;
+    border-top-style: solid;
+    width: calc(50% - 50px);
+    vertical-align: middle;
+}
+.eluid36c84ad4 .zn_separator__icon {
+    font-size: 30px;
+    color: #3bbfa0;
+}
+.clearfix:before{
+    content: " ";
+    display: table;
+}
+
+
+
+.clearfix:after{
+    clear: both;
+}
+
+/*---ESTILOS CARTAS ADOPCIONES---*/
+
+.card-deck{
+    font-family: 'Exo', sans-serif;
+    color: white;
+    justify-content: center;
+}
+.card-deck .card{
+    max-width: 22rem;
+    min-width: 22rem;
+    margin-bottom: 2rem;
+}
+.card-deck .card .card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.card-deck .card .card-header p{
+    margin: 0;
+}
+.card-deck .card .card-header a{
+    cursor: pointer;
+        color: #3bbfa0;
+    font-weight: bold;
+
+}
+
+.card-deck .card .card-body{
+    border-top: 5px solid #fc2827;
+    background-color: #262626;
+    padding:0;
+    padding-top: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card-deck .card .card-body  .datosAdop{
+    
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+
+}
+
+
+.estadoAdopA{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    background: #56ab2f;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.estadoAdopP{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    background: #43C6AC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.estadoAdopN{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    background: #333333;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #dd1818, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #dd1818, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+.card-deck .card .card-body .estadoAdopA p, .estadoAdopN p, .estadoAdopP p{
+    margin: 0;
+}
+.card-deck .card  .imgsAdp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card-deck .card  .imgsAdp .imgA{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+    height: 10rem;
+    color: #3bbfa0;
+}
+
+.card-deck .card  .imgsAdp .imgA img{
+    width: 100%;
+    height: 70%;
+    border-radius: 50%;
+}
+
+
+.conL{
+    position: relative;
+    width: 100%;
+    height: 6rem;
+}
+
+.containerLoad{
+    position: absolute;
+    height: 12%;
+    width: 100%;
+
+    padding-top: 2rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1020;
+}
+.loading{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top: 10px solid #e74c3c;
+   position: relative;
+   animation: a1 2s linear infinite;
+}
+.loading::before, .loading::after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    left: 0;
+    top: -10px;
+    box-sizing: border-box;
+    border-radius: 50%
+}
+
+.loading::before{
+    border-top: 10px solid #e67e22;
+    transform: rotate(120deg);
+}
+
+.loading::after{
+    border-top: 10px solid #3498db;
+    transform: rotate(240deg);
+}
+
+.loading span{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: black;
+    text-align: center;
+    line-height: 100px;
+    animation: a2 2s linear infinite;
+
+}
+@keyframes a1{
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes a2{
+    to{
+        transform: rotate(-360deg);
+    }
+}
+
+.advertencias{
+    background-color: white;
+}
+
+
+.advertencia{
+    display: flex;
+    width: 100%;
+    padding-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.advertencia .imgAd{
+    width: 10rem;
+    height: 10rem;
+    
+}
+
+.advertencia .imgAd img{
+    width: 100%;
+    height: 100%;
+    
+}

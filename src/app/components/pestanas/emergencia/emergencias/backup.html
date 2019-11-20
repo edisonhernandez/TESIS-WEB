@@ -1,0 +1,127 @@
+<app-nav></app-nav>
+<header>
+    <div class="titulo">
+        <h3>Emergencias</h3>
+        <span></span>
+    </div>
+    <div class="descripcionPes">
+
+        <div class="imgIcon">
+            <div class="imgI">
+                <img src="../../../../../assets/img/corEm.png">
+            </div>
+        </div>
+        <p>
+            Gracias a la ayuda de las fundaciones, voluntarios y ciudadanos es posible
+            ayudar a animales que se encuentran en peligro o que han sufrido algun
+            accidente y brindarles la atención necesaria para que puedan encontrar una familia.
+        </p>
+    </div>
+
+</header>
+<div class="main">
+    <section class="main-filtros">
+        <form>
+
+            <h5>Ordenar por</h5>
+
+            <div class="form-group btnDPR">
+                <label for="tipoDrop">Tipo</label>
+                <select class="form-control" id="tipoDrop">
+                    <option *ngFor="let t of tipoE" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)">{{t}}</option>
+
+                </select>
+            </div>
+            <div class="form-group btnDPR">
+                <label for="nivelDrop">Nivel</label>
+                <select class="form-control" id="nivelDrop">
+                    <option *ngFor="let n of nivelE"  [disabled]="n == 'Todos'" [value]="n" (click)="filtroBSQD(n)">{{n}}</option>
+                </select>
+            </div>
+
+            <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+
+        </form>
+
+
+        <div class="container dividerTi" *ngIf="carga == false">
+
+            <span>Total emergencias: {{total}}</span>
+
+        </div>
+    </section>
+    <section class="main-emergencias">
+        <div class="containerLoad" *ngIf="carga == true">
+            <div class="loading">
+                <span>Cargando...</span>
+            </div>
+        </div>
+        <div class="mascots" *ngIf="carga == false">
+
+            <div class="advertencia" *ngIf="advertencia == true">
+                <div class="imgAd" *ngIf="status == 'error'">
+                    <img src="../../../../assets/img/dog-2952471_960_720.png">
+                </div>
+                <p *ngIf="status == 'error'">{{mensaje}}</p>
+            </div>
+            <div class="clothes-pics" *ngIf="advertencia == false">
+
+                <div class="row img-row">
+                    <figure style="cursor: pointer;" [routerLink]="['/emergencia', emerg._id]" class="columns four card" *ngFor="let emerg of emergencias">
+
+                        <div class="card-header">
+                             
+                                        <h5>{{emerg.nivelEmergencia}}</h5>
+                                        <a matTooltip="Ver emergencia" class="btn verB" [routerLink]="['/emergencia', emerg._id]"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            
+                             
+                            <p class="text-muted">Publicado
+                                {{(emerg.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</p>
+                        </div>
+                        <div class="cardImg">
+                                <img *ngIf="emerg.fotoMascota != null" class="card-img-top" src="{{url + 'obtener-imagen-emergencia/' + emerg.fotoMascota}}"
+                                alt="Card image cap">
+                                <img *ngIf="emerg.fotoMascota == null" class="card-img-top" src="../../../../assets/img/Captura2.png"
+                                alt="Card image cap">
+                        </div>
+                        <div class="card-body" style="text-align: center;">
+                            <h5 class="card-title">{{emerg.tipoEmergencia}}</h5>
+                           
+                        </div>
+                      
+                    </figure>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row pp" *ngIf="filtroBTN == false && carga == false && advertencia == false">
+
+
+            <div class="col-12 btnMasMascotas">
+                <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/emergencias', 'todos', prev_page]"
+                    class="btn btn-primary">
+                    <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+                <a *ngIf="pages != page && advertencia != true" [routerLink]="['/emergencias','todos', next_page]"
+                    class="btn btn-primary">Siguiente
+                    <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="row pp" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+            <div class="col-12 btnMasMascotas">
+                <a *ngIf="page > 1 && advertencia != true" [routerLink]="['/emergencias', 'busqueda', prev_page]"
+                    class="btn btn-primary">
+                    <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior</a>
+                <a *ngIf="pages != page && advertencia != true"
+                    [routerLink]="['/emergencias', 'busqueda', next_page]" class="btn btn-primary">Siguiente
+                    <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<app-footer></app-footer>

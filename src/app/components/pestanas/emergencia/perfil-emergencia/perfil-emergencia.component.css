@@ -1,0 +1,275 @@
+.container{
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+.card-emergencia{
+   
+    background: #ffffff;  
+    border-radius: 5px;
+}
+.card-emergencia .card-imgs{
+    
+   
+    padding-bottom: 15px;
+    padding-top: 30px;
+   
+}
+.card-emergencia .card-imgs .card-deck{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+.card-emergencia .card-imgs  .card-deck .card {
+    margin-bottom: 15px;
+    min-width: 13rem;
+}
+.card-emergencia .card-imgs  .card-deck .card .imgs{
+    width: 100%;
+    height: 100%;
+ 
+}
+.card-emergencia .card-imgs .card-deck .card .card-img-top{
+    height: 100%;
+}
+
+
+
+
+.card-emergencia .card-datos{
+   
+    padding: 30px 45px 15px 15px;
+}
+
+
+@media only screen and (max-width:768px){
+    .card-emergencia .card-imgs .card-deck{
+        display: flex;
+        flex-direction:row;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+    align-items: center;
+    margin: 0;
+    flex-wrap: wrap;
+    }
+    .card-emergencia .card-imgs  .card-deck .card {
+        max-width: 25rem;
+    }
+
+    .card-emergencia .card-imgs  .card-deck .card .imgs{
+        width: 100%;
+        height: 15rem;
+     
+    }
+    .card-emergencia .card-datos{
+   
+        padding: 30px 15px 15px 15px;
+    }
+ }
+
+ .card-emergencia .card-datos .titulo{
+     border-bottom: 1px solid #d2cdcda1;
+     text-align: end;
+ }
+ .card-emergencia .card-datos span{
+    font-weight: 500;
+}
+
+ .card-emergencia .card-datos .headerEmer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+
+ }
+
+ .card-emergencia .card-datos .headerEmer h5{
+     margin: 0;
+}
+.card-emergencia .card-datos .emerDatos{
+    margin-bottom: 30px;
+}
+
+.card-emergencia .card-datos ul{
+    list-style: none;
+    padding: 20px 10px;
+ }
+
+ .card-emergencia .card-datos ul li p{
+    margin: 0;
+ }
+
+ .card-emergencia .card-datos .msjVC{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+ }
+ .card-emergencia .card-datos .msjVC p{
+     margin: 0;
+ }
+
+ .card-emergencia .card-datos .btnsEmer{
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: center;
+ }
+/*---------MODAL PARA AYUDA DE EMERGENCIA Y SELECCION DE VOLUNTARIOS-----*/
+#modalAyudarEmergencia{
+    
+}
+
+#modalAyudarEmergencia .imgCheckVolun{
+    width: 30px;
+    height: 30px;
+}
+
+#modalAyudarEmergencia .imgCheckVolun img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#modalAyudarEmergencia .imgCheckVolun input{
+    position: absolute;
+    margin-top: 0.5rem;
+    margin-left: -21px;
+}
+.formulario .form-check{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.formulario h2 {
+    font-size: 16px;
+    color: #001F3F;
+    margin-bottom: 20px;
+    margin-left: 20px; }
+  .formulario > div {
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc; }
+  .formulario .radio label,
+  .formulario .form-check label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+    align-items: center;
+    position: relative;
+    padding: 5px 15px 5px 51px;
+    font-size: 1em;
+
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    .formulario .radio label:hover,
+    .formulario .form-check label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    .formulario .radio label:before,
+    .formulario .form-check label:before {
+      content: "";
+      display: flex;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      border-radius: 50%;
+      background: none;
+      border: 3px solid #3bbfa0; }
+  .formulario input[type="radio"] {
+    display: none; }
+    .formulario input[type="radio"]:checked + label:before {
+      display: none; }
+    .formulario input[type="radio"]:checked + label {
+      padding: 5px 15px;
+      background: #3bbfa0;
+      border-radius: 2px;
+      color: #fff; }
+  .formulario .form-check label:before {
+    border-radius: 3px; }
+  .formulario .form-check input[type="checkbox"] {
+    display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label {
+      background: #3bbfa0;
+      color: #fff;
+      padding: 5px 15px; }
+.formulario .form-check label .imgVol{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+}
+
+.formulario .form-check label .imgVol img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.alertasAyuda{
+    text-align: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.alertasAyuda p{
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.alertasAyuda .imgAA{
+    width: 30px;
+    height: 30px;
+}
+
+.alertasAyuda .imgAA img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.btnm{
+    text-align: center;
+}
+.btnm button:nth-child(1){
+    background: #3bbfa0;
+    border: 1px solid #3bbfa0;
+    margin-right: 5px;
+}
+.btnm button:nth-child(2){
+    background: #bf3b3b;
+    border: 1px solid #bf3b3b;
+    margin-left: 5px;
+}
+.bnAY{
+    background: #3bbfa0;
+    border: 1px solid #3bbfa0;
+    margin-right: 5px;
+}
+
+.bnMA{
+    background: #3bbfa0;
+    border: 1px solid #3bbfa0;
+    margin-right: 5px;
+}

@@ -1,0 +1,168 @@
+ <div class="container">
+       <!-- Modal -->
+       <div class="modal fade" id="modalAyudarEmergencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLongTitle">Hacerce cargo de la emergencia</h5>
+                   <button type="button" (click)="loadPage()" class="close" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+    
+               <div class="modal-body" *ngIf="(advertenciaAyuda == true) || (advertenciaAyuda == true && statusAyuda == 'error') || (advertenciaAyuda == true && statusAyuda == 'success') || (advertenciaAyuda == true && statusAyuda == 'procesando') || (advertenciaAyuda == false && statusAyuda == 'success')">
+                   <div class="alert alert-primary alertasAyuda" role="alert" *ngIf="statusAyuda == 'procesando'">
+                       <div class="spinner-border text-primary" role="status">
+                           <span class="sr-only">Loading...</span>
+                       </div>
+                       <p> Guardando...</p>
+                   </div> 
+                   <div class="alert alert-success alertasAyuda" role="alert" *ngIf="statusAyuda == 'success'">
+                       <div class="imgAA">
+                           <img src="../../../assets/img/affirmative-156538_640.png">
+                       </div>
+                       <p>{{mensajeAyuda}}</p>
+                   </div>
+                   <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'error' && nAyuda != '6'">
+                       <div class="imgAA">
+                           <img src="../../../assets/img/Icon_Error.png">
+                       </div>
+                       <p>{{mensajeAyuda}}</p>
+                   </div>
+                   <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'error' && nAyuda == '6'">
+                       <div class="imgAA">
+                           <img src="../../../assets/img/sign-305734_960_720.png">
+                       </div>
+                       <p>{{mensajeAyuda}}</p>
+                   </div>
+               </div>
+               <div class="modal-body" *ngIf="(advertenciaAyuda == false && statusAyuda != 'success') || (advertenciaAyuda == true && statusAyuda == 'errorVoluntario')">
+                   <p>Selecciona por lo menos un voluntario, el cual ayude en la emergencia: </p>
+                   <form class="formulario needs-validation" #registerAyuda="ngForm" (ngSubmit)="registrarAyuda(registerAyuda)" novalidate>
+                       <div class="alert alert-danger alertasAyuda" role="alert" *ngIf="statusAyuda == 'errorVoluntario'">
+                           {{mensajeAyuda}}
+                       </div>
+                       <div class="form-check" *ngFor="let volun of voluntarios">
+                           <input required type="checkbox" name="checkbox" id="{{volun._id}}" value="{{volun._id}}">
+                           <label *ngIf="volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                               <div class="imgVol">
+                                   <img src="{{url + 'obtener-foto/' + volun.foto}}">
+                               </div>
+                           </label>
+                           <label *ngIf="!volun.foto" for="{{volun._id}}">{{volun.nombres}} {{volun.apellidos}}
+                               <div class="imgVol">
+                                   <img src="../../../assets/img/user.png">
+                               </div>
+                           </label>
+                       </div>
+                       <div class="btnm" style="border: 0 !important;">
+                            <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerAyuda.form.valid>Guardar</button>
+                        
+                       </div>
+                       
+                   </form>
+               </div>
+               <div class="modal-footer" *ngIf="(advertenciaAyuda == true) || (advertenciaAyuda == true && statusAyuda == 'error') || (advertenciaAyuda == true && statusAyuda == 'success') || (advertenciaAyuda == true && statusAyuda == 'procesando') || (advertenciaAyuda == false && statusAyuda == 'success')">
+                   <button type="button" (click)="loadPage()" class="btn btn-secondary">Cerrar</button>
+    
+               </div>
+           </div>
+       </div>
+    </div>
+      <div class="row card-emergencia" *ngIf='emergencia'>
+        <div class="col-12 col-sm-12 col-md-4 card-imgs">
+    
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header bg-transparent border-success">Estado del animal</div>
+                  <div class="imgs">
+                      <img class="card-img-top" *ngIf="emergencia.fotoMascota" src="{{url + 'obtener-imagen-emergencia/' + emergencia.fotoMascota}}" alt="Card image cap"> 
+                      <img class="card-img-top" *ngIf="!emergencia.fotoMascota" src="../../../../assets/img/Captura2.png" alt="Card image cap"> 
+                      
+                  </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-transparent border-success">Referencia de dirección</div>
+                  <div class="imgs">
+                      <img class="card-img-top"  *ngIf="direccionFoto" src="{{url + 'obtener-imagen-emergencia/' + emergencia.direccionFoto}}" alt="Card image cap">
+                      <img class="card-img-top" *ngIf="!direccionFoto" src="../../../../assets/img/Captura2.png" alt="Card image cap"> 
+    
+    
+                  </div>
+                  
+                </div>
+    
+              </div>
+    
+          
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 card-datos" >
+         <div class="msjVC" *ngIf="emergencia && emergencia.ayuda.fundacion && identity">
+            <div class="alert alert-success" role="alert" *ngIf="emergencia.ayuda.fundacion._id == identity._id && emergencia.estado == 'atentida'">
+                <p>¡ Marcaste esta emergencia como: ATENTIDA !</p>
+              </div>
+              <div class="alert alert-success" role="alert" *ngIf="emergencia.ayuda.fundacion._id != identity._id && emergencia.estado == 'atentida'">
+                  <p>¡ Esta emergencia fue marcada como: ATENTIDA, por la fundación <a href="#" [routerLink]="['/perfilFundacion',emergencia.ayuda.fundacion._id,'nosotros']">{{emergencia.ayuda.fundacion.nombreFundacion}}</a>!</p>
+                </div>
+          <div class="alert alert-primary" role="alert" *ngIf="emergencia.ayuda.fundacion._id == identity._id && emergencia.estado == 'acogida'">
+            <p>¡Acogiste esta emergencia!</p>
+          </div>
+          <div class="alert alert-primary" role="alert" *ngIf="emergencia.ayuda.fundacion._id != identity._id && emergencia.estado == 'acogida'">
+            <p>¡Esta emergencia fue acogida por la fundación: <a href="#" [routerLink]="['/perfilFundacion',emergencia.ayuda.fundacion._id,'nosotros']">{{emergencia.ayuda.fundacion.nombreFundacion}}</a>!</p>
+          </div>
+         </div>
+          <div class="headerEmer">
+            <h5>{{emergencia.nivelEmergencia}}</h5>
+           
+            <p class="text-muted">Publicado {{(emergencia.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}</p>
+          </div>
+          <div class="emerDatos">
+              <p><span>Tipo de emergencia: </span>{{emergencia.tipoEmergencia}}</p>
+              <p><span>Descripción: </span>{{emergencia.descripcion}}</p>
+          </div>
+          
+    
+          <div class="titulo"><span>Datos de la mascota</span></div>
+          <div class="emerMascota">
+            <ul>
+                <li><p><span>Tipo: </span>{{emergencia.tipoMascota}}</p></li>
+              <li><p><span>Sexo: </span>{{emergencia.sexoMascota}}</p></li>
+              <li><p><span>Raza: </span>{{emergencia.raza}}</p></li>
+              <li><p><span>Estado: </span>{{emergencia.estadoMascota}}</p></li>
+            </ul>
+          </div>
+    
+          <div class="titulo"><span>Dirección de la emergencia</span></div>
+          <div class="emerDireccion">
+              <ul>
+                  <li><p><span>Sector: </span>{{emergencia.direccionSector}}</p></li>
+                <li><p><span>Calle principal: </span>{{emergencia.direccionCprincipal}}</p></li>
+                <li><p><span>Calle secundaria: </span>{{emergencia.direccionCsecundaria}}</p></li>
+                <li><p><span>Referencia: </span>{{emergencia.direccionReferencia}}</p></li>
+              </ul>
+            </div>
+    
+            <div class="titulo"><span>Publicado por</span></div>
+            <div class="emerResponsable">
+                <ul>
+                  <li><p><span>Nombres y apellidos: </span>{{emergencia.responsable.nombres}} {{emergencia.apellidos}}</p></li>
+                  <li><p><span>Teléfono: </span>{{emergencia.responsable.telefono}}</p></li>
+                  <li><p><span>Celular: </span>{{emergencia.responsable.celular}}</p></li>
+                  <li><p><span>Correo: </span>{{emergencia.responsable.correo}}</p></li>
+                  <li><p><span>Contacto extra: </span>{{emergencia.contactoExtra}}</p></li>
+                </ul>
+              </div>
+              <div class="btnsEmer" *ngIf="identity">
+                
+                <button *ngIf="emergencia.estado == 'desactivo'" type="button" class="btn btn-success bnAY" data-toggle="modal" data-target="#modalAyudarEmergencia" >
+                    Ayudar
+                </button>
+                <div  class="" *ngIf="emergencia.ayuda">
+                        <button  *ngIf="emergencia.estado == 'acogida' && identity._id == emergencia.ayuda.fundacion._id" (click)="marcarAtentida()"class="btn btn-primary bnMA">Marcar como ATENTIDA</button>
+    
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>

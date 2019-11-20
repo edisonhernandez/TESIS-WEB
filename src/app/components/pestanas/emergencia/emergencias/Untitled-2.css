@@ -1,0 +1,513 @@
+.container{
+    padding-top: 50px;
+    padding-bottom: 30px;
+    background: #fff;
+    box-shadow: 0px 0px 20px #444;
+}
+.ubicacion{
+   
+   
+    
+    background: #e2cbd3a1;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+}
+
+.ubicacion h5{
+        margin: 8px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-family: 'Exo', sans-serif;
+}
+.card-deck{
+justify-content: center;
+}
+.card{
+    min-width: 20rem;
+    max-width: 25rem;
+    margin-bottom: 30px;
+}
+
+.card .card-header{
+    text-align: center;
+    
+}
+.card .card-header h5{
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+
+.card .card-header p{
+    margin: 0;
+}
+
+.card-body span{
+    font-weight: 500;
+}
+
+.card-body .datosMasc p{
+    margin: 0;
+}
+.card-footer p{
+    margin: 0;
+}
+
+.card-footer button:nth-child(1){
+    margin-right: 5px;
+}
+.card-footer button:nth-child(2){
+    margin-left: 5px;
+}
+.card .card-footer{
+    text-align: center;
+}
+.cardImg{
+    height: 250px;
+}
+
+.cardImg img{
+    height: 100%;
+}
+
+.btnNuevo{
+    margin-bottom: 20px;
+}
+
+.emr{
+    margin-top: 20px;
+}
+.titulo{
+    text-align: center;
+    margin-bottom: 50px;
+    color: white;
+}
+.formNuevaMascota{
+    background: #ad5389;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding:20px;
+    border-radius: 20px;
+}
+
+.dividers{
+    text-align: center;
+    color: white;
+    border-top: 1px solid gray;
+    margin-top: 30px;
+}
+
+
+/*----Imagen de la mascota---*/
+
+.input-label2{
+    background: #52c234;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #061700, #52c234);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+#file3{
+    display: none;
+}
+
+
+.imgRG{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+ 
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    
+}
+
+.imgRG2{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 0 !important;
+ 
+}
+.imgRG2 img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    
+}
+
+
+.bntRG{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+   
+   }
+.bntRG2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0 !important;
+   
+   
+   }
+   .form-group label{
+    color: white;
+    font-weight: 500;
+}
+.btnsRegMas{
+    margin-top: 30px;
+    padding-top: 30px;
+    text-align: center;
+    border-top: 1px solid gray;
+}
+
+.msjError{
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: red;
+    background-color: #23212199
+}
+
+.modalEmergencia{
+
+}
+
+.modalEmergencia .modalInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.tituloEmer {
+    margin-bottom: 30px;
+
+}
+.tituloEmer .col-12 {
+   
+
+}
+.tituloEmer .header{
+    display: flex;
+    padding: 10px 0px;
+    flex-direction: row;
+    justify-content: center;
+    
+    align-items: baseline;
+    flex-wrap: wrap;
+
+}
+
+.btnMasEmergencias{
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #ada9a9bd;
+}
+
+.btnMasEmergencias a:nth-child(1){
+    margin-right: 10px;
+    background: #c94b4b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+.btnMasEmergencias a:nth-child(2){
+    margin-left: 10px;
+    background: #c94b4b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+}
+
+/*-MENSAJE DE ADVERTENCIA--*/
+.contAdvertecia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-grow {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;}
+.contAdvertecia .procesando{
+    width: 50%;
+    text-align: center;
+}
+
+.contAdvertecia .errores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+}
+
+.contAdvertecia .errores .imgErr{
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}
+
+
+.contAdvertecia .errores .imgErr img{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+/*-----Efecto bolitas cargando----*/
+.containerCargando{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e9ebee;
+   flex-direction: column;
+    height: 500px;
+}
+.containerCargando p{
+    margin-top: 70px;
+    border-radius: 10px;
+    box-shadow: 0 14px 21px rgba(59, 15, 130, 0.6);
+    font-weight: bold;
+    padding: 10px 20px;
+}
+.circleC{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+}
+.circleC:before{
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #333,
+                0 0 0 20px #444,
+                0 0 0 30px #555,
+                0 0 0 40px #666,
+                0 0 0 50px #777,
+                inset 0 0 40px rgba(0,0,0,0.5);
+
+
+}
+
+.dots{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 50%;
+    animation: animate 10s linear infinite;
+}
+
+.dots:before{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    left: calc(50% - 5px);
+    top: 0;
+    box-shadow: 50px 0 0 #fff,
+                -65px -50px 0 rgb(214, 211, 22),
+                -65px 50px 0 rgb(27, 196, 202),
+                -55px  0 0 rgb(22, 224, 22),
+                 45px  35px 0 rgb(250, 16, 16),
+                -40px -40px 0 #fff,
+                 40px -40px 0 rgb(9, 13, 243),
+                55px -59px 0 #fff;
+    animation: animate 10s linear infinite;
+
+}
+
+.dots::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    left: calc(50% - 5px);
+    bottom: 0;
+    box-shadow: -50px 0 0 #fff,
+                65px 50px 0 rgb(214, 211, 22),
+                65px -50px 0 rgb(27, 196, 202),
+                55px  0 0 rgb(22, 224, 22),
+                 -45px  -35px 0 rgb(250, 16, 16),
+                40px 40px 0 #fff,
+                 -40px 40px 0 rgb(9, 13, 243),
+                -55px 59px 0 #fff;
+    animation: animate 10s linear infinite;
+
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+/*---------MODAL PARA AYUDA DE EMERGENCIA Y SELECCION DE VOLUNTARIOS-----*/
+#modalAyudarEmergencia{
+    
+}
+
+#modalAyudarEmergencia .imgCheckVolun{
+    width: 30px;
+    height: 30px;
+}
+
+#modalAyudarEmergencia .imgCheckVolun img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#modalAyudarEmergencia .imgCheckVolun input{
+    position: absolute;
+    margin-top: 0.5rem;
+    margin-left: -21px;
+}
+.formulario .form-check{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.formulario h2 {
+    font-size: 16px;
+    color: #001F3F;
+    margin-bottom: 20px;
+    margin-left: 20px; }
+  .formulario > div {
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc; }
+  .formulario .radio label,
+  .formulario .form-check label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+    align-items: center;
+    position: relative;
+    padding: 5px 15px 5px 51px;
+    font-size: 1em;
+
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+    .formulario .radio label:hover,
+    .formulario .form-check label:hover {
+      background: rgba(255, 65, 54, 0.1); }
+    .formulario .radio label:before,
+    .formulario .form-check label:before {
+      content: "";
+      display: flex;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      border-radius: 50%;
+      background: none;
+      border: 3px solid #FF4136; }
+  .formulario input[type="radio"] {
+    display: none; }
+    .formulario input[type="radio"]:checked + label:before {
+      display: none; }
+    .formulario input[type="radio"]:checked + label {
+      padding: 5px 15px;
+      background: #FF4136;
+      border-radius: 2px;
+      color: #fff; }
+  .formulario .form-check label:before {
+    border-radius: 3px; }
+  .formulario .form-check input[type="checkbox"] {
+    display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label:before {
+      display: none; }
+    .formulario .form-check input[type="checkbox"]:checked + label {
+      background: #FF4136;
+      color: #fff;
+      padding: 5px 15px; }
+.formulario .form-check label .imgVol{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+}
+
+.formulario .form-check label .imgVol img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.alertasAyuda{
+    text-align: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.alertasAyuda p{
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.alertasAyuda .imgAA{
+    width: 30px;
+    height: 30px;
+}
+
+.alertasAyuda .imgAA img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}

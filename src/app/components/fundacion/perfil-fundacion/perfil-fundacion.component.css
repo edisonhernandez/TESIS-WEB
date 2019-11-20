@@ -1,0 +1,286 @@
+.carousel-item img{
+    width: 100%;
+}
+.nav .nav-pills{
+    z-index: 1 !important;
+}
+.nav-fundacion{
+    background-color: white;
+    padding: 10px;
+    justify-content: center;
+}
+
+.container{
+    
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+
+/*-----portadas----*/
+
+
+.carousel{
+    height: 564px;
+}
+.carousel .carousel-inner{
+    height: 100%;
+}
+
+.carousel .carousel-inner .carousel-item{
+    height: 100%;
+}
+
+.carousel .carousel-inner .carousel-item img{
+    height: 100%;
+}
+.carousel-indicators{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 15%;
+    list-style: none;
+}
+
+.carousel-indicators li {
+
+    border-top: 1px solid transparent !important;
+    border-bottom: 3px solid transparent !important;
+   
+}
+
+.carousel-control-prev-icon {
+    background-image: none !important;
+    width: 38px;
+    height: 66px;
+}
+
+.carousel-control-prev-icon i{
+    color: #0087ff;
+    font-size: 4rem;
+}
+
+.carousel-control-next-icon {
+    background-image: none !important;
+    width: 38px;
+    height: 66px;
+}
+
+.carousel-control-next-icon i{
+    color: #0087ff;
+    font-size: 4rem;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+.btnConfigPor{
+    position: absolute;
+    z-index: 1;
+    bottom: 5%;
+    right: 2%;
+    display: flex;
+    flex-direction: row;
+}
+.dropPortada{
+    margin-left: 10px;
+}
+
+.btnSubirPortada{
+    
+}
+
+/*----form para subir nueva portada-----*/
+.formImgPortada{
+    
+}
+.msjError{
+    width: 100%;
+    color: red;
+}
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+
+/*-----MODAL FORM SUBIR PORTADA---*/
+.formPortada{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.formPortada .bntSelecPortada{
+    text-align: center;
+}
+
+.formPortada .btnsGuardarPortada{
+    text-align: center;
+}
+.formPortada .btnsGuardarPortada button:nth-child(1){
+    margin-right: 5px;
+}
+.formPortada .btnsGuardarPortada button:nth-child(2){
+    margin-left: 5px;
+}
+
+.alertasSubirPortada{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertasSubirPortada .icons {
+    width: 80px;
+    height: 80px;
+}
+.alertasSubirPortada .icons img{
+    width: 100%;
+    height: 100%;
+}
+
+.ordenPortadas{
+    width: 100% !important;
+   
+    display: flex;
+    justify-content: center;
+}
+.ordenPortadas ul{
+    width: 500px !important;
+
+}
+
+.ordenPortadas ul img{
+    width: 100% !important;
+}
+
+/*------DRGA---*/
+
+.exampleModal2 .modal-body{
+    height: 30rem;
+    overflow-x: auto;
+}
+.example-list {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .example-box {
+    position: relative;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  .example-box .imgPorOrden{
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+  }
+  .example-box .imgPorOrden img{
+      width: 100%;
+      height: 150%;
+  }
+
+  .example-box .btnEliminar{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #0000008c;
+    border-radius: 5px;
+  }
+
+  .example-box .btnEliminar button{
+      color: red;
+  }
+
+  .example-box .btnEliminar button i{
+      font-size: 1.3rem;
+  }
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+
+
+.notifs{
+    z-index: 2;
+}
+
+.notifs .toast-body{
+    padding: 0;
+}
+
+.notifs .toast-body p{
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+.msjRGV-e{
+    width: 100%;
+    height: 100%;
+    padding: .75rem;
+    background: #333333;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #dd1818, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #dd1818, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.msjRGV-s{
+    width: 100%;
+    height: 100%;
+    padding: .75rem;
+    background: #56ab2f;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}

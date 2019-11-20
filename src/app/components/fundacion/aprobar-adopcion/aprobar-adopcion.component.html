@@ -1,0 +1,326 @@
+<app-nav-fundacion></app-nav-fundacion>
+<header id="header">
+
+    <div class="titulo">
+      <h3>Solicitud de adopción</h3>
+      <span class="lineTi"></span>
+    </div>
+  
+  
+  </header>
+
+<div class="container" *ngIf="adopcion">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mascota</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Adoptante</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Preguntas</a>
+        </li>
+        <li class="nav-item" *ngIf="adopcion.estado == 'pendiente'">
+            <a class="nav-link" id="APNG-tab" data-toggle="tab" href="#APNG" role="tab" aria-controls="APNG" aria-selected="false">Aprobar/Negar</a>
+          </li>
+          <li class="nav-item" *ngIf="adopcion.estado == 'aprobado' || adopcion.estado == 'negado'">
+              <a class="nav-link" id="APNG-tab" data-toggle="tab" href="#APNG" role="tab" aria-controls="APNG" aria-selected="false">Observaciones</a>
+            </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="row mascota">
+            <div class="col-12 col-md-4 mascota-fotos">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item" *ngFor="let fot of adopcion.mascota.fotos" [class.active]="fot.estado == 'activo'">
+                        <img src="{{url + 'obtener-foto-mascota/' + fot.name}}" class="d-block w-100" alt="...">
+                      </div>
+                      
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+            </div>
+            <div class="col-12 col-md-8 mascota-datos">
+             <div class="titulo">
+               <h5>{{adopcion.mascota.nombre}}</h5>
+             </div>
+             <div class="info">
+                <p><span>Tamaño</span>{{adopcion.mascota.tamanio}}</p>
+                <p><span>Raza</span>{{adopcion.mascota.raza}}</p>
+                <p><span>Sexo</span>{{adopcion.mascota.sexo}}</p>
+                <p><span>Color</span>{{adopcion.mascota.color}}</p>
+                <p ><span>Edad</span>{{adopcion.mascota.edadT}} ( {{adopcion.mascota.anios}} año/s - {{adopcion.mascota.meses}} mes/es)</p>
+
+             </div>
+                  
+            </div>
+            <div class="col-12 col-md-6 mascota-desc">
+              <div class="ti">
+                <h5>Descripción</h5>
+              </div>
+                <p>{{adopcion.mascota.descripcion}}</p>
+            </div>
+            <div class="col-12 col-md-6 mascota-vacunas">
+                <div class="ti">
+                    <h5>Vacunas</h5>
+                  </div>
+                  <div class="op">
+                      <p  *ngIf="adopcion.mascota.vacunas.Puppy">Puppy <i *ngIf="adopcion.mascota.vacunas.Puppy == true" class="fa fa-check" aria-hidden="true"></i> <i
+                          *ngIf="adopcion.mascota.vacunas.Puppy == ''" class="fa fa-ban" aria-hidden="true"></i></p>
+                      <p *ngIf="adopcion.mascota.vacunas.Multiple">Múltiple <i *ngIf="adopcion.mascota.vacunas.Multiple == true" class="fa fa-check" aria-hidden="true"></i> <i
+                          *ngIf="adopcion.mascota.vacunas.Multiple == ''" class="fa fa-ban" aria-hidden="true"></i></p>
+                      <p *ngIf="adopcion.mascota.vacunas.Antirrabica">Antirrábica <i *ngIf="adopcion.mascota.vacunas.Antirrabica == true" class="fa fa-check" aria-hidden="true"></i> <i
+                          *ngIf="adopcion.mascota.vacunas.Antirrabica == ''" class="fa fa-ban" aria-hidden="true"></i></p>
+                      <p *ngIf="adopcion.mascota.vacunas.Bronchicine">Bronchicine <i *ngIf="adopcion.mascota.vacunas.Bronchicine == true" class="fa fa-check" aria-hidden="true"></i> <i
+                          *ngIf="adopcion.mascota.vacunas.Bronchicine == ''" class="fa fa-ban" aria-hidden="true"></i></p>
+                          <p *ngIf="adopcion.mascota.vacunas.TrFelina">Triple felina <i *ngIf="adopcion.mascota.vacunas.TrFelina == true" class="fa fa-check" aria-hidden="true"></i> <i
+                            *ngIf="adopcion.mascota.vacunas.TrFelina == ''" class="fa fa-ban" aria-hidden="true"></i></p>
+          
+                    </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="row adoptante">
+            <div class="col-12 col-md-4 adoptante-foto">
+              <div class="foto">
+                <img *ngIf="!adopcion.adoptante.foto" class="img-fluid" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png">
+                <img *ngIf="adopcion.adoptante.foto" class="img-fluid" src="{{url + 'obtener-foto/' + adopcion.adoptante.foto}}">
+
+              </div>
+            </div>
+            <div class="col-12 col-md-8 adoptante-info">
+              <div class="info">
+                  <i class="fa fa-user" aria-hidden="true"></i><p>{{adopcion.adoptante.nombres}} {{adopcion.adoptante.apellidos}}</p>
+              </div>
+              <div class="info">
+                  <i class="fa fa-id-card" aria-hidden="true"></i><p>{{adopcion.datosAdopcion.cedula}}</p>
+              </div>
+              <div class="info2">
+                  <i class="fa fa-envelope" aria-hidden="true"></i><p>{{adopcion.adoptante.correo}}</p>
+              </div>
+              <div class="info">
+                  <i class="fa fa-birthday-cake" aria-hidden="true"></i><p>{{adopcion.adoptante.fechaNacimiento}}</p>
+              </div>
+              <div class="info">
+                  <i class="fa fa-graduation-cap" aria-hidden="true"></i><p>{{adopcion.datosAdopcion.ocupacion}}</p>
+              </div>
+              <div class="info">
+                  <i class="fa fa-phone-square" aria-hidden="true"></i><p>{{adopcion.datosAdopcion.telefono}}</p>
+              </div>
+              <div class="info">
+                  <i class="fa fa-mobile" aria-hidden="true"></i><p>{{adopcion.datosAdopcion.celular}}</p>
+              </div>
+            
+            </div>
+            <div class="col-12 col-md-6 adoptante-domicilio">
+                <div class="ti">
+                    <h5>Domicilio</h5>
+                  </div>
+                  
+              <div class="info">
+                  Inmueble:&nbsp;<p>{{adopcion.datosAdopcion.inmueble}}</p>
+              </div>
+              <div class="info">
+                  Inmueble con cerramiento:&nbsp;<p> {{adopcion.datosAdopcion.inmueble}}</p>
+              </div>
+              <div class="info">
+                  Dirección:&nbsp;<p> La magdalena arenillas y huaquillas Oe9-06</p>
+              </div>
+             
+            </div>
+            <div class="col-12 col-md-6 adoptante-referencia">
+              <div class="ti">
+                <h5>Referencia personal</h5>
+              </div>
+                <div class="info">
+                    Nombres:&nbsp;<p> {{adopcion.datosAdopcion.nombresRP}}</p>
+                </div>
+                <div class="info">
+                    Teléfono:&nbsp;<p> {{adopcion.datosAdopcion.telefonoRP}}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="preguntas">
+              <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Acerca de la mascota
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Preguntas sobre la mascota a ser adoptada
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <div class="prg">
+                        <p>¿Por qué desea adoptar una mascota?</p>
+                        <p>{{adopcion.datosAdopcion.deseoAdoptar}}</p>
+                      </div>
+                      <div class="prg">
+                          <p>Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?</p>
+                          <p>{{adopcion.datosAdopcion.cambiarDomicilio}}</p>
+                        </div>
+                        <div class="prg">
+                            <p>Si UD. debe salir de viaje mas de un día, la mascota:</p>
+                            <p>{{adopcion.datosAdopcion.salirViaje}}</p>
+                          </div>
+                          <div class="prg">
+                              <p>¿Cuantó tiempo en el día pasará sola la mascota?</p>
+                              <p>{{adopcion.datosAdopcion.tiempoSolo}} horas</p>
+                            </div>
+                            <div class="prg">
+                                <p>¿Dónde dormirá la mascota?</p>
+                                <p>{{adopcion.datosAdopcion.dormirMS}}</p>
+                              </div>
+                              <div class="prg">
+                                  <p>¿Qué comerá habitualmente la mascota?</p>
+                                  <p>{{adopcion.datosAdopcion.comidaMS}}</p>
+                                </div>
+                                <div class="prg">
+                                    <p>Si su mascota enferma usted:</p>
+                                    <p>{{adopcion.datosAdopcion.enfermaMS}}</p>
+                                  </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Acerca de la persona adoptante
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Preguntas sobre la persona que adoptará la mascota
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="prg">
+                        <p>¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?</p>
+                        <p>{{adopcion.datosAdopcion.cargoGastos}}</p>
+                      </div>
+                      <div class="prg">
+                          <p>Estime cuánto dinero podría gastar en su mascota mensualmente:</p>
+                          <p>Entre {{adopcion.datosAdopcion.dineroMensualMS}} dólares</p>
+                        </div>
+                        <div class="prg">
+                            <p>¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra la mascota?</p>
+                            <p>{{adopcion.datosAdopcion.visitarDomicilio}}</p>
+                          </div>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Acerca de la familia
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Preguntas sobre la familia del adoptante
+                    </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="prg">
+                        <p> ¿Vive con mas personas?</p>
+                        <p>{{adopcion.datosAdopcion.numPersonas}}</p>
+                      </div>
+                      <div class="prg">
+                          <p> ¿Algún familiar espera un bebé?</p>
+                          <p>{{adopcion.datosAdopcion.familiarEmbarazo}}</p>
+                        </div>
+                        <div class="prg">
+                            <p>¿Alguien que viva con usted es alérgico a los animales o sufre de asma?</p>
+                            <p>{{adopcion.datosAdopcion.familiarAlergico}}</p>
+                          </div>
+                    <div class="prg">
+                        <p>¿La adopción fue compartida con su familia?</p>
+                        <p>{{adopcion.datosAdopcion.compartidaFamilia}}</p>
+                      </div>
+                     
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Acerca de mascotas
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Preguntas sobre mascotas que posee el adoptante
+                      </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="prg">
+                          <p>¿Ha tenido o tiene mascotas?</p>
+                          <p>{{adopcion.datosAdopcion.numMascotas}}</p>
+                        </div>
+                        <div class="prg">
+                            <p> ¿Cuál es el estado de dichas mascotas?</p>
+                            <p>{{adopcion.datosAdopcion.estadoMascotas}}</p>
+                          </div>
+                      </mat-expansion-panel>
+                </mat-accordion>
+           
+                       
+                            
+                                   
+                                  
+                               
+                    
+                    
+          </div>
+        
+        </div>
+        <div class="tab-pane fade" id="APNG" role="tabpanel" aria-labelledby="APNG-tab">
+          
+          <form class="formAdopcion" >
+              <div class="row justify-content-center" *ngIf="adopcion.estado == 'pendiente'">
+                  <div class="form-group col-md-6">
+                      <mat-radio-group style="display: flex; justify-content: space-evenly;" aria-label="Selecciona una opcion" [formControl]="aprobarNg">
+                          <mat-radio-button value="1">Aprobar</mat-radio-button>
+                          <mat-radio-button value="2">Negar</mat-radio-button>
+                        </mat-radio-group>
+                  </div>
+                  <div class="form-group col-md-10">
+                    <p>Indica las razones por la cual la adopción es aprobada o negada. Además se debe mencionar cuales son los
+                      pasos a seguir para que el adoptante retire a la mascota.
+                    </p>
+                  </div>
+                  <div class="form-group col-md-10">
+                      <mat-form-field hintLabel="Máximo 500 caracteres">
+                          <textarea [formControl]="descripcion" cdkTextareaAutosize
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5" required type="text" id="descripcion"  placeholder="Razones"  [class.is-invalid]="!descripcion.valid && descripcion.touched"
+                          [class.is-valid]="descripcion.valid" matInput minlength="25" maxlength="500"></textarea>
+          
+                          <mat-hint align="end">{{descripcion.value?.length || 0}}/500</mat-hint>
+                          <mat-error *ngIf="descripcion.invalid">{{getErrorMessage11()}}</mat-error>
+                        </mat-form-field>
+          
+                    </div>
+                    <div class="form-group col-md-10" style="text-align: center;">
+                        <button class="btnEnv btn btn-primary" [disabled]="aprobarNg.invalid || descripcion.invalid || statusAPA == 'procesando'" (click)="aproNgAdop(adopcion._id, adopcion.mascota._id)">Enviar <div *ngIf=" statusAPA == 'procesando'" style="margin-left: 5px;
+                          font-size: 1rem;
+                          width: 1rem;
+                          height: 1rem;" class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div></button>
+                    </div>
+                   
+                   
+                </div>
+                <div class="observaciones" *ngIf="adopcion.estado == 'aprobado' || adopcion.estado == 'negado'">
+                  <div class="titu">
+                      <h5 *ngIf="adopcion.estado == 'aprobado'">La adopción fue aprobada</h5>
+                    <h5 *ngIf="adopcion.estado == 'negado'">La adopción fue negada</h5>
+                  </div>
+                  <p>Razones:</p>
+                  <p>{{adopcion.observaciones}}</p>
+                </div>
+          </form>
+          </div>
+      </div>
+</div>

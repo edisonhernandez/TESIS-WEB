@@ -1,0 +1,650 @@
+.container{
+    margin-top: 5rem;
+    font-family: 'Exo', sans-serif;
+}
+h5,h4,h3,h2,h1{
+    font-family: 'Righteous', cursive;
+    margin: 0;
+}
+p,a,button{
+    font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+.carousel-item img{
+    width: 100%;
+}
+
+/*-----portadas----*/
+
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 17px;
+    max-width: 15rem;
+    background: #00000094;
+    left: 1%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+.carousel{
+    height: 564px;
+}
+.carousel .carousel-inner{
+    height: 100%;
+}
+
+.carousel .carousel-inner .carousel-item{
+    height: 100%;
+}
+
+.carousel .carousel-inner .carousel-item img{
+    height: 100%;
+}
+.carousel-indicators{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 15%;
+    list-style: none;
+}
+
+.carousel-indicators li {
+
+    border-top: 1px solid transparent !important;
+    border-bottom: 3px solid transparent !important;
+   
+}
+
+.carousel-control-prev-icon {
+    background-image: none !important;
+    width: 38px;
+    height: 66px;
+}
+
+.carousel-control-prev-icon i{
+    color: #0087ff;
+    font-size: 4rem;
+}
+
+.carousel-control-next-icon {
+    background-image: none !important;
+    width: 38px;
+    height: 66px;
+}
+
+.carousel-control-next-icon i{
+    color: #0087ff;
+    font-size: 4rem;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+.btnConfigPor{
+    position: absolute;
+    z-index: 1;
+    bottom: 5%;
+    right: 2%;
+    display: flex;
+    flex-direction: row;
+}
+.dropPortada{
+    margin-left: 10px;
+}
+
+/*----form para subir nueva portada-----*/
+.formImgPortada{
+    
+}
+.msjError{
+    width: 100%;
+    color: red;
+}
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+
+/*-----MODAL FORM SUBIR PORTADA---*/
+.formPortada{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.formPortada .bntSelecPortada{
+    text-align: center;
+}
+
+.btnsGuardarPortada{
+    text-align: center;
+    width: 100%;
+    margin: 0;
+}
+.btnsGuardarPortada button:nth-child(1){
+    background: #3bbfad;
+    border: 1px solid #3bbfad;
+}
+
+.mdBPOR::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    
+}
+.mdBPOR::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.mdBPOR::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.mdBPOR::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+.alertasSubirPortada{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertasSubirPortada .icons {
+    width: 80px;
+    height: 80px;
+}
+.alertasSubirPortada .icons img{
+    width: 100%;
+    height: 100%;
+}
+
+.ordenPortadas{
+    width: 100% !important;
+   
+    display: flex;
+    justify-content: center;
+}
+.ordenPortadas ul{
+    width: 500px !important;
+
+}
+
+.ordenPortadas ul img{
+    width: 100% !important;
+}
+
+/*------DRGA---*/
+
+.exampleModal2 .modal-body{
+    height: 30rem;
+    overflow-x: auto;
+}
+.example-list {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .example-box {
+    position: relative;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  .example-box .imgPorOrden{
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+  }
+  .example-box .imgPorOrden img{
+      width: 100%;
+      height: 150%;
+  }
+
+  .example-box .btnEliminar{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #0000008c;
+    border-radius: 5px;
+  }
+
+  .example-box .btnEliminar button{
+      color: red;
+  }
+
+  .example-box .btnEliminar button i{
+      font-size: 1.3rem;
+  }
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+
+.eluid36c84ad4 {
+    margin-top: 6px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.eluid36c84ad4.zn_separator--icon-yes .zn_separator__line {
+    border-top-width: 3px;
+    border-top-color: #3bbfa0;
+    width: calc(50% - 35px);
+}
+
+.zn_separator--icon-yes .zn_separator__line {
+    content: '';
+    display: inline-block;
+    border-top-style: solid;
+    width: calc(50% - 50px);
+    vertical-align: middle;
+}
+.eluid36c84ad4 .zn_separator__icon {
+    font-size: 30px;
+    color: #3bbfa0;
+}
+.clearfix:before{
+    content: " ";
+    display: table;
+}
+
+
+
+.clearfix:after{
+    clear: both;
+}
+
+.perfil{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+.perfil h5{
+    text-align: center;
+    font-size: 35px;
+    font-weight: 400;
+    color: #535353;
+    margin: 0;
+}
+
+.perfil p{
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 400;
+    font-style: normal;
+    color: #535353;
+    width: 100%;
+    word-wrap: break-word;
+}
+.ti3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+
+.perfil .ti{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.perfil .ti button, .ti3 button{
+    margin-left: 10px;
+    border: 1px solid #3bbfa0;
+}
+.perfil .ti i, .ti3 i{
+    color: #3bbfa0;
+}
+.perfil button{
+   
+}
+.lineTitu{
+    width: 10%;
+    border-top: 3px solid #3bbfa0;
+    border-radius: 10px;
+    margin-bottom: 2rem
+}
+
+
+.bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4{
+    position: relative;
+    opacity: 0.9;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bgimg-1, .bgimg-2{
+    display: none;
+}
+.bgimg-1{
+    background-image: url("../../../../assets/img/perro-en-la-oscuridad-4934.jpg");
+    min-height: 70vh;
+    background-size: 100% 100%;
+    background-position: left;
+    
+}
+.bgimg-2{
+    background-image: url("../../../../assets/img/wallpapers-hd-gatos.jpg");
+    min-height: 70vh;
+    background-size: 100% 100%;
+    background-position: left;
+    
+}
+.bgimg-4{
+    background-image: url("../../../../assets/img/perro-en-la-oscuridad-4934.jpg");
+    min-height: 70vh;
+    background-size: 100% 100%;
+    background-position: left;
+    
+}
+.bgimg-4 .mision{
+    font-family: 'Exo', sans-serif;
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 3rem;
+}
+.bgimg-1 .mision{
+    font-family: 'Exo', sans-serif;
+    background: #00000063;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 3rem;
+}
+.bgimg-1 .mision h5{
+    margin: 0;
+    color: #3bbfa0;
+    font-size: 25px;
+    font-weight: bold;
+}
+.bgimg-1 .mision p{
+    color: white;
+    font-size: 17px;
+    width: 100%;
+    word-wrap: break-word;
+
+}
+.bgimg-2 .vision{
+    font-family: 'Exo', sans-serif;
+    background: #00000063;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 3rem;
+}
+.bgimg-2 .vision h5{
+    margin: 0;
+    color: #3bbfa0;
+    font-size: 25px;
+    font-weight: bold;
+}
+.bgimg-2 .vision p{
+    color: white;
+    font-size: 17px;
+    width: 100%;
+    word-wrap: break-word;
+
+}
+.bgimg-4 .mision h5, .vision h5{
+    margin: 0;
+    color: #3bbfa0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.bgimg-4 .mision p, .vision p{
+    color: white;
+    font-size: 17px;
+    width: 100%;
+    word-wrap: break-word;
+
+}
+.bgimg-4 .vision p{
+    text-align: end;
+    width: 100%;
+    word-wrap: break-word;
+}
+.bgimg-4 .vision{
+    font-family: 'Exo', sans-serif;
+    position: absolute;
+    bottom: 2%;
+    left: 0%;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 3rem;
+}
+
+
+.lineMV{
+    width: 20%;
+    border-top: 3px solid #3bbfa0;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.historias{
+    background: #fff;
+    padding-top: 3rem;
+    padding-left: 4rem;
+    overflow: hidden;
+}
+
+.historias .ti2{
+    text-align: center;
+    font-family: 'Righteous', cursive;
+    font-size: 38px;
+    font-weight: bold;
+    
+    letter-spacing: 2px;
+    color: #3bbfa0;
+}
+.card-deckl{
+    width: 150%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 25%;
+    margin-bottom: 5rem;
+
+
+}
+.card-deckl .card{
+    margin: 10px;
+    max-width: 20rem;
+    min-width: 20rem;
+    height: 22rem;
+    perspective: 500px;
+    z-index: 1;
+}
+.card-deckl .card .imgHSI{
+    position: relative;
+    width: 100%;
+    height: 15rem;
+}
+.card-deckl .card .imgHSI img{
+    width: 100%;
+    height: 100%;
+}
+.card-deckl .card .card-body button{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+
+    border: 1px solid #bf3b3b;
+}
+.card-deckl .card .card-body button i{
+    color:  #bf3b3b;
+}
+.card-deckl .card .card-body{
+    position: relative;
+background: #8080802e;
+}
+
+.card-deckl .card .card-body p{
+    margin: 0;
+}
+
+
+/*----ACTUALIZAR PERFIL---*/
+.datosUser mat-form-field{
+    width: 100% !important;
+}
+
+.btnsACP {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnsACP button:nth-child(1){
+    margin-right: 5px;
+   
+}
+.btnsACP button:nth-child(2){
+    margin-left: 5px;
+    background: #3bbfa0 !important;
+}
+
+/*-------HISTORIAS----*/
+.imgRG{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+.imgRG img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    
+}
+.input-label2{
+    background: #3bbfa0;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-label2:hover{
+    cursor: pointer;
+}
+
+#file2{
+    display: none;
+}
+#file23{
+    display: none;
+}
+.btnRGA{
+    background: #3bbfa0;
+    border: 0 !important
+}
+
+@media only screen and (max-width:975px){
+    .bgimg-4 .mision{
+        
+        top: 5%;
+        left: 0%;
+        width: 100%;
+       
+      
+    }
+    .bgimg-4 .vision{
+        
+        bottom: 2%;
+        left: 0%;
+        width: 100%;
+        
+    }
+    .bgimg-4 .vision p, .bgimg-4 .mision p{
+        background: rgba(0, 0, 0, 0.63)
+    }
+  }
+
+  @media only screen and (max-width:550px){
+    .bgimg-4{
+        display: none;
+    }
+    .bgimg-1{
+        display: flex;
+    }
+    .bgimg-2{
+        display: flex;
+    }
+  }

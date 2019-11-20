@@ -1,0 +1,219 @@
+<header id="header">
+
+    <div class="titulo">
+      <h3>Adopciones</h3>
+      <span class="lineTi"></span>
+    </div>
+  
+  
+  </header>
+ <!-- Modal para ver foto del adoptante / mascota-->
+ <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+       
+        <div class="modal-body" *ngIf="imgCom">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="imgModalCom">
+                  
+                  <img *ngIf="imgCom == 's' && opAd == 'v'"   class="profile-img card-img-top" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" alt="Card image cap" >
+                  <img *ngIf="imgCom != 's' && opAd == 'v'"  src="{{url + 'obtener-foto/' + imgCom}}"  class="profile-img card-img-top">
+                  <img *ngIf="imgCom != 's' && opAd == 'm'"  src="{{url + 'obtener-foto-mascota/' + imgCom}}"  class="profile-img card-img-top">
+
+              </div>
+          
+        </div>
+       
+      </div>
+    </div>
+  
+  </div>
+  <div id="mainMS" class="main">
+
+      <!--Seccion de filtros y cantidad de resultados-->
+     <section class="main-filtros">
+      
+        <form>
+    
+          <h5>Ordenar por</h5>
+    
+          <div class="form-group btnDPR">
+              <label for="tamDrop">Estado</label>
+              <select class="form-control" id="tamDrop">
+                <option *ngFor="let t of estados" [disabled]="t == 'Todos'" [value]="t" (click)="filtroBSQD(t)" >{{t}}</option>
+    
+              </select>
+            </div>
+          
+    
+          <button class="btn btn-danger" (click)="cancelarBus()" *ngIf="filtroBTN == true">Ver todos</button>
+       
+        </form>
+    
+    
+        <div class="container dividerTi" *ngIf="carga == false">
+        
+          <span >Total solicitudes: {{total}}</span>
+          
+        </div>
+      </section>
+      <!--Seccion de cartas de adopciones-->
+      <section class="main-mascotas">
+    
+     <div class="containerLoad" *ngIf="carga == true">
+          <div class="loading">
+            <span>Cargando...</span>
+          </div>
+        </div>
+        <div class="mascots" *ngIf="carga == false">
+          <div class="advertencia" *ngIf="advertencia == true">
+            <div class="imgAd">
+              <img src="../../../../assets/img/dog-2952471_960_720.png">
+            </div>
+            <p *ngIf="status == 'error'">{{mensaje}}</p>
+          </div>
+          <div class="card-deck" *ngIf="advertencia != true && carga != true">
+              <div class="card" *ngFor="let adop of adopciones">
+                  <div class="card-header" [routerLink]="['/aprobar-adopcion', identity._id,adop._id]" style="cursor: pointer;">
+                      <div class="tituloDonacion"   >
+                        <a matTooltip="Ver adopción" style="cursor: pointer;" [routerLink]="['/aprobar-adopcion', identity._id,adop._id]">
+                          Solicitadodo: {{(adop.creadoEn | amFromUnix) | amLocale:'es' | amTimeAgo}}
+                        </a>
+                        
+                         <span style="cursor: pointer;" matTooltip="Ver adopción" [routerLink]="['/aprobar-adopcion', identity._id,adop._id]"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                      </div>
+         
+                      </div>
+                      <div class="card-body"  >
+                        <div class="contentCardBody">
+                            <div class="dropCom">
+                                <div  class="btn btn-primary nomFMascota"  role="button">
+                                    <a matTooltip="Ver adopción" [routerLink]="['/aprobar-adopcion', identity._id,adop._id]">{{adop.adoptante.nombres}} {{adop.adoptante.apellidos}}</a><div class="imgCom">
+                                        <img matTooltip="Ver foto" (click)="verFoto(adop.adoptante.foto, 'v')" *ngIf="adop.adoptante.foto" src="{{url + 'obtener-foto/' + adop.adoptante.foto}}" class="card-img-top" alt="...">
+                                        <img matTooltip="Ver foto" (click)="verFoto('s','v')" *ngIf="!adop.adoptante.foto" src="../../../../assets/img/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png" class="card-img-top" alt="...">
+              
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="dropCom">
+                                <div  class="btn btn-primary nomFMascota"  role="button">
+                                    <a matTooltip="Ver adopción" [routerLink]="['/aprobar-adopcion', identity._id,adop._id]">{{adop.mascota.nombre}}</a><div class="imgCom">
+                                        <div matTooltip="Ver foto" id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                              <a  class="carousel-item" *ngFor="let fot of adop.mascota.fotos"
+                                                [class.active]="fot.estado == 'activo'">
+                                                <img (click)="verFoto(fot.name,'m')" src="{{url + 'obtener-foto-mascota/' + fot.name}}" class="d-block w-100" alt="...">
+                                              </a>
+                              
+                                            </div>
+                                           
+                                          </div>
+
+                                    </div>
+                                </div>
+                             </div>
+                      
+                      
+                               
+                              <div class="dividerInDon">
+                                Contactos
+                              </div>
+                              <div class="donador">
+                                <p >{{adop.datosAdopcion.telefono}} / {{adop.datosAdopcion.celular}}</p>
+                              </div>
+        
+                        </div>
+                       
+                 
+                        <div class="estadoDonA" *ngIf="adop.estado == 'pendiente' || adop.estado == 'aprobado'">
+                         <span>{{adop.estado}}</span>
+                        </div>
+                        <div class="estadoDonN" *ngIf="adop.estado == 'negado'">
+                            <span>{{adop.estado}}</span>
+                           </div>
+        
+                      </div>
+        
+                  
+                </div>
+    
+    
+        <!--      <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+              </div>-->
+              
+            </div>
+
+        </div>
+     
+          <div class="selectPages" *ngIf="filtroBTN == false && carga == false && advertencia == false ">
+            <div class="pageAnt2">
+                <a  [routerLink]="['/fundacion',idFun,'adopciones', 'all', '1']"
+                  class="btn btn-primary">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+              </div>
+          <div class="pageAnt">
+            <button [disabled]="page == 1"  [routerLink]="['/fundacion',idFun,'adopciones', 'all', prev_page]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          </div>
+          <div class="pagess">
+    
+           <a *ngFor="let p of pagesSelec" [routerLink]="['/fundacion',idFun,'adopciones', 'all', p]"  [class.pgActive]="page == p">{{p}}</a>
+       
+          </div>
+          <div class="pageNex">
+            <button [disabled]="page == pages"  [routerLink]="['/fundacion',idFun,'adopciones', 'all', next_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pageNex2">
+              <a  [routerLink]="['/fundacion',idFun,'adopciones', 'all', pages]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+            </div>
+        </div>
+        <div class="selectPages" *ngIf="filtroBTN == true && carga == false && advertencia == false">
+            <div class="pageAnt2">
+                <a  [routerLink]="['/fundacion',idFun,'adopciones', 'busqueda', '1']"
+                  class="btn btn-primary">
+                  <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+              </div>
+          <div class="pageAnt">
+            <button [disabled]="page == 1" [routerLink]="['/fundacion',idFun,'adopciones', 'busqueda', prev_page]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          </div>
+          <div class="pagess">
+    
+           <a *ngFor="let p of pagesSelec" [routerLink]="['/fundacion',idFun,'adopciones', 'busqueda', p]"  [class.pgActive]="page == p">{{p}}</a>
+          </div>
+          <div class="pageNex">
+            <button [disabled]="page == pages"  [routerLink]="['/fundacion',idFun,'adopciones', 'busqueda', next_page]"
+            class="btn btn-primary">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pageNex2">
+              <a  [routerLink]="['/fundacion',idFun,'adopciones', 'busqueda', pages]"
+              class="btn btn-primary">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+            </div>
+        </div>
+       
+      </section>
+    </div>
+
+    <app-footer-fundacion *ngIf="carga == false" ></app-footer-fundacion>

@@ -1,0 +1,807 @@
+<!--<h1>
+    redes
+</h1>
+<button (click)="sociallogin('facebook')">Facebook</button>
+<button (click)="sociallogin('google')">Google</button>
+
+<div *ngIf="display">
+    <h3>Mi nombre: {{name}}</h3>
+    <h3>Email: {{email}}</h3>
+</div>
+-->
+
+<div class="container">
+        <div class="row justify-content-center RG">
+          
+          
+          <div class="col-8 formularioRG" *ngIf="!display">
+              <div class="col-12 tituloRG" >Registrate</div>
+                <ul class="nav nav-tabs navsRG" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Adoptante</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Fundación</a>
+                    </li>
+                   
+                  </ul>
+
+                  <div class="btnsFG">
+                        <button type="button" (click)="signInWithFB()" class="btn btn-primary" ><i class="fa fa-facebook-official" aria-hidden="true"></i> Registrarme con Facebook</button>
+                  </div>
+                  <div class="dividerO">
+                      <hr class="hrd"><span>o bien,</span><hr class="hri">
+                  </div>
+                  <!--FORMULARIO DE REGISTRO PARA ADOPTANTE-->
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                                <!--MODAL DE CONFIRMACION DE REGISTRO DE ADOPTANTE-->
+                                <div class="modal fade" id="modalAdoptante" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalCenterTitle">Registrado exitosamente</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row">
+                                              <div class="col-12 bienvenidaRGF">
+                                                  <span class="bienvenidaUser">{{usuarioAdoptante.nombres}}&nbsp;{{usuarioAdoptante.apellidos}}</span>
+                                                </div>
+                                              <div class="col-12 imgRGFM">
+                                                  <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                                  <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                                              </div>
+                                              <div class="col-12 bienvenidaRGF">
+                                                <span class="bienvenidaText">Bienvenido</span>
+                                                <p class="bienvenidaText2">Gracias por unirte a nuestra plataforma, ya puedes publicar en la web</p>
+                                
+                                              </div>
+                                          
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer bntRGF">
+                                          <button type="button" (click)="moveLogin()" class="btn btn-secondary" data-dismiss="modal">Iniciar Sesión</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--fin modal-->
+                            <div class="col-12 imgRG">
+                                <img *ngIf="imL == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                <img *ngIf="imL == true" src="{{imgUN}}">
+      
+                            </div>
+                            <div class="col s12 file-field input-field">
+                                <div class="btn">
+                                  
+                                    <label for="file" class="input-label">Sube una foto</label><input id="file" (change)="fileChangeEvent($event)" name="foto" #foto="ngModel" [(ngModel)]="usuarioAdoptante.foto" type="file">
+                                </div>
+                                
+                              </div>
+                            <div class="form-row datosUser" >
+                                <div class="form-group col-md-6" [class.formError]="!nombres.valid && nombres.touched">
+                                    
+                                    <label for="nombres">Nombres</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                                      </div>
+                                      <input required type="text" class="form-control" id="nombres" placeholder="¿Cuáles son tus nombres?" name="nombres" #nombres="ngModel" [(ngModel)]="usuarioAdoptante.nombres">
+                                      <div class="msjError" *ngIf="!nombres.valid && nombres.touched">
+      
+                                            <div *ngIf="nombres.errors.required">
+                                                Ingresa por lo menos un nombre
+                                              </div>
+                                        </div>
+                                        </div>
+                                  </div>
+                                <div class="form-group col-md-6" [class.formError]="!apellidos.valid && apellidos.touched">
+                                    
+                                    
+                                   
+
+                                        <label for="apellidos">Apellidos</label>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                                          </div>
+                                          <input required type="text" class="form-control" id="apellidos" placeholder="¿Cuáles son tus apellidos?" name="apellidos" #apellidos="ngModel" [(ngModel)]="usuarioAdoptante.apellidos">
+                                          <div class="msjError" *ngIf="!apellidos.valid && apellidos.touched">
+                                          <div *ngIf="apellidos.errors.required">
+                                                Ingresa por lo menos un apellido
+                                              </div>
+                                            </div>
+                                        </div>
+      
+                                  </div>
+                                <div class="form-group col-md-6" [class.formError]="!cedula.valid && cedula.touched">
+
+                                     <label for="cedula">Cédula</label>
+                                     <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                       </div>
+                                       <input  required pattern="[0-2]{1}[1-4]{1}[0-6]{1}[0-9]{7}" type="number" class="form-control" id="cedula" placeholder="¿Cúal es tu cédula?" name="cedula" #cedula="ngModel" [(ngModel)]="usuarioAdoptante.cedula">
+                                       <div class="msjError" *ngIf="!cedula.valid && cedula.touched">
+                                            <div  *ngIf="cedula.errors.required">
+                                                    La cédula es obligatoria
+                                                  </div>
+                                            
+                                              <div *ngIf="cedula.errors.pattern">
+                                                  La cédula es incorrecta
+                                                </div>
+                                           </div>
+                                     </div>
+                                  </div>
+                                  
+                                <div class="form-group col-md-6" [class.formError]="!fechaNacimiento.valid && fechaNacimiento.touched">
+
+
+                                       <label for="fechaNacimiento">Fecha de nacimiento</label>
+                                       <div class="input-group">
+                                         <div class="input-group-prepend">
+                                           <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                                         </div>
+                                         <input required type="date" class="form-control" id="fechaNacimiento" placeholder="¿Cuándo naciste?" name="fechaNacimiento" #fechaNacimiento="ngModel" [(ngModel)]="usuarioAdoptante.fechaNacimiento">
+                                         <div class="msjError" *ngIf="!fechaNacimiento.valid && fechaNacimiento.touched">
+                                      
+                                                <div *ngIf="fechaNacimiento.errors.required">
+                                                    La fecha de nacimiento es obligatoria
+                                                  </div>
+                                                  
+                                               </div>
+                                       </div>
+
+                                  </div>
+                              <div class="form-group col-md-6" [class.formError]="!correo.valid && correo.touched">
+
+                                <label for="correo">Correo electrónico</label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                  </div>
+                                  <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email" class="form-control" id="correo" placeholder="¿Cuál es tu correo electrónico?" name="correo" #correo="ngModel" [(ngModel)]="usuarioAdoptante.correo">
+                                  <div class="msjError" *ngIf="!correo.valid && correo.touched">
+                                        <div *ngIf="correo.errors.required">
+                                            El correo es obligatorio
+                                        </div>
+          
+                                        <div *ngIf="correo.errors.pattern">
+                                            Ingresa un correo electrónico válido
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+      
+                              </div>
+                              <div class="form-group col-md-6" [class.formError]="!password.valid && password.touched">
+                                
+
+                                  <label for="password">Contraseña</label>
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input required minlength="8" type="password" class="form-control" id="password" placeholder="Contraseña" name="password" #password="ngModel" [(ngModel)]="usuarioAdoptante.password">
+                                    <div class="msjError" *ngIf="!password.valid && password.touched">
+                                            <div *ngIf="password.errors.required">
+                                                La contraseña es obligatoria
+                                            </div>
+              
+                                            <div *ngIf="password.errors.minlength">
+                                                Ingresa mínimos 8 caracteres
+                                            </div>
+                                          </div>
+                                  </div>
+      
+                              </div>
+                              <div class="form-group col-md-6" [class.formError]="!direccion.valid && direccion.touched">
+
+                                  <label for="direccion">Dirección</label>
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input required type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" #direccion="ngModel" [(ngModel)]="usuarioAdoptante.direccion">
+                                    <div class="msjError" *ngIf="!direccion.valid && direccion.touched">
+                                            <div *ngIf="direccion.errors.required">
+                                                La dirección es obligatoria
+                                            </div>
+              
+                                          </div>
+                                  </div>
+                                
+                                </div>
+                                
+                                <div class="form-group col-md-6" [class.formError]="!telefono.valid && telefono.touched">
+    
+                                      <label for="telefono">Teléfono</label>
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input pattern="[0-9]{7}" type="number" class="form-control" id="telefono" placeholder="Teléfono" name="telefono" #telefono="ngModel" [(ngModel)]="usuarioAdoptante.telefono">
+                                    <div class="msjError" *ngIf="!telefono.valid && telefono.touched">
+                                            
+                                            <div *ngIf="telefono.errors.pattern">
+                                                El teléfono debe contener mínimo y máximo 7 números
+                                            </div>
+              
+                                          </div>
+                                  </div>
+                                  
+                                
+                            </div>
+                            
+                           
+                              <div class="form-group col-md-6" [class.formError]="!celular.valid && celular.touched">
+                                
+                                
+
+                                  <label for="celular">Celular</label>
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input pattern="[0-9]{10}" type="number" class="form-control" id="celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="usuarioAdoptante.celular">
+                                    <div class="msjError" *ngIf="!celular.valid && celular.touched">
+                                            <div *ngIf="celular.errors.pattern">
+                                                El celular debe contener mínimo y máximo 10 números
+                                            </div>
+              
+                                          </div>
+                                  </div>
+                              </div>
+                            
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm.form.valid>Registrarme</button>
+                            <div class="msjIS"><label>Ya tienes una cuenta?&nbsp;</label> <a href="#">Inicia sesión</a></div>
+                          </form>
+      
+      
+                    </div>
+                    <!--FORMULARIO DE REGISTRO PARA FUNDACION-->
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      
+                        <form #registerForm2="ngForm" (ngSubmit)="registrarFundacion(registerForm2)" novalidate>
+                          <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+                            <div class="modal fade" id="modalFundacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalCenterTitle">Registrado exitosamente</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row">
+                                          <div class="col-12 bienvenidaRGF">
+                                              <span class="bienvenidaUser">{{usuarioFundacion.nombreFundacion}}</span>
+                                            </div>
+                                          <div class="col-12 imgRGFM">
+                                              <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                              <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                                          </div>
+                                          <div class="col-12 bienvenidaRGF">
+                                            <span class="bienvenidaText">Bienvenido a nuestra plataforma</span>
+                                            <p class="bienvenidaText2">Tu registro sera enviado al administrador para la respectiva verificación de los datos y activación de la cuenta.</p>
+                            
+                                          </div>
+                                      
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer bntRGF">
+                                      <button type="button" (click)="moveLogin()" class="btn btn-secondary" data-dismiss="modal">Listo</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--fin modal-->
+                            <div class="col-12 imgRG">
+                                <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                <img *ngIf="imL2 == true" src="{{imgUN2}}">
+      
+                            </div>
+                            <div class="col s12 file-field input-field">
+                                <div class="btn">
+                                  
+                                    <label for="file2" class="input-label2">Sube un logo</label><input id="file2" (change)="fileChangeEvent2($event)" name="logo" #logo="ngModel" [(ngModel)]="usuarioFundacion.logo" type="file">
+                                </div>
+                                
+                              </div>
+                            <div class="form-row" >
+                                <div class="form-group col-md-6" [class.formError]="!nombreFundacion.valid && nombreFundacion.touched">
+                                    <input  required   type="text" class="form-control" id="nombreFundacion" placeholder="Nombre de la fundación o asociación" name="nombreFundacion" #nombreFundacion="ngModel" [(ngModel)]="usuarioFundacion.nombreFundacion">
+                                    <div class="msjError" *ngIf="(!nombreFundacion.valid && nombreFundacion.touched)">
+                                        <div *ngIf="nombreFundacion.errors.required">
+                                            El nombre es obligatorio
+                                          </div>
+                                      
+                                    </div>
+                                  </div>
+                                <div class="form-group col-md-6" [class.formError]="!fechaFundacion.valid && fechaFundacion.touched">
+                                    <input required type="date" class="form-control" id="fechaFundacion" placeholder="Fecha de fundacion" name="fechaFundacion" #fechaFundacion="ngModel" [(ngModel)]="usuarioFundacion.fechaFundacion">
+                                    <span class="msjError" *ngIf="!fechaFundacion.valid && fechaFundacion.touched">La fecha en que fue fundada es obligatoria</span>
+      
+                                  </div>
+                                <div class="form-group col-md-6" [class.formError]="!correoFundacion.valid && correoFundacion.touched">
+                                    <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email" class="form-control" id="correoFundacion" placeholder="Correo electrónico" name="correoFundacion" #correoFundacion="ngModel" [(ngModel)]="usuarioFundacion.correoFundacion">
+                                    <div  class="msjError" *ngIf="!correoFundacion.valid && correoFundacion.touched">
+                                        <div *ngIf="correoFundacion.errors.required">
+                                            El correo es obligatorio
+                                          </div>
+                                          <div *ngIf="correoFundacion.errors.pattern">
+                                              Ingresa un correo válido
+                                            </div>
+                                      </div>
+      
+                                  </div>
+                                  
+                                <div class="form-group col-md-6" [class.formError]="!passwordFundacion.valid && passwordFundacion.touched">
+                                    <input required minlength="8" type="password" class="form-control" id="passwordFundacion" placeholder="Contraseña" name="passwordFundacion" #passwordFundacion="ngModel" [(ngModel)]="usuarioFundacion.passwordFundacion">
+                                    <div  class="msjError" *ngIf="!passwordFundacion.valid && passwordFundacion.touched">
+                                        <div *ngIf="passwordFundacion.errors.required">
+                                            La contraseña es obligatoria
+                                        </div>
+                                        <div *ngIf="passwordFundacion.errors.minlength">
+                                            Ingresa mínimo 8 caracteres
+                                        </div>
+                                      </div>
+                                  </div>
+                              <div class="form-group col-md-6" [class.formError]="!direccionFundacion.valid && direccionFundacion.touched">
+                                <input required type="text" class="form-control" id="direccionFundacion" placeholder="Dirección exacta" name="direccionFundacion" #direccionFundacion="ngModel" [(ngModel)]="usuarioFundacion.direccionFundacion">
+                                <div class="msjError" *ngIf="!direccionFundacion.valid && direccionFundacion.touched">
+                                    <div *ngIf="direccionFundacion.errors.required">
+                                        La dirección es obligatoria
+                                    </div>
+                                  </div>
+      
+                              </div>
+                              <div class="form-group col-md-6" [class.formError]="!telefonoFundacion.valid && telefonoFundacion.touched">
+                                <input required pattern="[0-9]{7}" maxlength="10" type="number" class="form-control" id="telefonoFundacion" placeholder="Teléfono" name="telefonoFundacion" #telefonoFundacion="ngModel" [(ngModel)]="usuarioFundacion.telefonoFundacion">
+                                <div class="msjError" *ngIf="!telefonoFundacion.valid  &&  telefonoFundacion.touched">
+      
+                                    <div *ngIf="telefonoFundacion.errors.required">
+                                        El teléfono es obligatorio
+                                    </div>
+                                  <div *ngIf="telefonoFundacion.errors.pattern">
+                                      El teléfono debe contener mínimo y máximo 7 números.
+                                  </div>
+                                  
+                                </div>
+      
+                              </div>
+                              <div class="form-group col-md-6" [class.formError]="!celularFundacion.valid && celularFundacion.touched">
+                                  <input type="number" pattern="[0-9]{10}" class="form-control" id="celularFundacion" placeholder="Celular" name="celularFundacion" #celularFundacion="ngModel" [(ngModel)]="usuarioFundacion.celularFundacion">
+                                  <div class="msjError" *ngIf="!celularFundacion.valid  &&  celularFundacion.touched">
+      
+                                    <div *ngIf="celularFundacion.errors.pattern">
+                                        El celular debe contener minimo 10 y máximo 10 números.
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6" [class.formError]="!link.valid && link.touched">
+                                    <input type="url" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" class="form-control" id="link" placeholder="Página web" name="link" #link="ngModel" [(ngModel)]="usuarioFundacion.link">
+                                    <div class="msjError" *ngIf="!link.valid  &&  link.touched">
+      
+                                        <div *ngIf="link.errors.pattern">
+                                            Ingresa una URL válida
+                                        </div>
+                                        
+                                      </div>
+                                  </div>
+                            </div>
+                            
+                           
+                            
+                            <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm2.form.valid>Registrarme</button>
+                            <div class="msjIS"><label>Ya tienes una cuenta?&nbsp;</label> <a href="#">Inicia sesión</a></div>
+                          </form>
+                    </div>
+                  </div>
+          </div>
+
+
+
+
+
+
+
+          <!--asdasdasdasd-->
+          <div class="col-8 formularioRG" *ngIf="display">
+           
+                <div class="col-12 tituloRG" >Crear una cuenta para: {{usuarioAdoptante.nombres}}  &nbsp; {{usuarioAdoptante.apellidos}}</div> 
+                <div class="msjRegfacebook"><p>Por favor, ingresa los siguientes datos para completar tu registro.</p></div>   
+                <!--FORMULARIO DE REGISTRO PARA ADOPTANTE-->
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                                  <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+                                  <div class="modal fade" id="modalAdoptante" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Registrado exitosamente</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12 bienvenidaRGF">
+                                                    <span class="bienvenidaUser">{{usuarioAdoptante.nombres}}&nbsp;{{usuarioAdoptante.apellidos}}</span>
+                                                  </div>
+                                                <div class="col-12 imgRGFM">
+                                                    <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                                    <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                                                </div>
+                                                <div class="col-12 bienvenidaRGF">
+                                                  <span class="bienvenidaText">Bienvenido</span>
+                                                  <p class="bienvenidaText2">Gracias por unirte a nuestra plataforma, ya puedes publicar en la web</p>
+                                  
+                                                </div>
+                                            
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer bntRGF">
+                                            <button type="button" (click)="moveLogin()" class="btn btn-secondary" data-dismiss="modal">Iniciar Sesión</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--fin modal-->
+                              <div class="col-12 imgRGF">
+                                  <img *ngIf="imL == true" src="{{imgUN}}">
+                                  
+                                  
+                              </div>
+                              
+                              <div class="form-row justify-content-center datosUser" >
+                                
+                                    <div class="form-group col-md-6" [class.formError]="!nombres.valid && nombres.touched">
+                                    
+                                            <label for="nombres">Nombres</label>
+                                            <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                                              </div>
+                                              <input required type="text" class="form-control" id="nombres" placeholder="¿Cuáles son tus nombres?" name="nombres" #nombres="ngModel" [(ngModel)]="usuarioAdoptante.nombres">
+                                              <div class="msjError" *ngIf="!nombres.valid && nombres.touched">
+              
+                                                    <div *ngIf="nombres.errors.required">
+                                                        Ingresa por lo menos un nombre
+                                                      </div>
+                                                </div>
+                                                </div>
+                                          </div>
+                                        <div class="form-group col-md-6" [class.formError]="!apellidos.valid && apellidos.touched">
+                                            
+                                            
+                                           
+        
+                                                <label for="apellidos">Apellidos</label>
+                                                <div class="input-group">
+                                                  <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                                                  </div>
+                                                  <input required type="text" class="form-control" id="apellidos" placeholder="¿Cuáles son tus apellidos?" name="apellidos" #apellidos="ngModel" [(ngModel)]="usuarioAdoptante.apellidos">
+                                                  <div class="msjError" *ngIf="!apellidos.valid && apellidos.touched">
+                                                  <div *ngIf="apellidos.errors.required">
+                                                        Ingresa por lo menos un apellido
+                                                      </div>
+                                                    </div>
+                                                </div>
+              
+                                          </div>
+                                    <div class="form-group col-md-8" >
+                                        <input  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email" class="form-control disab" id="correo" placeholder="Correo electrónico" name="correo" #correo="ngModel" [(ngModel)]="usuarioAdoptante.correo">
+                                      </div>
+                                      <div class="form-group col-md-8" [class.formError]="!cedula.valid && cedula.touched">
+
+                                             <label for="cedula">Cédula</label>
+                                             <div class="input-group">
+                                               <div class="input-group-prepend">
+                                                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                                               </div>
+                                               <input required pattern="[0-2]{1}[1-4]{1}[0-6]{1}[0-9]{7}" type="number" class="form-control" id="cedula" placeholder="Cédula" name="cedula" #cedula="ngModel" [(ngModel)]="usuarioAdoptante.cedula">
+                                               <div class="msjError" *ngIf="!cedula.valid && cedula.touched">
+                                              
+                                                    <div *ngIf="cedula.errors.required">
+                                                        La cédula es obligatoria
+                                                      </div>
+                                                      <div *ngIf="cedula.errors.pattern">
+                                                          La cédula es incorrecta
+                                                        </div>
+                                                   </div>
+      
+                                             </div>
+              
+                                          </div>
+                                    <div class="form-group col-md-8" [class.formError]="!fechaNacimiento.valid && fechaNacimiento.touched">
+                                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+                                        <input required type="date" class="form-control" id="fechaNacimiento" placeholder="Fecha de nacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel" [(ngModel)]="usuarioAdoptante.fechaNacimiento">
+                                        <div class="msjError" *ngIf="!fechaNacimiento.valid && fechaNacimiento.touched">
+                                          
+                                            <div *ngIf="fechaNacimiento.errors.required">
+                                                La fecha de nacimiento es obligatoria
+                                              </div>
+                                              
+                                           </div>
+                                      </div>
+
+                               
+                                    
+                                  
+                               
+                             <!--   <div class="form-group col-md-6" [class.formError]="!password.valid && password.touched">
+                                  <input required minlength="8" type="password" class="form-control" id="password" placeholder="Contraseña" name="password" #password="ngModel" [(ngModel)]="usuarioAdoptante.password">
+                                  <div class="msjError" *ngIf="!password.valid && password.touched">
+                                      <div *ngIf="password.errors.required">
+                                          La contraseña es obligatoria
+                                      </div>
+        
+                                      <div *ngIf="password.errors.minlength">
+                                          Ingresa mínimos 8 caracteres
+                                      </div>
+                                    </div>
+        
+                                </div>-->
+                                <div class="form-group col-md-8" [class.formError]="!direccion.valid && direccion.touched">
+                                        <label for="direccion">Dirección</label>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                          </div>
+                                          <input required type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" #direccion="ngModel" [(ngModel)]="usuarioAdoptante.direccion">
+                                          <div class="msjError" *ngIf="!direccion.valid && direccion.touched">
+                                                  <div *ngIf="direccion.errors.required">
+                                                      La dirección es obligatoria
+                                                  </div>
+                    
+                                                </div>
+                                        </div>
+                                
+                                </div>
+                                  
+                                  <div class="form-group col-md-8" [class.formError]="!telefono.valid && telefono.touched">
+                                        <label for="telefono">Teléfono</label>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                                          </div>
+                                          <input pattern="[0-9]{7}" type="number" class="form-control" id="telefono" placeholder="Teléfono" name="telefono" #telefono="ngModel" [(ngModel)]="usuarioAdoptante.telefono">
+                                          <div class="msjError" *ngIf="!telefono.valid && telefono.touched">
+                                                  
+                                                  <div *ngIf="telefono.errors.pattern">
+                                                      El teléfono debe contener mínimo y máximo 7 números
+                                                  </div>
+                    
+                                                </div>
+                                        </div>
+                                    
+                                 
+                              </div>
+                             
+                              
+                                <div class="form-group col-md-8" [class.formError]="!celular.valid && celular.touched">
+                                        <label for="celular">Celular</label>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-phone-square" aria-hidden="true"></i></span>
+                                          </div>
+                                          <input pattern="[0-9]{10}" type="number" class="form-control" id="celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="usuarioAdoptante.celular">
+                                          <div class="msjError" *ngIf="!celular.valid && celular.touched">
+                                                  <div *ngIf="celular.errors.pattern">
+                                                      El celular debe contener mínimo y máximo 10 números
+                                                  </div>
+                    
+                                                </div>
+                                        </div>
+                                </div>
+                              
+                              </div>
+                              
+                              <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm.form.valid>Registrarme</button>
+                              <div class="msjIS"><label>Ya tienes una cuenta?&nbsp;</label> <a href="#">Inicia sesión</a></div>
+                            </form>
+        
+        
+                      </div>
+                      <!--FORMULARIO DE REGISTRO PARA FUNDACION-->
+                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        
+                          <form #registerForm2="ngForm" (ngSubmit)="registrarFundacion(registerForm2)" novalidate>
+                            <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+                              <div class="modal fade" id="modalFundacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Registrado exitosamente</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-12 bienvenidaRGF">
+                                                <span class="bienvenidaUser">{{usuarioFundacion.nombreFundacion}}</span>
+                                              </div>
+                                            <div class="col-12 imgRGFM">
+                                                <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                                <img *ngIf="imL2 == true" src="{{imgUN2}}">
+                                            </div>
+                                            <div class="col-12 bienvenidaRGF">
+                                              <span class="bienvenidaText">Bienvenido a nuestra plataforma</span>
+                                              <p class="bienvenidaText2">Tu registro sera enviado al administrador para la respectiva verificación de los datos y activación de la cuenta.</p>
+                              
+                                            </div>
+                                        
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer bntRGF">
+                                        <button type="button" (click)="moveLogin()" class="btn btn-secondary" data-dismiss="modal">Listo</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--fin modal-->
+                              <div class="col-12 imgRG">
+                                  <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                                  <img *ngIf="imL2 == true" src="{{imgUN2}}">
+        
+                              </div>
+                              <div class="col s12 file-field input-field">
+                                  <div class="btn">
+                                    
+                                      <label for="file2" class="input-label2">Sube un logo</label><input id="file2" (change)="fileChangeEvent2($event)" name="logo" #logo="ngModel" [(ngModel)]="usuarioFundacion.logo" type="file">
+                                  </div>
+                                  
+                                </div>
+                              <div class="form-row" >
+                                  <div class="form-group col-md-6" [class.formError]="!nombreFundacion.valid && nombreFundacion.touched">
+                                      <input  required   type="text" class="form-control" id="nombreFundacion" placeholder="Nombre de la fundación o asociación" name="nombreFundacion" #nombreFundacion="ngModel" [(ngModel)]="usuarioFundacion.nombreFundacion">
+                                      <div class="msjError" *ngIf="(!nombreFundacion.valid && nombreFundacion.touched)">
+                                          <div *ngIf="nombreFundacion.errors.required">
+                                              El nombre es obligatorio
+                                            </div>
+                                        
+                                      </div>
+                                    </div>
+                                  <div class="form-group col-md-6" [class.formError]="!fechaFundacion.valid && fechaFundacion.touched">
+                                      <input required type="date" class="form-control" id="fechaFundacion" placeholder="Fecha de fundacion" name="fechaFundacion" #fechaFundacion="ngModel" [(ngModel)]="usuarioFundacion.fechaFundacion">
+                                      <span class="msjError" *ngIf="!fechaFundacion.valid && fechaFundacion.touched">La fecha en que fue fundada es obligatoria</span>
+        
+                                    </div>
+                                  <div class="form-group col-md-6" [class.formError]="!correoFundacion.valid && correoFundacion.touched">
+                                      <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email" class="form-control" id="correoFundacion" placeholder="Correo electrónico" name="correoFundacion" #correoFundacion="ngModel" [(ngModel)]="usuarioFundacion.correoFundacion">
+                                      <div  class="msjError" *ngIf="!correoFundacion.valid && correoFundacion.touched">
+                                          <div *ngIf="correoFundacion.errors.required">
+                                              El correo es obligatorio
+                                            </div>
+                                            <div *ngIf="correoFundacion.errors.pattern">
+                                                Ingresa un correo válido
+                                              </div>
+                                        </div>
+        
+                                    </div>
+                                    
+                                  <div class="form-group col-md-6" [class.formError]="!passwordFundacion.valid && passwordFundacion.touched">
+                                      <input required minlength="8" type="password" class="form-control" id="passwordFundacion" placeholder="Contraseña" name="passwordFundacion" #passwordFundacion="ngModel" [(ngModel)]="usuarioFundacion.passwordFundacion">
+                                      <div  class="msjError" *ngIf="!passwordFundacion.valid && passwordFundacion.touched">
+                                          <div *ngIf="passwordFundacion.errors.required">
+                                              La contraseña es obligatoria
+                                          </div>
+                                          <div *ngIf="passwordFundacion.errors.minlength">
+                                              Ingresa mínimo 8 caracteres
+                                          </div>
+                                        </div>
+                                    </div>
+                                <div class="form-group col-md-6" [class.formError]="!direccionFundacion.valid && direccionFundacion.touched">
+                                  <input required type="text" class="form-control" id="direccionFundacion" placeholder="Dirección exacta" name="direccionFundacion" #direccionFundacion="ngModel" [(ngModel)]="usuarioFundacion.direccionFundacion">
+                                  <div class="msjError" *ngIf="!direccionFundacion.valid && direccionFundacion.touched">
+                                      <div *ngIf="direccionFundacion.errors.required">
+                                          La dirección es obligatoria
+                                      </div>
+                                    </div>
+        
+                                </div>
+                                <div class="form-group col-md-6" [class.formError]="!telefonoFundacion.valid && telefonoFundacion.touched">
+                                  <input required pattern="[0-9]{7}" maxlength="10" type="number" class="form-control" id="telefonoFundacion" placeholder="Teléfono" name="telefonoFundacion" #telefonoFundacion="ngModel" [(ngModel)]="usuarioFundacion.telefonoFundacion">
+                                  <div class="msjError" *ngIf="!telefonoFundacion.valid  &&  telefonoFundacion.touched">
+        
+                                      <div *ngIf="telefonoFundacion.errors.required">
+                                          El teléfono es obligatorio
+                                      </div>
+                                    <div *ngIf="telefonoFundacion.errors.pattern">
+                                        El teléfono debe contener mínimo y máximo 7 números.
+                                    </div>
+                                    
+                                  </div>
+        
+                                </div>
+                                <div class="form-group col-md-6" [class.formError]="!celularFundacion.valid && celularFundacion.touched">
+                                    <input type="number" pattern="[0-9]{10}" class="form-control" id="celularFundacion" placeholder="Celular" name="celularFundacion" #celularFundacion="ngModel" [(ngModel)]="usuarioFundacion.celularFundacion">
+                                    <div class="msjError" *ngIf="!celularFundacion.valid  &&  celularFundacion.touched">
+        
+                                      <div *ngIf="celularFundacion.errors.pattern">
+                                          El celular debe contener minimo 10 y máximo 10 números.
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="form-group col-md-6" [class.formError]="!link.valid && link.touched">
+                                      <input type="url" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" class="form-control" id="link" placeholder="Página web" name="link" #link="ngModel" [(ngModel)]="usuarioFundacion.link">
+                                      <div class="msjError" *ngIf="!link.valid  &&  link.touched">
+        
+                                          <div *ngIf="link.errors.pattern">
+                                              Ingresa una URL válida
+                                          </div>
+                                          
+                                        </div>
+                                    </div>
+                              </div>
+                              
+                             
+                              
+                              <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm2.form.valid>Registrarme</button>
+                              <div class="msjIS"><label>Ya tienes una cuenta?&nbsp;</label> <a href="#">Inicia sesión</a></div>
+                            </form>
+                      </div>
+                    </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          Launch demo modal
+        </button>
+        
+        <!-- Modal -->
+        
+      
+      
+        
+      
+      
+      
+      <app-footer></app-footer>
+
+
+
+
+
+<!--<div class="container">
+
+    <button type="button" class="btn btn-primary" (click)="login()">Registrar con Facebook</button>
+
+    <div *ngIf = "display">
+        <h1>Mis datos personales: {{name}}</h1>
+        <img [src]="imagen">
+
+    </div>
+</div>-->

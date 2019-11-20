@@ -1,0 +1,394 @@
+<div class="container">
+    <div class="row">
+      <div class="colmimgs col-12 col-lg-8">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+               
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="../../../../assets/img/fondoperr.jpg" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                      <h5>ASI</h5>
+                      <p>Nuestro proyecto tiene la misión de conectar a todas las asociaciones, 
+                          fundaciones o protectoras de animalesy demás entidades colaboradoras con 
+                          aquellos interesados en sumar a un miembro más a la familia, para que aquellos 
+                          animales que no lo han tenido fácil logren encontrar su hogar definitivo.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="../../../../assets/img/fondlogin.jpg" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                      <h5 class="non2">¿Eres una fundación?. Únete a nuestra plataforma.</h5>
+                      <button  class="non2 btn btn-primary">¡Registrarme!</button>
+  
+                      <h5 class="non">Si quieres unirte a nuestra plataforma, es muy sencillo:</h5>
+                      <ol class="non">
+                          <li>Regístrate pulsando el enlace de "Registrarme", introduciendo los datos necesarios.</li>
+                          <li>Recibirás un email pidiéndote que confirmes tu cuenta.</li>   
+                          <li>Pasadas 72 horas, recibirás un segundo email cuando hayamos verificado que la información es correcta y tu cuenta haya sido activada.</li>   
+                          <li>Entonces ya podrás publicar en la web.</li>   
+                      </ol >
+                      <button class=" non btn btn-primary">Registrarme</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../../../assets/img/footprint-797727_960_720.jpg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>¿Deseas adoptar una mascota?</h5>
+  
+                        <p>Descarga nuestra App Móbil y ayuda a los animales a coseguir un hogar.</p>
+                        <button class="btn btn-primary">Descargar</button>
+                      </div>
+                  </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+        
+      </div>
+      <div class="colmform col-12 col-lg-4">
+        <div class="headerLogin">
+            <a [routerLink]="['/inicio']" class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i></a>
+          <a [routerLink]="['/login']" class="btn btn-primary">Iniciar sesión</a>
+          <a class="btn btn-primary"><i class="fa fa-android" aria-hidden="true"></i></a>
+        </div>
+        <div class="formLogin">
+          <div class="fl">
+              <h1 class="tituloIS">Registrate</h1>
+              <form id="RGF" #registerForm2="ngForm" (ngSubmit)="enviarEmailRF(registerForm2)" class="formRg needs-validation" novalidate>
+                  <!--MODAL DE CONFIRMACION DE REGISTRO DE FUNDACION-->
+         
+                  <div class="modal fade" data-backdrop="false" id="modalFundacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      
+      
+      
+                      <!--PROCESO DE REGISTRO-->
+                      <div class="modal-content" *ngIf="advertencia == true">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="status == 'procesando'">Registrando...</h5>
+                          <h5 class="modal-title" id="exampleModalCenterTitle" *ngIf="status=='error'">Error al registrar</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" *ngIf="status=='error' || status == 'success'">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <!--alertas de registro-->
+                        <div class="modal-body">
+                          <div class="alert alert-info" role="alert" *ngIf="status == 'procesando'">
+                            <div class="spinner-border text-primary" role="status">
+                              <span class="sr-only">Registrando...</span>
+                            </div>
+                            Por favor, espera mientras procesamos tu solicitud.
+                          </div>
+                          <div class="alert alert-danger" role="alert" *ngIf="status=='error'">
+                            {{mensaje}}
+                          </div>
+                          <div class="registroExitosoFun" *ngIf="status=='success'" >
+                            <div class="imgScss">
+                              <img src="../../../assets/img/affirmative-156538_640.png">
+                            </div>
+                            <p>
+                                El proceso de registro fue completado exitosamente, los datos fueron enviados al administrador para la verificación
+                                de los datos y la respectiva activación de la cuenta.
+                            </p>
+                            
+                             
+                            </div>
+      
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="status=='error' || status == 'success'">Cerrar</button>
+                        </div>
+                      </div>
+                      <!--VERIFICACION DE CORREO-->
+                      <div class="modal-content" *ngIf="advertencia == false">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle">Verificación de correo</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" *ngIf="status=='error'">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-12">
+                              <h5 class="">Registro exitoso.</h5>
+                            </div>
+                            <div class="col-12">
+                              <p class="">Un código de verificación fue enviado al correo electrónico que proporcionaste. Ingresalo a continuación:</p>
+                            </div>
+                          </div>
+                          <form #registerCodigo="ngForm" (ngSubmit)="registrarCodigo(registerCodigo)" class="needs-validation" novalidate>
+                            <div class="form-group col-md-12">
+      
+                              <label for="codigo">Código</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupPrepend">
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+                                <input required pattern="[0-9]{4}" type="number" class="form-control" id="codigo" placeholder="Ingresa el código de verificación"
+                                  name="codigo" #codigo="ngModel" [(ngModel)]="codi.codigo" [class.is-invalid]="!codigo.valid && codigo.touched"
+                                  [class.is-valid]="codigo.valid">
+      
+                                <div class="msjError" *ngIf="(!codigo.valid && codigo.touched)">
+                                  <div *ngIf="codigo.errors.required">
+                                    Es necesario que ingreses el código.
+                                  </div>
+                                  <div *ngIf="codigo.errors.pattern">
+                                    El código debe contener mínimo y máximo 4 números.
+                                  </div>
+                                 
+                                </div>
+                                <div class="msjError" *ngIf="status == 'codIn'">
+
+                                    <div >
+                                        El código ingresado es incorrecto.
+                                      </div>
+                                </div>
+                               
+                              </div>
+                            </div>
+      
+                            <div class="form-group col-md-12">
+                              <button type="button" (click)="verificarCodigo()" class="btn btn-primary" [disabled]=!registerCodigo.form.valid>Verificar</button>
+                              
+                            </div>
+      
+                          </form>
+                        </div>
+      
+                      </div>
+      
+                    </div>
+                  </div>
+                  <!--fin modal-->
+                  <div class="col-12 imgRG">
+                    <p>Seleccionar un logo que represente a la fundación</p>
+                    <img *ngIf="imL2 == false" src="../../../assets/img/fondos-de-perros.jpg" class="img-fluid" alt="Responsive image">
+                    <img *ngIf="imL2 == true" src="{{imgUN2}}">
+      
+                  </div>
+                  <div class="col s12 file-field input-field">
+                    <div class="btn btnf">
+      
+                      <label for="file2" class="input-label2">Seleccionar logo <i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                      <input id="file2" (change)="fileChangeEvent2($event)" name="logo" #logo="ngModel" [(ngModel)]="usuarioFundacion.logo"
+                        type="file">
+                    </div>
+      
+                  </div>
+                  <div class="form-row datosUser">
+                    <div class="form-group col-md-12">
+      
+                      <label for="nombres">Nombre</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input pattern="^[0-9 a-z A-Z]+$" maxlength="50" minlength="5" required type="text" class="form-control" id="nombreFundacion" placeholder="Nombre de la fundación o asociación" name="nombreFundacion"
+                          #nombreFundacion="ngModel" [(ngModel)]="usuarioFundacion.nombreFundacion" [class.is-invalid]="!nombreFundacion.valid && nombreFundacion.touched"
+                          [class.is-valid]="nombreFundacion.valid">
+      
+                        <div class="msjError" *ngIf="(!nombreFundacion.valid && nombreFundacion.touched)">
+                          <div *ngIf="nombreFundacion.errors.required">
+                            El nombre es obligatorio
+                          </div>
+                          <div *ngIf="nombreFundacion.errors.pattern">
+                              No se admite simbolos o caracteres especiales
+                          </div>
+                          <div *ngIf="nombreFundacion.errors.maxlength">
+                              Máximo 50 caracteres
+                          </div>
+                          <div *ngIf="nombreFundacion.errors.minlength">
+                              Mínimo 5 caracteres
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="form-group col-md-12">
+                      <label for="nombres">Fecha de fundación</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                              <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input min="1980-01-01" max="2019-08-31" required type="date" class="form-control" id="fechaFundacion" placeholder="¿En qué fecha fue fundada la fundación?"
+                          name="fechaFundacion" #fechaFundacion="ngModel" [(ngModel)]="usuarioFundacion.fechaFundacion" [class.is-invalid]="!fechaFundacion.valid && fechaFundacion.touched"
+                          [class.is-valid]="fechaFundacion.valid">
+      
+                        <div class="msjError" *ngIf="!fechaFundacion.valid && fechaFundacion.touched">
+                          <div *ngIf="fechaFundacion.errors.required">
+                            La fecha en que fue fundada es obligatoria
+                          </div>
+      
+                        </div>
+                      </div>
+      
+                    </div>
+      
+                    <div class="form-group col-md-12">
+                      <label for="nombres">Correo electrónico</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                           <i class="fa fa-at" aria-hidden="true"></i>
+      
+                          </span>
+                        </div>
+                        <input required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" type="email"
+                          class="form-control" id="correoFundacion" placeholder="Correo electrónico" name="correoFundacion" #correoFundacion="ngModel"
+                          [(ngModel)]="usuarioFundacion.correoFundacion" [class.is-invalid]="!correoFundacion.valid && correoFundacion.touched"
+                          [class.is-valid]="correoFundacion.valid">
+      
+                        <div class="msjError" *ngIf="!correoFundacion.valid && correoFundacion.touched">
+                          <div *ngIf="correoFundacion.errors.required">
+                            El correo es obligatorio
+                          </div>
+                          <div *ngIf="correoFundacion.errors.pattern">
+                            Ingresa un correo válido
+                          </div>
+                        </div>
+                      </div>
+      
+                    </div>
+      
+                    <div class="form-group col-md-12">
+      
+                      <label for="nombres">Contraseña</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                              <i class="fa fa-key" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,30}$" required minlength="8" maxlength="30" type="password" class="form-control" id="passwordFundacion" placeholder="Contraseña" name="passwordFundacion"
+                          #passwordFundacion="ngModel" [(ngModel)]="usuarioFundacion.passwordFundacion" [class.is-invalid]="!passwordFundacion.valid && passwordFundacion.touched"
+                          [class.is-valid]="passwordFundacion.valid">
+                          <small id="passwordHelpBlock" class="form-text text-muted">
+                              La contraseña debe contener entre 8-20 caracteres, al menos 1 letra mayúscula, 1 letra minúscula, 1 número y un caracter no alfanumérico.
+                            </small>
+                        <div class="msjError" *ngIf="!passwordFundacion.valid && passwordFundacion.touched">
+                          <div *ngIf="passwordFundacion.errors.required">
+                            La contraseña es obligatoria
+                          </div>
+                          <div *ngIf="passwordFundacion.errors.maxlength">
+                              Máximo 30 caracteres
+                            </div>
+                          <div *ngIf="passwordFundacion.errors.minlength">
+                              Mínimo 8 caracteres
+                          </div>
+                          <div *ngIf="passwordFundacion.errors.pattern">
+                              La contraseña no es válida
+                          </div>
+                        </div>
+                      </div>
+      
+      
+      
+      
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="nombres">Dirección</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                              <i class="fa fa-home" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input maxlength="200" minlength="30" required type="text" class="form-control" id="direccionFundacion" placeholder="Dirección exacta" name="direccionFundacion"
+                          #direccionFundacion="ngModel" [(ngModel)]="usuarioFundacion.direccionFundacion" [class.is-invalid]="!direccionFundacion.valid && direccionFundacion.touched"
+                          [class.is-valid]="direccionFundacion.valid">
+                        <div class="msjError" *ngIf="!direccionFundacion.valid && direccionFundacion.touched">
+                          <div *ngIf="direccionFundacion.errors.required">
+                            La dirección es obligatoria
+                          </div>
+                          <div *ngIf="direccionFundacion.errors.maxlength">
+                              Máximo 200 caracteres
+                            </div>
+                            <div *ngIf="direccionFundacion.errors.minlength">
+                                Específica mejor la dirección
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="form-group col-md-12">
+                      <label for="nombres">Teléfono</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                              <i class="fa fa-phone" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input required pattern="[0-9]{7}" maxlength="10" type="number" class="form-control" id="telefonoFundacion" placeholder="Teléfono"
+                          name="telefonoFundacion" #telefonoFundacion="ngModel" [(ngModel)]="usuarioFundacion.telefonoFundacion"
+                          [class.is-invalid]="!telefonoFundacion.valid && telefonoFundacion.touched" [class.is-valid]="telefonoFundacion.valid">
+                        <div class="msjError" *ngIf="!telefonoFundacion.valid  &&  telefonoFundacion.touched">
+      
+                          <div *ngIf="telefonoFundacion.errors.required">
+                            El teléfono es obligatorio
+                          </div>
+                          <div *ngIf="telefonoFundacion.errors.pattern">
+                            El teléfono debe contener mínimo y máximo 7 números.
+                          </div>
+      
+                        </div>
+                      </div>
+                    </div>
+      
+      
+                    <div class="form-group col-md-12">
+                      <label for="nombres">Página web</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend">
+                              <i class="fa fa-desktop" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input  type="url" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" class="form-control"
+                          id="link" placeholder="Página web" name="link" #link="ngModel" [(ngModel)]="usuarioFundacion.link" [class.is-invalid]="!link.valid && link.touched"
+                          [class.is-valid]="link.valid ">
+                        <div class="msjError" *ngIf="!link.valid  &&  link.touched">
+      
+                          <div *ngIf="link.errors.pattern">
+                            Ingresa una URL válida
+                          </div>
+      
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div>
+      
+                  <button type="submit" class="btn btn-primary btnRGA" [disabled]=!registerForm2.form.valid>Registrarme</button>
+                  <div class="msjIS">
+                    <label>Ya tienes una cuenta?&nbsp;</label>
+                    <a [routerLink]="['/login']">Inicia sesión</a>
+                  </div>
+                </form>
+          </div>
+            
+        </div>
+       
+      </div>
+    </div>
+   
+  
+  </div>
+  
+  <app-footer></app-footer>
